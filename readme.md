@@ -6,7 +6,7 @@ some course related info here..
 
 ## social sciences methods workshops
 
-1. [python for research with the scipy stack](web/210927/)
+1. [python for research using the scipy stack](web/210927/)
 
 2. [survey experiments with the psychopy package](web/210928/)
 
