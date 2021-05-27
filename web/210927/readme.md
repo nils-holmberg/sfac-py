@@ -1,10 +1,16 @@
 [home](https://nils-holmberg.github.io/)
 
-# using python in the social sciences
+# python for research using the scipy stack (210927)
 
-some text 
+- install anaconda (win/mac/linux, software center?)
+- using virtual environments, starting venv
+- pip installing packages (scipy, pandas, matplotlib)
+- creating python scripts, import packages
+- reading, writing tabular data with pandas
+- some execises with control structures
+- multiple linear regression using sklearn
 
-## python for research using the scipy stack (210927)
 
-some content
+
+
 
