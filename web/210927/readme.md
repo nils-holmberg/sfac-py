@@ -3,7 +3,7 @@
 # python for research using the scipy stack (210927)
 
 - install anaconda (win/mac/linux, software center?)
-- using virtual environments, [starting](some.ipynb) venv
+- using virtual environments, [starting](some.html) venv
 - pip installing packages (scipy, pandas, matplotlib)
 - creating python scripts, import packages
 - reading, writing tabular data with pandas
