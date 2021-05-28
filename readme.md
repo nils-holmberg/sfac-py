@@ -2,7 +2,7 @@
 
 # using python in the social sciences
 
-some course related info here..
+some course related info comes here..
 
 ## social sciences methods workshops
 
