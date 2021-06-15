@@ -10,9 +10,9 @@ some course related info will be presented here..
 
 2. [survey experiments with the psychopy package](web/210928/)
 
-3. [data visualization using seaborn](web/210929/)
+3. [natural language processing with spacy](web/210929/)
 
-4. [natural language processing with spacy](web/210930/)
+4. [data visualization using matplotlib, seaborn](web/210930/)
 
 5. [collaborate and share python code with jupyter](web/211001/)
 
