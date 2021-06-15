@@ -2,7 +2,7 @@
 
 # using python in the social sciences
 
-some course related info will be presented here..
+computational content analyses, cognitive communication effects
 
 ## social sciences methods workshops
 
