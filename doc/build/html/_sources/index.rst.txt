@@ -22,7 +22,7 @@ short.
 
 This is another one.
 
-.. image:: ../fig/avatar-256.png
+.. image:: https://raw.githubusercontent.com/nils-holmberg/sfac-py/main/fig/avatar-256.png
    :height: 100
    :width: 200
    :scale: 50
