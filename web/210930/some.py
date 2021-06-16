@@ -1,6 +1,15 @@
 #!/usr/bin/env python
 # coding: utf-8
 
+# [home](https://nils-holmberg.github.io/sfac-py/web/210930/)
+# 
+# # data visualization using matplotlib, seaborn (210930)
+# some line
+# 
+# ## exercise 1
+# some line
+# 
+
 # In[1]:
 
 

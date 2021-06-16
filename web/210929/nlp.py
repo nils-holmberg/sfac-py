@@ -1,9 +1,9 @@
 #!/usr/bin/env python
 # coding: utf-8
 
-# link [home](https://nils-holmberg.github.io/sfac-py/web/210929/)
+# [home](https://nils-holmberg.github.io/sfac-py/web/210929/)
 # 
-# # natural language processing with spacy (210930)
+# # natural language processing with spacy (210929)
 # some line
 # 
 # ## exercise 1

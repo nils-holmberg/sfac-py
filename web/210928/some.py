@@ -1,6 +1,15 @@
 #!/usr/bin/env python
 # coding: utf-8
 
+# [home](https://nils-holmberg.github.io/sfac-py/web/210928/)
+# 
+# # survey experiments with the psychopy package (210928)
+# some line
+# 
+# ## exercise 1
+# some line
+# 
+
 # In[1]:
 
 

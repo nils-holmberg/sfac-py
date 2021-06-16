@@ -1,6 +1,15 @@
 #!/usr/bin/env python
 # coding: utf-8
 
+# [home](https://nils-holmberg.github.io/sfac-py/web/211001/)
+# 
+# # collaborate and share python code with jupyter (211001)
+# some line
+# 
+# ## exercise 1
+# some portability code
+# 
+
 # In[1]:
 
 
