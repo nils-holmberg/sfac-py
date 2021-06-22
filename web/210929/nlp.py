@@ -76,10 +76,10 @@ nlp = spacy.load("en_core_web_sm")
 doc = nlp("my name is nils")
 
 
-# In[11]:
+# In[12]:
 
 
-displacy.render(doc)
+displacy.render(doc, jupyter=True)
 
 
 # In[ ]:

@@ -9,10 +9,10 @@
 
 
 <style type="text/css">
-    pre { line-height: 125%; }
-td.linenos .normal { color: inherit; background-color: transparent; padding-left: 5px; padding-right: 5px; }
-span.linenos { color: inherit; background-color: transparent; padding-left: 5px; padding-right: 5px; }
-td.linenos .special { color: #000000; background-color: #ffffc0; padding-left: 5px; padding-right: 5px; }
+    pre { line-height: 125%; margin: 0; }
+td.linenos pre { color: #000000; background-color: #f0f0f0; padding-left: 5px; padding-right: 5px; }
+span.linenos { color: #000000; background-color: #f0f0f0; padding-left: 5px; padding-right: 5px; }
+td.linenos pre.special { color: #000000; background-color: #ffffc0; padding-left: 5px; padding-right: 5px; }
 span.linenos.special { color: #000000; background-color: #ffffc0; padding-left: 5px; padding-right: 5px; }
 .highlight .hll { background-color: var(--jp-cell-editor-active-background) }
 .highlight { background: var(--jp-cell-editor-background); color: var(--jp-mirror-editor-variable-color) }
@@ -14463,9 +14463,9 @@ a.anchor-link {
 
 
 <div class="jp-RenderedText jp-OutputArea-output" data-mime-type="application/vnd.jupyter.stderr">
-<pre>/home/sol-nhl/lib/python/anaconda3/envs/conda-nlp/lib/python3.9/site-packages/spacy/displacy/__init__.py:125: UserWarning: [W005] Doc object not parsed. This means displaCy won&#39;t be able to generate a dependency visualization for it. Make sure the Doc was processed with a model that supports dependency parsing, and not just a language class like `English()`. For more info, see the docs:
+<pre>/usr/lib/python3.7/runpy.py:193: UserWarning: [W005] Doc object not parsed. This means displaCy won&#39;t be able to generate a dependency visualization for it. Make sure the Doc was processed with a model that supports dependency parsing, and not just a language class like `English()`. For more info, see the docs:
 https://spacy.io/usage/models
-  warnings.warn(Warnings.W005)
+  &#34;__main__&#34;, mod_spec)
 </pre>
 </div>
 </div>
@@ -14473,27 +14473,13 @@ https://spacy.io/usage/models
 <div class="jp-OutputArea-child">
 
     
-    <div class="jp-OutputPrompt jp-OutputArea-prompt"></div>
+    <div class="jp-OutputPrompt jp-OutputArea-prompt">Out[8]:</div>
 
 
 
-<div class="jp-RenderedHTMLCommon jp-RenderedHTML jp-OutputArea-output " data-mime-type="text/html">
-<span class="tex2jax_ignore"><svg xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink" xml:lang="sv" id="4603a17aa084417a9a2e02556040db99-0" class="displacy" width="575" height="137.0" direction="ltr" style="max-width: none; height: 137.0px; color: #000000; background: #ffffff; font-family: Arial; direction: ltr">
-<text class="displacy-token" fill="currentColor" text-anchor="middle" y="47.0">
-    <tspan class="displacy-word" fill="currentColor" x="50">jag</tspan>
-    <tspan class="displacy-tag" dy="2em" fill="currentColor" x="50"></tspan>
-</text>
 
-<text class="displacy-token" fill="currentColor" text-anchor="middle" y="47.0">
-    <tspan class="displacy-word" fill="currentColor" x="225">heter</tspan>
-    <tspan class="displacy-tag" dy="2em" fill="currentColor" x="225"></tspan>
-</text>
-
-<text class="displacy-token" fill="currentColor" text-anchor="middle" y="47.0">
-    <tspan class="displacy-word" fill="currentColor" x="400">nils</tspan>
-    <tspan class="displacy-tag" dy="2em" fill="currentColor" x="400"></tspan>
-</text>
-</svg></span>
+<div class="jp-RenderedText jp-OutputArea-output jp-OutputArea-executeResult" data-mime-type="text/plain">
+<pre>&#39;&lt;svg xmlns=&#34;http://www.w3.org/2000/svg&#34; xmlns:xlink=&#34;http://www.w3.org/1999/xlink&#34; xml:lang=&#34;sv&#34; id=&#34;cd3df3602f304ed9914996212adcadb5-0&#34; class=&#34;displacy&#34; width=&#34;575&#34; height=&#34;137.0&#34; direction=&#34;ltr&#34; style=&#34;max-width: none; height: 137.0px; color: #000000; background: #ffffff; font-family: Arial; direction: ltr&#34;&gt;\n&lt;text class=&#34;displacy-token&#34; fill=&#34;currentColor&#34; text-anchor=&#34;middle&#34; y=&#34;47.0&#34;&gt;\n    &lt;tspan class=&#34;displacy-word&#34; fill=&#34;currentColor&#34; x=&#34;50&#34;&gt;jag&lt;/tspan&gt;\n    &lt;tspan class=&#34;displacy-tag&#34; dy=&#34;2em&#34; fill=&#34;currentColor&#34; x=&#34;50&#34;&gt;&lt;/tspan&gt;\n&lt;/text&gt;\n\n&lt;text class=&#34;displacy-token&#34; fill=&#34;currentColor&#34; text-anchor=&#34;middle&#34; y=&#34;47.0&#34;&gt;\n    &lt;tspan class=&#34;displacy-word&#34; fill=&#34;currentColor&#34; x=&#34;225&#34;&gt;heter&lt;/tspan&gt;\n    &lt;tspan class=&#34;displacy-tag&#34; dy=&#34;2em&#34; fill=&#34;currentColor&#34; x=&#34;225&#34;&gt;&lt;/tspan&gt;\n&lt;/text&gt;\n\n&lt;text class=&#34;displacy-token&#34; fill=&#34;currentColor&#34; text-anchor=&#34;middle&#34; y=&#34;47.0&#34;&gt;\n    &lt;tspan class=&#34;displacy-word&#34; fill=&#34;currentColor&#34; x=&#34;400&#34;&gt;nils&lt;/tspan&gt;\n    &lt;tspan class=&#34;displacy-tag&#34; dy=&#34;2em&#34; fill=&#34;currentColor&#34; x=&#34;400&#34;&gt;&lt;/tspan&gt;\n&lt;/text&gt;\n&lt;/svg&gt;&#39;</pre>
 </div>
 
 </div>
@@ -14533,10 +14519,10 @@ https://spacy.io/usage/models
 </div><div class="jp-Cell jp-CodeCell jp-Notebook-cell   ">
 <div class="jp-Cell-inputWrapper">
 <div class="jp-InputArea jp-Cell-inputArea">
-<div class="jp-InputPrompt jp-InputArea-prompt">In&nbsp;[11]:</div>
+<div class="jp-InputPrompt jp-InputArea-prompt">In&nbsp;[12]:</div>
 <div class="jp-CodeMirrorEditor jp-Editor jp-InputArea-editor" data-type="inline">
      <div class="CodeMirror cm-s-jupyter">
-<div class=" highlight hl-ipython3"><pre><span></span><span class="n">displacy</span><span class="o">.</span><span class="n">render</span><span class="p">(</span><span class="n">doc</span><span class="p">)</span>
+<div class=" highlight hl-ipython3"><pre><span></span><span class="n">displacy</span><span class="o">.</span><span class="n">render</span><span class="p">(</span><span class="n">doc</span><span class="p">,</span> <span class="n">jupyter</span><span class="o">=</span><span class="kc">True</span><span class="p">)</span>
 </pre></div>
 
      </div>
@@ -14557,10 +14543,10 @@ https://spacy.io/usage/models
 
 
 <div class="jp-RenderedHTMLCommon jp-RenderedHTML jp-OutputArea-output " data-mime-type="text/html">
-<span class="tex2jax_ignore"><svg xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink" xml:lang="en" id="0d83e3a7300b4a188d5944359aee8f59-0" class="displacy" width="750" height="224.5" direction="ltr" style="max-width: none; height: 224.5px; color: #000000; background: #ffffff; font-family: Arial; direction: ltr">
+<span class="tex2jax_ignore"><svg xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink" xml:lang="en" id="2abd4164c0914d5abf0c9e86ab24f023-0" class="displacy" width="750" height="224.5" direction="ltr" style="max-width: none; height: 224.5px; color: #000000; background: #ffffff; font-family: Arial; direction: ltr">
 <text class="displacy-token" fill="currentColor" text-anchor="middle" y="134.5">
     <tspan class="displacy-word" fill="currentColor" x="50">my</tspan>
-    <tspan class="displacy-tag" dy="2em" fill="currentColor" x="50">PRON</tspan>
+    <tspan class="displacy-tag" dy="2em" fill="currentColor" x="50">DET</tspan>
 </text>
 
 <text class="displacy-token" fill="currentColor" text-anchor="middle" y="134.5">
@@ -14575,29 +14561,29 @@ https://spacy.io/usage/models
 
 <text class="displacy-token" fill="currentColor" text-anchor="middle" y="134.5">
     <tspan class="displacy-word" fill="currentColor" x="575">nils</tspan>
-    <tspan class="displacy-tag" dy="2em" fill="currentColor" x="575">NOUN</tspan>
+    <tspan class="displacy-tag" dy="2em" fill="currentColor" x="575">VERB</tspan>
 </text>
 
 <g class="displacy-arrow">
-    <path class="displacy-arc" id="arrow-0d83e3a7300b4a188d5944359aee8f59-0-0" stroke-width="2px" d="M70,89.5 C70,2.0 225.0,2.0 225.0,89.5" fill="none" stroke="currentColor"/>
+    <path class="displacy-arc" id="arrow-2abd4164c0914d5abf0c9e86ab24f023-0-0" stroke-width="2px" d="M70,89.5 C70,2.0 225.0,2.0 225.0,89.5" fill="none" stroke="currentColor"/>
     <text dy="1.25em" style="font-size: 0.8em; letter-spacing: 1px">
-        <textPath xlink:href="#arrow-0d83e3a7300b4a188d5944359aee8f59-0-0" class="displacy-label" startOffset="50%" side="left" fill="currentColor" text-anchor="middle">poss</textPath>
+        <textPath xlink:href="#arrow-2abd4164c0914d5abf0c9e86ab24f023-0-0" class="displacy-label" startOffset="50%" side="left" fill="currentColor" text-anchor="middle">poss</textPath>
     </text>
     <path class="displacy-arrowhead" d="M70,91.5 L62,79.5 78,79.5" fill="currentColor"/>
 </g>
 
 <g class="displacy-arrow">
-    <path class="displacy-arc" id="arrow-0d83e3a7300b4a188d5944359aee8f59-0-1" stroke-width="2px" d="M245,89.5 C245,2.0 400.0,2.0 400.0,89.5" fill="none" stroke="currentColor"/>
+    <path class="displacy-arc" id="arrow-2abd4164c0914d5abf0c9e86ab24f023-0-1" stroke-width="2px" d="M245,89.5 C245,2.0 400.0,2.0 400.0,89.5" fill="none" stroke="currentColor"/>
     <text dy="1.25em" style="font-size: 0.8em; letter-spacing: 1px">
-        <textPath xlink:href="#arrow-0d83e3a7300b4a188d5944359aee8f59-0-1" class="displacy-label" startOffset="50%" side="left" fill="currentColor" text-anchor="middle">nsubj</textPath>
+        <textPath xlink:href="#arrow-2abd4164c0914d5abf0c9e86ab24f023-0-1" class="displacy-label" startOffset="50%" side="left" fill="currentColor" text-anchor="middle">nsubj</textPath>
     </text>
     <path class="displacy-arrowhead" d="M245,91.5 L237,79.5 253,79.5" fill="currentColor"/>
 </g>
 
 <g class="displacy-arrow">
-    <path class="displacy-arc" id="arrow-0d83e3a7300b4a188d5944359aee8f59-0-2" stroke-width="2px" d="M420,89.5 C420,2.0 575.0,2.0 575.0,89.5" fill="none" stroke="currentColor"/>
+    <path class="displacy-arc" id="arrow-2abd4164c0914d5abf0c9e86ab24f023-0-2" stroke-width="2px" d="M420,89.5 C420,2.0 575.0,2.0 575.0,89.5" fill="none" stroke="currentColor"/>
     <text dy="1.25em" style="font-size: 0.8em; letter-spacing: 1px">
-        <textPath xlink:href="#arrow-0d83e3a7300b4a188d5944359aee8f59-0-2" class="displacy-label" startOffset="50%" side="left" fill="currentColor" text-anchor="middle">attr</textPath>
+        <textPath xlink:href="#arrow-2abd4164c0914d5abf0c9e86ab24f023-0-2" class="displacy-label" startOffset="50%" side="left" fill="currentColor" text-anchor="middle">attr</textPath>
     </text>
     <path class="displacy-arrowhead" d="M575.0,91.5 L583.0,79.5 567.0,79.5" fill="currentColor"/>
 </g>
