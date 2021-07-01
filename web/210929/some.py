@@ -1,9 +1,9 @@
 #!/usr/bin/env python
 # coding: utf-8
 
-# [home](https://nils-holmberg.github.io/sfac-py/web/210929/)
+# [home](https://nils-holmberg.github.io/sfac-py/web/210928/)
 # 
-# # natural language processing with spacy (210929)
+# # survey experiments with the psychopy package (210928)
 # some line
 # 
 # ## exercise 1
@@ -15,13 +15,23 @@
 
 import numpy as np
 import pandas as pd
+import csv
+# import matplotlib.pyplot as plt
+# import seaborn as sns
+import nltk
+from datetime import datetime
+import string
+import sys
 
 
 # In[2]:
 
 
-import spacy
-from spacy.lang.sv import Swedish
-nlp = Swedish()  # use directly
-nlp = spacy.blank("sv")  # blank instance
+stop = nltk.corpus.stopwords.words("en") + list(string.punctuation)
+
+
+# In[ ]:
+
+
+
 
