@@ -6,10 +6,11 @@
 - using virtual environments, [starting](some.html) venv
 - pip installing packages (scipy, pandas, matplotlib)
 - creating python scripts, import packages
-- creating ipython notebooks with jupyterlab
+- working with the file system, directories, csv
 - reading, writing tabular data with pandas
 - some execises with control structures
 - multiple linear regression using sklearn
+- creating ipython notebooks with jupyterlab
 
 
 
