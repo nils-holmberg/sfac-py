@@ -49,6 +49,20 @@ df.head()
 df.to_csv("csv/iris.csv", sep="\t", header=True, index=False)
 
 
+# In[1]:
+
+
+import pandas as pd
+
+# file path on google colab
+fp = '/content/iris.csv'
+# file path relative to local working dir
+fp = '../../csv/iris.csv'
+
+df = pd.read_csv(fp, sep="\t", header=0)
+df.head()
+
+
 # In[ ]:
 
 
