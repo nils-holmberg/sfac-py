@@ -2,15 +2,15 @@
 
 # python for research using the scipy stack (210927)
 
-- install anaconda (win/mac/linux, software center?)
-- using virtual environments, [starting](some.html) venv
-- pip installing packages (scipy, pandas, matplotlib)
-- creating python scripts, import packages
-- working with the file system, directories [files](files.html)
-- reading, writing tabular data with pandas [tables](tables.html)
-- some execises with control structures
-- multiple linear regression using sklearn
-- creating ipython notebooks with jupyterlab
+- section 1_1: [intro to anaconda3](01-intro.html)
+- section 1_2: jupyter
+- section 1_3: testing
+- section 2_1: [python syntax](02-syntax.html)
+- section 2_2: functions
+- section 2_3: files
+- section 3_1: [working with tables](03-tables.html)
+- section 3_2: subset, substitute
+- section 3_3: summarize
 
 
 

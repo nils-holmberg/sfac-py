@@ -1,3 +1,6 @@
-date	topic	some
-2021-09-27	get to know the anaconda3 environment, basic python, flow control and functions, read and process tabular data	numpy, scipy, pandas
-2021-09-28	how to leverage machine learning to analyze textual data	spacy
+"Course date"	"Course topic"	"Python packages"
+210927	"the anaconda3 python environment, read and process tabular data"	"numpy, scipy, pandas"
+210928	"natural language processing and analyzing textual content"	"spacy"
+210929	"experimental design, online surveys, and data collection "	"psychopy"
+210930	"data analysis and data visualization using bar charts and time series"	"matplotlib, seaborn"
+211001	"reproducible data analysis, sharing and collaborating on python code"	"jupyter"
