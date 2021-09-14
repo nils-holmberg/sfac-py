@@ -1,7 +1,7 @@
 #!/usr/bin/env python
 # coding: utf-8
 
-# [home](https://nils-holmberg.github.io/sfac-py/web/210927/)
+# [home](https://nils-holmberg.github.io/sfac-py/web/210927-sci/)
 # 
 # # day 1: getting started with python
 # - overview of day 1

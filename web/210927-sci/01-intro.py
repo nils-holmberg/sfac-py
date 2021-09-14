@@ -12,13 +12,13 @@
 # |      |1.1.2   |jupyter                         |download course material, open notebooks, edit in web browser       |
 # |      |1.1.3   |testing                         |execute the hello world example in jupyter python env               |
 # |      |break   |                                |                                                                    |
-# |10-11 |1.2.1   |[python syntax](02-syntax.html) |set variables, conditional statements, flow control                 |
+# |10-11 |1.2.1   |[python syntax](02-syntax.html) |practice data structures, conditional statements, flow control      |
 # |      |1.2.2   |functions                       |understand modules                                                  |
 # |      |1.2.3   |files, directories              |navigate the file system, read, write data files                    |
 # |      |break   |                                |                                                                    |
-# |11-12 |1.3.1   |[tabular data](03-tables.html)  |                                                                    |
-# |      |1.3.2   |subset, substitute              |                                                                    |
-# |      |1.3.3   |summarize                       |                                                                    |
+# |11-12 |1.3.1   |[tabular data](03-tables.html)  |understand how to read, write, and process survey data              |
+# |      |1.3.2   |subset, substitute              |and reshape                                                         |
+# |      |1.3.3   |summarize                       |aggregate, combine, join operations                                 |
 # |12-13 |lunch   |anaconda, continued             |try to resolve anaconda, psychopy installation problems             |
 # 
 # - **mindset: excel on steroids**

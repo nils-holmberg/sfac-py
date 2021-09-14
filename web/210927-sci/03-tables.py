@@ -1,7 +1,14 @@
 #!/usr/bin/env python
 # coding: utf-8
 
-# ## section 3.1: tables
+# [home](https://nils-holmberg.github.io/sfac-py/web/210927-sci/)
+# 
+# # day 1: getting started with python
+# - overview of day 1
+# - **mindset: excel on steroids**
+# <img src="../../fig/Microsoft_Office_Excel_2019_present.svg.png" width="100"/>
+# 
+# ## section 1.3.1: tables
 # - **mindset: excel on steroids**
 # - file system, folders, csv files
 # - checking, cleaning, summarizing 
