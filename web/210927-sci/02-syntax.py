@@ -6,13 +6,13 @@
 # # day 1: getting started with python
 # - overview of day 1
 # 
-# ## section: 2.1: python
+# ## section: 1.2.1: python
 # - variables, flow control, con
 # 
-# ## section: 2.2: functions
+# ## section: 1.2.2: functions
 # - data structures, functions, pkgs
 # 
-# ## section: 2.3: files
+# ## section: 1.2.3: files
 # - navigate file system, working dir 
 # 
 
