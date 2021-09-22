@@ -1,10 +1,13 @@
 ### resume course (210922)
-# toggle log/bash.log file
+# toggle log/bash.log file, show it
 vim .gitignore
-# push to github to show file, then to hide again..
+git add log/bash.log
+# then hide again..
+vim .gitignore
 git rm log/bash.log
-# avoid reset command 
+# avoid reset command, requires commit id to undo 
 #git reset HEAD -- log/bash.log
+bash src/compile.sh -p
 
 
 ### inspiration (210916)
