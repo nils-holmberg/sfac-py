@@ -1,3 +1,12 @@
+### resume course (210922)
+# toggle log/bash.log file
+vim .gitignore
+# push to github to show file, then to hide again..
+git rm log/bash.log
+# avoid reset command 
+#git reset HEAD -- log/bash.log
+
+
 ### inspiration (210916)
 # https://monashdatafluency.github.io/python-workshop-base/modules/working_with_data/
 git clone https://github.com/MonashDataFluency/python-workshop-base.git
