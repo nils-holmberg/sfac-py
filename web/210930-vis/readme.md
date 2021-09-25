@@ -2,7 +2,7 @@
 
 # 4. data visualization using matplotlib, seaborn (210930)
 
-- 4.1.1: some, 
+- 4.1.1: [matplotlib](01-intro.html), seaborn and plotly
 - 4.1.2: stuff, 
 - 4.1.3: goes, 
 - 4.2.1: clean, 

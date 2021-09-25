@@ -1,4 +1,14 @@
-### resume course (210922)
+### resume nlp (210925)
+# start base env
+source ~/lib/python/anaconda3/bin/activate
+# create new venv with ipython kernel
+conda create -n conda-nlp
+conda install -c conda-forge -n conda-nlp ipykernel scipy spacy
+# trained pipline, language model, in conda prompt?
+python -m spacy download en_core_web_sm
+
+
+### resume sci (210922)
 # start base env
 source ~/lib/python/anaconda3/bin/activate
 # update packages in env
