@@ -2,12 +2,12 @@
 
 # 4. data visualization using matplotlib, seaborn (210930)
 
-- 2.1.1: some, 
-- 2.1.2: stuff, 
-- 2.1.3: goes, 
-- 2.2.1: clean, 
-- 2.2.2: , 
-- 2.2.3: , 
-- 2.3.1: classify, 
-- 2.3.2: , 
-- 2.3.3: , 
+- 4.1.1: some, 
+- 4.1.2: stuff, 
+- 4.1.3: goes, 
+- 4.2.1: clean, 
+- 4.2.2: , 
+- 4.2.3: , 
+- 4.3.1: classify, 
+- 4.3.2: , 
+- 4.3.3: , 
