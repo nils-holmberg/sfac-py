@@ -1,6 +1,6 @@
 [home](https://nils-holmberg.github.io/sfac-py/)
 
-# 3. survey experiments with the psychopy package (210929)
+# 3. web experiments with the psychopy package (210929)
 
 - 3.1.1: some, 
 - 3.1.2: stuff, 

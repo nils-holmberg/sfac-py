@@ -10,7 +10,7 @@ computational content analyses, cognitive communication effects
 
 2. [natural language processing with spacy](web/210928-nlp/)
 
-3. [survey experiments with the psychopy package](web/210929-exp/)
+3. [web experiments with the psychopy package](web/210929-exp/)
 
 4. [data visualization using matplotlib, seaborn](web/210930-vis/)
 
