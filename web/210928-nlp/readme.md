@@ -1,6 +1,6 @@
 [home](https://nils-holmberg.github.io/sfac-py/)
 
-# natural language processing with spacy (210928)
+# 2. natural language processing with spacy (210928)
 
 - 2.1.1: some, 
 - 2.1.2: stuff, 
