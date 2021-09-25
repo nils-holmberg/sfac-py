@@ -3,7 +3,7 @@
 <head><meta charset="utf-8" />
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
 
-<title>graphs</title><script src="https://cdnjs.cloudflare.com/ajax/libs/jquery/2.0.3/jquery.min.js"></script><script src="https://cdnjs.cloudflare.com/ajax/libs/require.js/2.1.10/require.min.js"></script>
+<title>some</title><script src="https://cdnjs.cloudflare.com/ajax/libs/jquery/2.0.3/jquery.min.js"></script><script src="https://cdnjs.cloudflare.com/ajax/libs/require.js/2.1.10/require.min.js"></script>
 
 <style type="text/css">
   pre { line-height: 125%; }
@@ -13107,9 +13107,9 @@ div#notebook {
 <div class="cell border-box-sizing text_cell rendered"><div class="prompt input_prompt">
 </div><div class="inner_cell">
 <div class="text_cell_render border-box-sizing rendered_html">
-<p><a href="https://nils-holmberg.github.io/sfac-py/web/210930/">home</a></p>
-<h1 id="data-visualization-using-matplotlib,-seaborn-(210930)">data visualization using matplotlib, seaborn (210930)<a class="anchor-link" href="#data-visualization-using-matplotlib,-seaborn-(210930)">&#182;</a></h1><p>some line</p>
-<h2 id="exercise-1">exercise 1<a class="anchor-link" href="#exercise-1">&#182;</a></h2><p>some line</p>
+<p><a href="https://nils-holmberg.github.io/sfac-py/web/211001/">home</a></p>
+<h1 id="collaborate-and-share-python-code-with-jupyter-(211001)">collaborate and share python code with jupyter (211001)<a class="anchor-link" href="#collaborate-and-share-python-code-with-jupyter-(211001)">&#182;</a></h1><p>some line</p>
+<h2 id="exercise-1">exercise 1<a class="anchor-link" href="#exercise-1">&#182;</a></h2><p>some portability code</p>
 
 </div>
 </div>
@@ -13121,13 +13121,13 @@ div#notebook {
     <div class="input_area">
 <div class=" highlight hl-ipython3"><pre><span></span><span class="kn">import</span> <span class="nn">numpy</span> <span class="k">as</span> <span class="nn">np</span>
 <span class="kn">import</span> <span class="nn">pandas</span> <span class="k">as</span> <span class="nn">pd</span>
-<span class="kn">import</span> <span class="nn">matplotlib.pyplot</span> <span class="k">as</span> <span class="nn">plt</span>
-<span class="c1">#!pip install seaborn</span>
-<span class="kn">import</span> <span class="nn">seaborn</span> <span class="k">as</span> <span class="nn">sns</span>
-
-<span class="c1">#%matplotlib inline</span>
-<span class="c1">#%reload_ext autoreload</span>
-<span class="c1">#%autoreload 2</span>
+<span class="kn">import</span> <span class="nn">csv</span>
+<span class="c1"># import matplotlib.pyplot as plt</span>
+<span class="c1"># import seaborn as sns</span>
+<span class="kn">import</span> <span class="nn">nltk</span>
+<span class="kn">from</span> <span class="nn">datetime</span> <span class="kn">import</span> <span class="n">datetime</span>
+<span class="kn">import</span> <span class="nn">string</span>
+<span class="kn">import</span> <span class="nn">sys</span>
 </pre></div>
 
     </div>
@@ -13140,10 +13140,7 @@ div#notebook {
 <div class="prompt input_prompt">In&nbsp;[2]:</div>
 <div class="inner_cell">
     <div class="input_area">
-<div class=" highlight hl-ipython3"><pre><span></span><span class="c1">#dfc = pd.read_csv(&#39;some.csv&#39;)</span>
-<span class="nb">print</span><span class="p">(</span><span class="n">sns</span><span class="o">.</span><span class="n">get_dataset_names</span><span class="p">())</span>
-<span class="n">dfc</span> <span class="o">=</span> <span class="n">sns</span><span class="o">.</span><span class="n">load_dataset</span><span class="p">(</span><span class="s1">&#39;car_crashes&#39;</span><span class="p">)</span>
-<span class="n">dfc</span><span class="o">.</span><span class="n">head</span><span class="p">()</span>
+<div class=" highlight hl-ipython3"><pre><span></span><span class="n">stop</span> <span class="o">=</span> <span class="n">nltk</span><span class="o">.</span><span class="n">corpus</span><span class="o">.</span><span class="n">stopwords</span><span class="o">.</span><span class="n">words</span><span class="p">(</span><span class="s2">&quot;en&quot;</span><span class="p">)</span> <span class="o">+</span> <span class="nb">list</span><span class="p">(</span><span class="n">string</span><span class="o">.</span><span class="n">punctuation</span><span class="p">)</span>
 </pre></div>
 
     </div>
@@ -13159,154 +13156,102 @@ div#notebook {
     <div class="prompt"></div>
 
 
-<div class="output_subarea output_stream output_stdout output_text">
-<pre>[&#39;anagrams&#39;, &#39;anscombe&#39;, &#39;attention&#39;, &#39;brain_networks&#39;, &#39;car_crashes&#39;, &#39;diamonds&#39;, &#39;dots&#39;, &#39;exercise&#39;, &#39;flights&#39;, &#39;fmri&#39;, &#39;gammas&#39;, &#39;geyser&#39;, &#39;iris&#39;, &#39;mpg&#39;, &#39;penguins&#39;, &#39;planets&#39;, &#39;tips&#39;, &#39;titanic&#39;]
+<div class="output_subarea output_text output_error">
+<pre>
+<span class="ansi-red-fg">---------------------------------------------------------------------------</span>
+<span class="ansi-red-fg">LookupError</span>                               Traceback (most recent call last)
+<span class="ansi-green-fg">~/.local/lib/python3.8/site-packages/nltk/corpus/util.py</span> in <span class="ansi-cyan-fg">__load</span><span class="ansi-blue-fg">(self)</span>
+<span class="ansi-green-intense-fg ansi-bold">     82</span>                 <span class="ansi-green-fg">try</span><span class="ansi-blue-fg">:</span>
+<span class="ansi-green-fg">---&gt; 83</span><span class="ansi-red-fg">                     </span>root <span class="ansi-blue-fg">=</span> nltk<span class="ansi-blue-fg">.</span>data<span class="ansi-blue-fg">.</span>find<span class="ansi-blue-fg">(</span><span class="ansi-blue-fg">&#34;{}/{}&#34;</span><span class="ansi-blue-fg">.</span>format<span class="ansi-blue-fg">(</span>self<span class="ansi-blue-fg">.</span>subdir<span class="ansi-blue-fg">,</span> zip_name<span class="ansi-blue-fg">)</span><span class="ansi-blue-fg">)</span>
+<span class="ansi-green-intense-fg ansi-bold">     84</span>                 <span class="ansi-green-fg">except</span> LookupError<span class="ansi-blue-fg">:</span>
+
+<span class="ansi-green-fg">~/.local/lib/python3.8/site-packages/nltk/data.py</span> in <span class="ansi-cyan-fg">find</span><span class="ansi-blue-fg">(resource_name, paths)</span>
+<span class="ansi-green-intense-fg ansi-bold">    584</span>     resource_not_found <span class="ansi-blue-fg">=</span> <span class="ansi-blue-fg">&#34;\n%s\n%s\n%s\n&#34;</span> <span class="ansi-blue-fg">%</span> <span class="ansi-blue-fg">(</span>sep<span class="ansi-blue-fg">,</span> msg<span class="ansi-blue-fg">,</span> sep<span class="ansi-blue-fg">)</span>
+<span class="ansi-green-fg">--&gt; 585</span><span class="ansi-red-fg">     </span><span class="ansi-green-fg">raise</span> LookupError<span class="ansi-blue-fg">(</span>resource_not_found<span class="ansi-blue-fg">)</span>
+<span class="ansi-green-intense-fg ansi-bold">    586</span> 
+
+<span class="ansi-red-fg">LookupError</span>: 
+**********************************************************************
+  Resource <span class="ansi-yellow-intense-fg">stopwords</span> not found.
+  Please use the NLTK Downloader to obtain the resource:
+
+  <span class="ansi-red-fg">&gt;&gt;&gt; import nltk
+  &gt;&gt;&gt; nltk.download(&#39;stopwords&#39;)
+  </span>
+  For more information see: https://www.nltk.org/data.html
+
+  Attempted to load <span class="ansi-yellow-intense-fg">corpora/stopwords.zip/stopwords/</span>
+
+  Searched in:
+    - &#39;/home/sol-nhl/nltk_data&#39;
+    - &#39;/usr/nltk_data&#39;
+    - &#39;/usr/share/nltk_data&#39;
+    - &#39;/usr/lib/nltk_data&#39;
+    - &#39;/usr/share/nltk_data&#39;
+    - &#39;/usr/local/share/nltk_data&#39;
+    - &#39;/usr/lib/nltk_data&#39;
+    - &#39;/usr/local/lib/nltk_data&#39;
+**********************************************************************
+
+
+During handling of the above exception, another exception occurred:
+
+<span class="ansi-red-fg">LookupError</span>                               Traceback (most recent call last)
+<span class="ansi-green-fg">&lt;ipython-input-2-4b944edbc3be&gt;</span> in <span class="ansi-cyan-fg">&lt;module&gt;</span>
+<span class="ansi-green-fg">----&gt; 1</span><span class="ansi-red-fg"> </span>stop <span class="ansi-blue-fg">=</span> nltk<span class="ansi-blue-fg">.</span>corpus<span class="ansi-blue-fg">.</span>stopwords<span class="ansi-blue-fg">.</span>words<span class="ansi-blue-fg">(</span><span class="ansi-blue-fg">&#34;en&#34;</span><span class="ansi-blue-fg">)</span> <span class="ansi-blue-fg">+</span> list<span class="ansi-blue-fg">(</span>string<span class="ansi-blue-fg">.</span>punctuation<span class="ansi-blue-fg">)</span>
+
+<span class="ansi-green-fg">~/.local/lib/python3.8/site-packages/nltk/corpus/util.py</span> in <span class="ansi-cyan-fg">__getattr__</span><span class="ansi-blue-fg">(self, attr)</span>
+<span class="ansi-green-intense-fg ansi-bold">    118</span>             <span class="ansi-green-fg">raise</span> AttributeError<span class="ansi-blue-fg">(</span><span class="ansi-blue-fg">&#34;LazyCorpusLoader object has no attribute &#39;__bases__&#39;&#34;</span><span class="ansi-blue-fg">)</span>
+<span class="ansi-green-intense-fg ansi-bold">    119</span> 
+<span class="ansi-green-fg">--&gt; 120</span><span class="ansi-red-fg">         </span>self<span class="ansi-blue-fg">.</span>__load<span class="ansi-blue-fg">(</span><span class="ansi-blue-fg">)</span>
+<span class="ansi-green-intense-fg ansi-bold">    121</span>         <span class="ansi-red-fg"># This looks circular, but its not, since __load() changes our</span>
+<span class="ansi-green-intense-fg ansi-bold">    122</span>         <span class="ansi-red-fg"># __class__ to something new:</span>
+
+<span class="ansi-green-fg">~/.local/lib/python3.8/site-packages/nltk/corpus/util.py</span> in <span class="ansi-cyan-fg">__load</span><span class="ansi-blue-fg">(self)</span>
+<span class="ansi-green-intense-fg ansi-bold">     83</span>                     root <span class="ansi-blue-fg">=</span> nltk<span class="ansi-blue-fg">.</span>data<span class="ansi-blue-fg">.</span>find<span class="ansi-blue-fg">(</span><span class="ansi-blue-fg">&#34;{}/{}&#34;</span><span class="ansi-blue-fg">.</span>format<span class="ansi-blue-fg">(</span>self<span class="ansi-blue-fg">.</span>subdir<span class="ansi-blue-fg">,</span> zip_name<span class="ansi-blue-fg">)</span><span class="ansi-blue-fg">)</span>
+<span class="ansi-green-intense-fg ansi-bold">     84</span>                 <span class="ansi-green-fg">except</span> LookupError<span class="ansi-blue-fg">:</span>
+<span class="ansi-green-fg">---&gt; 85</span><span class="ansi-red-fg">                     </span><span class="ansi-green-fg">raise</span> e
+<span class="ansi-green-intense-fg ansi-bold">     86</span> 
+<span class="ansi-green-intense-fg ansi-bold">     87</span>         <span class="ansi-red-fg"># Load the corpus.</span>
+
+<span class="ansi-green-fg">~/.local/lib/python3.8/site-packages/nltk/corpus/util.py</span> in <span class="ansi-cyan-fg">__load</span><span class="ansi-blue-fg">(self)</span>
+<span class="ansi-green-intense-fg ansi-bold">     78</span>         <span class="ansi-green-fg">else</span><span class="ansi-blue-fg">:</span>
+<span class="ansi-green-intense-fg ansi-bold">     79</span>             <span class="ansi-green-fg">try</span><span class="ansi-blue-fg">:</span>
+<span class="ansi-green-fg">---&gt; 80</span><span class="ansi-red-fg">                 </span>root <span class="ansi-blue-fg">=</span> nltk<span class="ansi-blue-fg">.</span>data<span class="ansi-blue-fg">.</span>find<span class="ansi-blue-fg">(</span><span class="ansi-blue-fg">&#34;{}/{}&#34;</span><span class="ansi-blue-fg">.</span>format<span class="ansi-blue-fg">(</span>self<span class="ansi-blue-fg">.</span>subdir<span class="ansi-blue-fg">,</span> self<span class="ansi-blue-fg">.</span>__name<span class="ansi-blue-fg">)</span><span class="ansi-blue-fg">)</span>
+<span class="ansi-green-intense-fg ansi-bold">     81</span>             <span class="ansi-green-fg">except</span> LookupError <span class="ansi-green-fg">as</span> e<span class="ansi-blue-fg">:</span>
+<span class="ansi-green-intense-fg ansi-bold">     82</span>                 <span class="ansi-green-fg">try</span><span class="ansi-blue-fg">:</span>
+
+<span class="ansi-green-fg">~/.local/lib/python3.8/site-packages/nltk/data.py</span> in <span class="ansi-cyan-fg">find</span><span class="ansi-blue-fg">(resource_name, paths)</span>
+<span class="ansi-green-intense-fg ansi-bold">    583</span>     sep <span class="ansi-blue-fg">=</span> <span class="ansi-blue-fg">&#34;*&#34;</span> <span class="ansi-blue-fg">*</span> <span class="ansi-cyan-fg">70</span>
+<span class="ansi-green-intense-fg ansi-bold">    584</span>     resource_not_found <span class="ansi-blue-fg">=</span> <span class="ansi-blue-fg">&#34;\n%s\n%s\n%s\n&#34;</span> <span class="ansi-blue-fg">%</span> <span class="ansi-blue-fg">(</span>sep<span class="ansi-blue-fg">,</span> msg<span class="ansi-blue-fg">,</span> sep<span class="ansi-blue-fg">)</span>
+<span class="ansi-green-fg">--&gt; 585</span><span class="ansi-red-fg">     </span><span class="ansi-green-fg">raise</span> LookupError<span class="ansi-blue-fg">(</span>resource_not_found<span class="ansi-blue-fg">)</span>
+<span class="ansi-green-intense-fg ansi-bold">    586</span> 
+<span class="ansi-green-intense-fg ansi-bold">    587</span> 
+
+<span class="ansi-red-fg">LookupError</span>: 
+**********************************************************************
+  Resource <span class="ansi-yellow-intense-fg">stopwords</span> not found.
+  Please use the NLTK Downloader to obtain the resource:
+
+  <span class="ansi-red-fg">&gt;&gt;&gt; import nltk
+  &gt;&gt;&gt; nltk.download(&#39;stopwords&#39;)
+  </span>
+  For more information see: https://www.nltk.org/data.html
+
+  Attempted to load <span class="ansi-yellow-intense-fg">corpora/stopwords</span>
+
+  Searched in:
+    - &#39;/home/sol-nhl/nltk_data&#39;
+    - &#39;/usr/nltk_data&#39;
+    - &#39;/usr/share/nltk_data&#39;
+    - &#39;/usr/lib/nltk_data&#39;
+    - &#39;/usr/share/nltk_data&#39;
+    - &#39;/usr/local/share/nltk_data&#39;
+    - &#39;/usr/lib/nltk_data&#39;
+    - &#39;/usr/local/lib/nltk_data&#39;
+**********************************************************************
 </pre>
 </div>
-</div>
-
-<div class="output_area">
-
-    <div class="prompt output_prompt">Out[2]:</div>
-
-
-
-<div class="output_html rendered_html output_subarea output_execute_result"><div>
-<style scoped>
-    .dataframe tbody tr th:only-of-type {
-        vertical-align: middle;
-    }
-
-    .dataframe tbody tr th {
-        vertical-align: top;
-    }
-
-    .dataframe thead th {
-        text-align: right;
-    }
-</style>
-<table border="1" class="dataframe">
-  <thead>
-    <tr style="text-align: right;">
-      <th></th>
-      <th>total</th>
-      <th>speeding</th>
-      <th>alcohol</th>
-      <th>not_distracted</th>
-      <th>no_previous</th>
-      <th>ins_premium</th>
-      <th>ins_losses</th>
-      <th>abbrev</th>
-    </tr>
-  </thead>
-  <tbody>
-    <tr>
-      <th>0</th>
-      <td>18.8</td>
-      <td>7.332</td>
-      <td>5.640</td>
-      <td>18.048</td>
-      <td>15.040</td>
-      <td>784.55</td>
-      <td>145.08</td>
-      <td>AL</td>
-    </tr>
-    <tr>
-      <th>1</th>
-      <td>18.1</td>
-      <td>7.421</td>
-      <td>4.525</td>
-      <td>16.290</td>
-      <td>17.014</td>
-      <td>1053.48</td>
-      <td>133.93</td>
-      <td>AK</td>
-    </tr>
-    <tr>
-      <th>2</th>
-      <td>18.6</td>
-      <td>6.510</td>
-      <td>5.208</td>
-      <td>15.624</td>
-      <td>17.856</td>
-      <td>899.47</td>
-      <td>110.35</td>
-      <td>AZ</td>
-    </tr>
-    <tr>
-      <th>3</th>
-      <td>22.4</td>
-      <td>4.032</td>
-      <td>5.824</td>
-      <td>21.056</td>
-      <td>21.280</td>
-      <td>827.34</td>
-      <td>142.39</td>
-      <td>AR</td>
-    </tr>
-    <tr>
-      <th>4</th>
-      <td>12.0</td>
-      <td>4.200</td>
-      <td>3.360</td>
-      <td>10.920</td>
-      <td>10.680</td>
-      <td>878.41</td>
-      <td>165.63</td>
-      <td>CA</td>
-    </tr>
-  </tbody>
-</table>
-</div></div>
-
-</div>
-
-</div>
-</div>
-
-</div>
-<div class="cell border-box-sizing code_cell rendered">
-<div class="input">
-<div class="prompt input_prompt">In&nbsp;[3]:</div>
-<div class="inner_cell">
-    <div class="input_area">
-<div class=" highlight hl-ipython3"><pre><span></span><span class="n">sns</span><span class="o">.</span><span class="n">displot</span><span class="p">(</span><span class="n">dfc</span><span class="p">[</span><span class="s1">&#39;not_distracted&#39;</span><span class="p">])</span>
-</pre></div>
-
-    </div>
-</div>
-</div>
-
-<div class="output_wrapper">
-<div class="output">
-
-
-<div class="output_area">
-
-    <div class="prompt output_prompt">Out[3]:</div>
-
-
-
-
-<div class="output_text output_subarea output_execute_result">
-<pre>&lt;seaborn.axisgrid.FacetGrid at 0x7efe86225550&gt;</pre>
-</div>
-
-</div>
-
-<div class="output_area">
-
-    <div class="prompt"></div>
-
-
-
-
-<div class="output_png output_subarea ">
-<img src="data:image/png;base64,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
-"
->
-</div>
-
 </div>
 
 </div>

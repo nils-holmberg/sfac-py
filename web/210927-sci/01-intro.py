@@ -41,8 +41,71 @@
 # In[2]:
 
 
+# comment: test anaconda3 and jupyter notebooks
 print("hello world")
 
+
+# ## Interpreter
+# 
+# Python is an interpreted language[*](https://softwareengineering.stackexchange.com/a/24560) which can be used in two ways:
+# 
+# * "Interactive" Mode: It functions like an "advanced calculator", executing
+#   one command at a time:
+#   
+# ```bash
+# user:host:~$ python
+# Python 3.5.1 (default, Oct 23 2015, 18:05:06)
+# [GCC 4.8.3] on linux2
+# Type "help", "copyright", "credits" or "license" for more information.
+# >>> 2 + 2
+# 4
+# >>> print("Hello World")
+# Hello World
+# ```
+# 
+# * "Scripting" Mode: Executing a series of "commands" saved in text file,
+#   usually with a `.py` extension after the name of your file:
+# 
+# ```bash
+# user:host:~$ python my_script.py
+# Hello World
+# ```
+# 
+# ## Using interactive Python in Jupyter-style notebooks
+# 
+# A convenient and powerful way to use interactive-mode Python is via a Jupyter Notebook, or similar browser-based interface.
+# 
+# This particularly lends itself to data analysis since the notebook records a history of commands and shows output and graphs immediately in the browser.
+# 
+# There are several ways you can run a Jupyter(-style) notebook - locally installed on your computer or hosted as a service on the web. Today we will use a Jupyter notebook service provided by Google: https://colab.research.google.com (Colaboratory).
+# 
+# ### Jupyter-style notebooks: a quick tour
+# 
+# Go to https://colab.research.google.com and login with your Google account.
+# 
+# Select ***NEW NOTEBOOK → NEW PYTHON 3 NOTEBOOK*** - a new notebook will be created.
+# 
+# ---
+# 
+# Type some Python code in the top cell, eg:
+# 
+# ```python
+# print("Hello Jupyter !")
+# ```
+# 
+# ***Shift-Enter*** to run the contents of the cell
+# 
+# ---
+# 
+# You can add new cells.
+# 
+# ***Insert → Insert Code Cell***
+# 
+# ---
+# 
+# NOTE: When the text on the left hand of the cell is: `In [*]` (with an asterisk rather than a number), the cell is still running. It's usually best to wait until one cell has finished running before running the next.
+# 
+# Let's begin writing some code in our notebook.
 
 # In[ ]:
 

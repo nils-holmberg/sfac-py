@@ -14,7 +14,7 @@ computational content analyses, cognitive communication effects
 
 4. [data visualization using matplotlib, seaborn](web/210930-vis/)
 
-5. [collaborate and share python code with jupyter](web/211001-ipn/)
+5. [collaborate and share python code with jupyter](web/211001-jnb/)
 
 ## some headline
 

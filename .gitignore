@@ -3,9 +3,11 @@
 .Rhistory
 
 # folder content
-#log/*
+log/*
+!log/bash.log
 src/*
 tmp/*
+!tmp/syllabus.pdf
 
 # keep empty dir
 !log/.gitkeep

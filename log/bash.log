@@ -1,4 +1,21 @@
 ### resume course (210922)
+# start base env
+source ~/lib/python/anaconda3/bin/activate
+# update packages in env
+conda update --all
+# list envs
+conda env list
+# activate env
+#conda activate conda-sci
+# install notebook merge support, search packages at https://anaconda.org
+#conda install -c terradue -n base nbmerge
+# cut and paste, nbmerge only available for python2, so..
+#nbmerge file_1.ipynb file_2.ipynb file_3.ipynb > merged.ipynb
+# start jnb and copy paste multiple cells with shift arrow keys
+jupyter notebook
+
+
+### git toggle log (210922)
 # toggle log/bash.log file, show it
 vim .gitignore
 git add log/bash.log
@@ -32,6 +49,8 @@ conda install -n base -c conda-forge jupyterthemes
 jt -t oceans16 -tfs 18 -fs 18 -ofs 18 -dfs 18
 jupyter notebook
 # theme list: chesterish, grade3, ggruvboxd, gruvboxl, monokai, oceans16, onedork, solarizedd, solarizedl
+# reset theme
+jt -r
 
 
 ### anaconda from scratch (210913)
