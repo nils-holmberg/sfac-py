@@ -3,7 +3,7 @@
 # 3. web experiments with the psychopy package (210929)
 
 - 3.1.1: [psychopy](01-intro.html), 
-- 3.1.2: stuff, 
+- 3.1.2: python syntax, practice data structures, conditional statements, flow control
 - 3.1.3: goes, 
 - 3.2.1: [builder](02-build.html), 
 - 3.2.2: , 

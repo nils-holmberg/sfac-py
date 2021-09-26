@@ -9,8 +9,11 @@ python -m spacy download en_core_web_sm
 
 
 ### resume sci (210922)
-# start base env
+# start base env, or anaconda prompt on windows
 source ~/lib/python/anaconda3/bin/activate
+# update anaconda, spyder
+conda update anaconda
+conda install spyder=5.0.5
 # update packages in env
 conda update --all
 # list envs
