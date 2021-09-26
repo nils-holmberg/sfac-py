@@ -5,6 +5,14 @@
 # 
 # # day 1: getting started with python
 # - overview of day 1
+# - section 1.2.1 python syntax
+#     - [variables and data types](#variables)
+#     - [lists and sequence types](#lists)
+#     - [loops and flow control](#loops)
+# - section 1.2.2 functions
+#     - [functions and modules](#functions)
+# - section 1.2.3 files
+#     - [files and directories](#files)
 # 
 # # section: 1.2.1: python syntax
 # - variables, flow control, con
@@ -33,6 +41,7 @@ message
 print("No comment")  # comment
 
 
+# <a id='variables'></a>
 # ## Variables and data types
 # ### Integers, floats, strings
 
@@ -466,6 +475,7 @@ dict_of_dicts
 # 
 # **D** mixes up the value and the key (and doesn't actually include the new value to be assigned, `9`, anywhere). `2` is the original *value*, `Apricot` is the key. Assigning to a dictionary uses the form: `dictionary[key] = value`.
 
+# <a id='loops'></a>
 # ## Automation with Loops
 
 # ## Instructor notes
@@ -824,6 +834,7 @@ print(y)
 
 
 
+# <a id='functions'></a>
 # # section: 1.2.2: functions
 # - data structures, functions, pkgs
 
@@ -1611,6 +1622,7 @@ print()
 print(list(set(surveys_df.year)))
 
 
+# <a id='files'></a>
 # # section: 1.2.3: files
 # - navigate file system, working dir 
 # - coming in the tables section 1.3.1
