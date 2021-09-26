@@ -4,7 +4,7 @@
 
 - 5.1.1: [project](511-intro.html), ideas about how to organize a python project
 - 5.1.2: python syntax, practice data structures, conditional statements, flow control
-- 5.1.3: goes, 
+- 5.1.3: documentation, how to comment and document python code for later use
 - 5.2.1: [collaborate](521-colab.html), google colab, kaggle
 - 5.2.2: , 
 - 5.2.3: , 
