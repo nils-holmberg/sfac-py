@@ -13111,7 +13111,7 @@ div#notebook {
 <h1 id="day-1:-getting-started-with-python">day 1: getting started with python<a class="anchor-link" href="#day-1:-getting-started-with-python">&#182;</a></h1><ul>
 <li>overview of day 1</li>
 </ul>
-<h2 id="section:-1.2.1:-python-syntax">section: 1.2.1: python syntax<a class="anchor-link" href="#section:-1.2.1:-python-syntax">&#182;</a></h2><ul>
+<h1 id="section:-1.2.1:-python-syntax">section: 1.2.1: python syntax<a class="anchor-link" href="#section:-1.2.1:-python-syntax">&#182;</a></h1><ul>
 <li>variables, flow control, con</li>
 </ul>
 
@@ -14964,6 +14964,782 @@ TypeError: 'tuple' object does not support item assignment</code></pre>
 </div>
 </div>
 </div>
+<div class="cell border-box-sizing text_cell rendered"><div class="prompt input_prompt">
+</div><div class="inner_cell">
+<div class="text_cell_render border-box-sizing rendered_html">
+<h2 id="Automation-with-Loops">Automation with Loops<a class="anchor-link" href="#Automation-with-Loops">&#182;</a></h2>
+</div>
+</div>
+</div>
+<div class="cell border-box-sizing text_cell rendered celltag_solution"><div class="prompt input_prompt">
+</div><div class="inner_cell">
+<div class="text_cell_render border-box-sizing rendered_html">
+<h2 id="Instructor-notes">Instructor notes<a class="anchor-link" href="#Instructor-notes">&#182;</a></h2><p><em>Estimated teaching time:</em> 30 min</p>
+<p><em>Estimated challenge time:</em> 0 min</p>
+<p><em>Key questions:</em></p>
+<ul>
+<li>"How can I do the same operations on many different values?""</li>
+</ul>
+<p><em>Learning objectives:</em></p>
+<ul>
+<li>"Explain what a <code>for</code> loop does."</li>
+<li>"Correctly write <code>for</code> loops to repeat simple calculations."</li>
+<li>"Trace changes to a loop variable as the loop runs."</li>
+<li>"Trace changes to other variables as they are updated by a <code>for</code> loop."</li>
+</ul>
+<p><em>Key points:</em></p>
+<ul>
+<li>"Use <code>for variable in sequence</code> to process the elements of a sequence one at a time."</li>
+<li>"The body of a <code>for</code> loop must be indented."</li>
+<li>"Use <code>len(thing)</code> to determine the length of something that contains other values."</li>
+</ul>
+<hr>
+
+</div>
+</div>
+</div>
+<div class="cell border-box-sizing text_cell rendered"><div class="prompt input_prompt">
+</div><div class="inner_cell">
+<div class="text_cell_render border-box-sizing rendered_html">
+<p>An example task that we might want to repeat is printing each character in a
+word on a line of its own.</p>
+
+</div>
+</div>
+</div>
+<div class="cell border-box-sizing code_cell rendered">
+<div class="input">
+<div class="prompt input_prompt">In&nbsp;[17]:</div>
+<div class="inner_cell">
+    <div class="input_area">
+<div class=" highlight hl-ipython3"><pre><span></span><span class="n">word</span> <span class="o">=</span> <span class="s1">&#39;lead&#39;</span>
+</pre></div>
+
+    </div>
+</div>
+</div>
+
+</div>
+<div class="cell border-box-sizing text_cell rendered"><div class="prompt input_prompt">
+</div><div class="inner_cell">
+<div class="text_cell_render border-box-sizing rendered_html">
+<p>We can access a character in a string using its index. For example, we can get the first
+character of the word <code>'lead'</code>, by using <code>word[0]</code>. One way to print each character is to use
+four <code>print</code> statements:</p>
+
+</div>
+</div>
+</div>
+<div class="cell border-box-sizing code_cell rendered">
+<div class="input">
+<div class="prompt input_prompt">In&nbsp;[18]:</div>
+<div class="inner_cell">
+    <div class="input_area">
+<div class=" highlight hl-ipython3"><pre><span></span><span class="nb">print</span><span class="p">(</span><span class="n">word</span><span class="p">[</span><span class="mi">0</span><span class="p">])</span>
+<span class="nb">print</span><span class="p">(</span><span class="n">word</span><span class="p">[</span><span class="mi">1</span><span class="p">])</span>
+<span class="nb">print</span><span class="p">(</span><span class="n">word</span><span class="p">[</span><span class="mi">2</span><span class="p">])</span>
+<span class="nb">print</span><span class="p">(</span><span class="n">word</span><span class="p">[</span><span class="mi">3</span><span class="p">])</span>
+</pre></div>
+
+    </div>
+</div>
+</div>
+
+<div class="output_wrapper">
+<div class="output">
+
+
+<div class="output_area">
+
+    <div class="prompt"></div>
+
+
+<div class="output_subarea output_stream output_stdout output_text">
+<pre>l
+e
+a
+d
+</pre>
+</div>
+</div>
+
+</div>
+</div>
+
+</div>
+<div class="cell border-box-sizing text_cell rendered"><div class="prompt input_prompt">
+</div><div class="inner_cell">
+<div class="text_cell_render border-box-sizing rendered_html">
+<p>While this works, it's a bad approach for two reasons:</p>
+<ol>
+<li><p>It doesn't scale:
+if we want to print the characters in a string that's hundreds of letters long,
+we'd be better off just typing them in.</p>
+</li>
+<li><p>It's fragile:
+if we give it a longer string,
+it only prints part of the data,
+and if we give it a shorter one,
+it produces an error because we're asking for characters that don't exist.</p>
+</li>
+</ol>
+
+</div>
+</div>
+</div>
+<div class="cell border-box-sizing text_cell rendered"><div class="prompt input_prompt">
+</div><div class="inner_cell">
+<div class="text_cell_render border-box-sizing rendered_html">
+<p>Running:</p>
+<div class="highlight"><pre><span></span><span class="n">word</span> <span class="o">=</span> <span class="s1">&#39;tin&#39;</span>
+<span class="nb">print</span><span class="p">(</span><span class="n">word</span><span class="p">[</span><span class="mi">0</span><span class="p">])</span>
+<span class="nb">print</span><span class="p">(</span><span class="n">word</span><span class="p">[</span><span class="mi">1</span><span class="p">])</span>
+<span class="nb">print</span><span class="p">(</span><span class="n">word</span><span class="p">[</span><span class="mi">2</span><span class="p">])</span>
+<span class="nb">print</span><span class="p">(</span><span class="n">word</span><span class="p">[</span><span class="mi">3</span><span class="p">])</span>
+</pre></div>
+
+</div>
+</div>
+</div>
+<div class="cell border-box-sizing text_cell rendered"><div class="prompt input_prompt">
+</div><div class="inner_cell">
+<div class="text_cell_render border-box-sizing rendered_html">
+<p>Gives the error:</p>
+
+<pre><code>---------------------------------------------------------------------------
+IndexError                                Traceback (most recent call last)
+&lt;ipython-input-4-e59d5eac5430&gt; in &lt;module&gt;()
+      3 print(word[1])
+      4 print(word[2])
+----&gt; 5 print(word[3])
+
+IndexError: string index out of range</code></pre>
+
+</div>
+</div>
+</div>
+<div class="cell border-box-sizing text_cell rendered"><div class="prompt input_prompt">
+</div><div class="inner_cell">
+<div class="text_cell_render border-box-sizing rendered_html">
+<p>Here's a better approach:</p>
+
+</div>
+</div>
+</div>
+<div class="cell border-box-sizing code_cell rendered">
+<div class="input">
+<div class="prompt input_prompt">In&nbsp;[19]:</div>
+<div class="inner_cell">
+    <div class="input_area">
+<div class=" highlight hl-ipython3"><pre><span></span><span class="n">word</span> <span class="o">=</span> <span class="s1">&#39;lead&#39;</span>
+<span class="k">for</span> <span class="n">char</span> <span class="ow">in</span> <span class="n">word</span><span class="p">:</span>
+    <span class="nb">print</span><span class="p">(</span><span class="n">char</span><span class="p">)</span>
+</pre></div>
+
+    </div>
+</div>
+</div>
+
+<div class="output_wrapper">
+<div class="output">
+
+
+<div class="output_area">
+
+    <div class="prompt"></div>
+
+
+<div class="output_subarea output_stream output_stdout output_text">
+<pre>l
+e
+a
+d
+</pre>
+</div>
+</div>
+
+</div>
+</div>
+
+</div>
+<div class="cell border-box-sizing text_cell rendered"><div class="prompt input_prompt">
+</div><div class="inner_cell">
+<div class="text_cell_render border-box-sizing rendered_html">
+<p>This is shorter --- certainly shorter than something that prints every character in a hundred-letter string --- and
+more robust as well:</p>
+
+</div>
+</div>
+</div>
+<div class="cell border-box-sizing code_cell rendered">
+<div class="input">
+<div class="prompt input_prompt">In&nbsp;[20]:</div>
+<div class="inner_cell">
+    <div class="input_area">
+<div class=" highlight hl-ipython3"><pre><span></span><span class="n">word</span> <span class="o">=</span> <span class="s1">&#39;oxygen&#39;</span>
+<span class="k">for</span> <span class="n">char</span> <span class="ow">in</span> <span class="n">word</span><span class="p">:</span>
+    <span class="nb">print</span><span class="p">(</span><span class="n">char</span><span class="p">)</span>
+</pre></div>
+
+    </div>
+</div>
+</div>
+
+<div class="output_wrapper">
+<div class="output">
+
+
+<div class="output_area">
+
+    <div class="prompt"></div>
+
+
+<div class="output_subarea output_stream output_stdout output_text">
+<pre>o
+x
+y
+g
+e
+n
+</pre>
+</div>
+</div>
+
+</div>
+</div>
+
+</div>
+<div class="cell border-box-sizing text_cell rendered"><div class="prompt input_prompt">
+</div><div class="inner_cell">
+<div class="text_cell_render border-box-sizing rendered_html">
+<p>The improved version uses a <strong>for loop</strong> to repeat an operation --- in this case, printing --- once for each thing in a sequence.
+The general form of a loop is:</p>
+<div class="highlight"><pre><span></span><span class="k">for</span> <span class="n">variable</span> <span class="ow">in</span> <span class="n">collection</span><span class="p">:</span>
+    <span class="c1"># do things with variable</span>
+</pre></div>
+
+</div>
+</div>
+</div>
+<div class="cell border-box-sizing text_cell rendered"><div class="prompt input_prompt">
+</div><div class="inner_cell">
+<div class="text_cell_render border-box-sizing rendered_html">
+<p>Using the oxygen example above, the loop might look like this:</p>
+<p><img src="images/loops_image.png" alt="loop_image"></p>
+<p>where each character (<code>char</code>) in the variable <code>word</code> is looped through and printed one character after another.
+The numbers in the diagram denote which loop cycle the character was printed in (1 being the first loop, and 6 being the final loop).</p>
+<p>We can call the <strong>loop variable</strong> anything we like,
+but there must be a colon at the end of the line starting the loop, and we must indent anything we want to run inside the loop. Unlike many other languages, there is no command to signify the end of the loop body (e.g. <code>end for</code>); what is indented after the <code>for</code> statement belongs to the loop.</p>
+
+</div>
+</div>
+</div>
+<div class="cell border-box-sizing text_cell rendered"><div class="prompt input_prompt">
+</div><div class="inner_cell">
+<div class="text_cell_render border-box-sizing rendered_html">
+<h2 id="What's-in-a-name?">What's in a name?<a class="anchor-link" href="#What's-in-a-name?">&#182;</a></h2><p>In the example above, the loop variable was given the name <code>char</code> as a mnemonic; it is short for 'character'. 
+We can choose any name we want for variables. We might just as easily have chosen the name <code>banana</code> for the loop variable, as long as we use the same name when we invoke the variable inside the loop:</p>
+
+</div>
+</div>
+</div>
+<div class="cell border-box-sizing code_cell rendered">
+<div class="input">
+<div class="prompt input_prompt">In&nbsp;[21]:</div>
+<div class="inner_cell">
+    <div class="input_area">
+<div class=" highlight hl-ipython3"><pre><span></span><span class="n">word</span> <span class="o">=</span> <span class="s1">&#39;oxygen&#39;</span>
+<span class="k">for</span> <span class="n">banana</span> <span class="ow">in</span> <span class="n">word</span><span class="p">:</span>
+    <span class="nb">print</span><span class="p">(</span><span class="n">banana</span><span class="p">)</span>
+</pre></div>
+
+    </div>
+</div>
+</div>
+
+<div class="output_wrapper">
+<div class="output">
+
+
+<div class="output_area">
+
+    <div class="prompt"></div>
+
+
+<div class="output_subarea output_stream output_stdout output_text">
+<pre>o
+x
+y
+g
+e
+n
+</pre>
+</div>
+</div>
+
+</div>
+</div>
+
+</div>
+<div class="cell border-box-sizing text_cell rendered"><div class="prompt input_prompt">
+</div><div class="inner_cell">
+<div class="text_cell_render border-box-sizing rendered_html">
+<p>It is a good idea to choose variable names that are meaningful, otherwise it would be more difficult to understand what the loop is doing.</p>
+<p>Here's another loop that repeatedly updates a variable:</p>
+
+</div>
+</div>
+</div>
+<div class="cell border-box-sizing code_cell rendered">
+<div class="input">
+<div class="prompt input_prompt">In&nbsp;[22]:</div>
+<div class="inner_cell">
+    <div class="input_area">
+<div class=" highlight hl-ipython3"><pre><span></span><span class="n">length</span> <span class="o">=</span> <span class="mi">0</span>
+<span class="k">for</span> <span class="n">vowel</span> <span class="ow">in</span> <span class="s1">&#39;aeiou&#39;</span><span class="p">:</span>
+    <span class="n">length</span> <span class="o">=</span> <span class="n">length</span> <span class="o">+</span> <span class="mi">1</span>
+<span class="nb">print</span><span class="p">(</span><span class="s1">&#39;There are&#39;</span><span class="p">,</span> <span class="n">length</span><span class="p">,</span> <span class="s1">&#39;vowels&#39;</span><span class="p">)</span>
+</pre></div>
+
+    </div>
+</div>
+</div>
+
+<div class="output_wrapper">
+<div class="output">
+
+
+<div class="output_area">
+
+    <div class="prompt"></div>
+
+
+<div class="output_subarea output_stream output_stdout output_text">
+<pre>There are 5 vowels
+</pre>
+</div>
+</div>
+
+</div>
+</div>
+
+</div>
+<div class="cell border-box-sizing text_cell rendered"><div class="prompt input_prompt">
+</div><div class="inner_cell">
+<div class="text_cell_render border-box-sizing rendered_html">
+<p>It's worth tracing the execution of this little program step by step.</p>
+<p>Since there are five characters in <code>'aeiou'</code>,
+the statement on line 3 will be executed five times.</p>
+<p>The first time around,
+<code>length</code> is zero (the value assigned to it on line 1)
+and <code>vowel</code> is <code>'a'</code>.
+The statement adds 1 to the old value of <code>length</code>,
+producing 1,
+and updates <code>length</code> to refer to that new value.</p>
+<p>The next time around,
+<code>vowel</code> is <code>'e'</code> and <code>length</code> is 1,
+so <code>length</code> is updated to be 2.</p>
+<p>After three more updates,
+<code>length</code> is 5;
+since there is nothing left in <code>'aeiou'</code> for Python to process,
+the loop finishes
+and the <code>print</code> statement on line 4 tells us our final answer.</p>
+<p>Note that a loop variable <code>vowel</code> is just a variable that's being used to record progress in a loop.</p>
+
+</div>
+</div>
+</div>
+<div class="cell border-box-sizing text_cell rendered"><div class="prompt input_prompt">
+</div><div class="inner_cell">
+<div class="text_cell_render border-box-sizing rendered_html">
+<h2 id="Challenge---scope-of-the-loop-variable">Challenge - scope of the loop variable<a class="anchor-link" href="#Challenge---scope-of-the-loop-variable">&#182;</a></h2><ol>
+<li>In the loop over <code>"aeiou"</code> above, does the loop variable <code>vowel</code> exist after the loop has finished ?</li>
+</ol>
+
+</div>
+</div>
+</div>
+<div class="cell border-box-sizing code_cell rendered">
+<div class="input">
+<div class="prompt input_prompt">In&nbsp;[23]:</div>
+<div class="inner_cell">
+    <div class="input_area">
+<div class=" highlight hl-ipython3"><pre><span></span><span class="n">length</span> <span class="o">=</span> <span class="mi">0</span>
+<span class="k">for</span> <span class="n">vowel</span> <span class="ow">in</span> <span class="s1">&#39;aeiou&#39;</span><span class="p">:</span>
+    <span class="n">length</span> <span class="o">=</span> <span class="n">length</span> <span class="o">+</span> <span class="mi">1</span>
+<span class="nb">print</span><span class="p">(</span><span class="s1">&#39;After the loop, `vowel` exists and has the value: &#39;</span> <span class="o">+</span> <span class="n">vowel</span><span class="p">)</span>
+
+<span class="c1"># The loop variable `vowel` exists after the loop is completed, not only inside the loop</span>
+</pre></div>
+
+    </div>
+</div>
+</div>
+
+<div class="output_wrapper">
+<div class="output">
+
+
+<div class="output_area">
+
+    <div class="prompt"></div>
+
+
+<div class="output_subarea output_stream output_stdout output_text">
+<pre>After the loop, `vowel` exists and has the value: u
+</pre>
+</div>
+</div>
+
+</div>
+</div>
+
+</div>
+<div class="cell border-box-sizing text_cell rendered"><div class="prompt input_prompt">
+</div><div class="inner_cell">
+<div class="text_cell_render border-box-sizing rendered_html">
+<p>Note also that finding the length of a string is such a common operation that Python actually has a built-in function to do it called <code>len</code>:</p>
+
+</div>
+</div>
+</div>
+<div class="cell border-box-sizing code_cell rendered">
+<div class="input">
+<div class="prompt input_prompt">In&nbsp;[24]:</div>
+<div class="inner_cell">
+    <div class="input_area">
+<div class=" highlight hl-ipython3"><pre><span></span><span class="nb">print</span><span class="p">(</span><span class="nb">len</span><span class="p">(</span><span class="s1">&#39;aeiou&#39;</span><span class="p">))</span>
+</pre></div>
+
+    </div>
+</div>
+</div>
+
+<div class="output_wrapper">
+<div class="output">
+
+
+<div class="output_area">
+
+    <div class="prompt"></div>
+
+
+<div class="output_subarea output_stream output_stdout output_text">
+<pre>5
+</pre>
+</div>
+</div>
+
+</div>
+</div>
+
+</div>
+<div class="cell border-box-sizing text_cell rendered"><div class="prompt input_prompt">
+</div><div class="inner_cell">
+<div class="text_cell_render border-box-sizing rendered_html">
+<p><code>len</code> is much faster than any function we could write ourselves,
+and much easier to read than a two-line loop;
+it will also give us the length of many other things that we haven't met yet,
+so we should always use it when we can.</p>
+
+</div>
+</div>
+</div>
+<div class="cell border-box-sizing text_cell rendered"><div class="prompt input_prompt">
+</div><div class="inner_cell">
+<div class="text_cell_render border-box-sizing rendered_html">
+<h2 id="From-1-to-N">From 1 to N<a class="anchor-link" href="#From-1-to-N">&#182;</a></h2><p>Python has a built-in function called <code>range</code> that creates a sequence of numbers. <code>range</code> can
+accept 1, 2, or 3 parameters.</p>
+<ul>
+<li>If one parameter is given, <code>range</code> creates an array of that length,
+starting at zero and incrementing by 1.
+For example, <code>range(3)</code> produces the numbers <code>0, 1, 2</code>.</li>
+<li>If two parameters are given, <code>range</code> starts at
+the first and ends just before the second, incrementing by one.
+For example, <code>range(2, 5)</code> produces <code>2, 3, 4</code>.</li>
+<li>If <code>range</code> is given 3 parameters,
+it starts at the first one, ends just before the second one, and increments by the third one.
+For exmaple <code>range(3, 10, 2)</code> produces <code>3, 5, 7, 9</code>.</li>
+</ul>
+
+</div>
+</div>
+</div>
+<div class="cell border-box-sizing text_cell rendered celltag_challenge"><div class="prompt input_prompt">
+</div><div class="inner_cell">
+<div class="text_cell_render border-box-sizing rendered_html">
+<h2 id="Challenge---loop-over-a-range">Challenge - loop over a range<a class="anchor-link" href="#Challenge---loop-over-a-range">&#182;</a></h2><p>Using <code>range</code>,
+write a loop that uses <code>range</code> to print the first 3 natural numbers:</p>
+
+<pre><code>1
+2
+3</code></pre>
+
+</div>
+</div>
+</div>
+<div class="cell border-box-sizing text_cell rendered celltag_solution"><div class="prompt input_prompt">
+</div><div class="inner_cell">
+<div class="text_cell_render border-box-sizing rendered_html">
+<h2 id="Solution">Solution<a class="anchor-link" href="#Solution">&#182;</a></h2>
+</div>
+</div>
+</div>
+<div class="cell border-box-sizing code_cell rendered celltag_solution">
+<div class="input">
+<div class="prompt input_prompt">In&nbsp;[25]:</div>
+<div class="inner_cell">
+    <div class="input_area">
+<div class=" highlight hl-ipython3"><pre><span></span><span class="k">for</span> <span class="n">i</span> <span class="ow">in</span> <span class="nb">range</span><span class="p">(</span><span class="mi">1</span><span class="p">,</span> <span class="mi">4</span><span class="p">):</span>
+   <span class="nb">print</span><span class="p">(</span><span class="n">i</span><span class="p">)</span>
+</pre></div>
+
+    </div>
+</div>
+</div>
+
+<div class="output_wrapper">
+<div class="output">
+
+
+<div class="output_area">
+
+    <div class="prompt"></div>
+
+
+<div class="output_subarea output_stream output_stdout output_text">
+<pre>1
+2
+3
+</pre>
+</div>
+</div>
+
+</div>
+</div>
+
+</div>
+<div class="cell border-box-sizing text_cell rendered"><div class="prompt input_prompt">
+</div><div class="inner_cell">
+<div class="text_cell_render border-box-sizing rendered_html">
+<h2 id="Computing-Powers-With-Loops">Computing Powers With Loops<a class="anchor-link" href="#Computing-Powers-With-Loops">&#182;</a></h2><p>Exponentiation is built into Python:</p>
+
+</div>
+</div>
+</div>
+<div class="cell border-box-sizing code_cell rendered">
+<div class="input">
+<div class="prompt input_prompt">In&nbsp;[26]:</div>
+<div class="inner_cell">
+    <div class="input_area">
+<div class=" highlight hl-ipython3"><pre><span></span><span class="nb">print</span><span class="p">(</span><span class="mi">5</span> <span class="o">**</span> <span class="mi">3</span><span class="p">)</span>
+</pre></div>
+
+    </div>
+</div>
+</div>
+
+<div class="output_wrapper">
+<div class="output">
+
+
+<div class="output_area">
+
+    <div class="prompt"></div>
+
+
+<div class="output_subarea output_stream output_stdout output_text">
+<pre>125
+</pre>
+</div>
+</div>
+
+</div>
+</div>
+
+</div>
+<div class="cell border-box-sizing text_cell rendered celltag_challenge"><div class="prompt input_prompt">
+</div><div class="inner_cell">
+<div class="text_cell_render border-box-sizing rendered_html">
+<h2 id="Challenge---multiplication-in-a-loop">Challenge - multiplication in a loop<a class="anchor-link" href="#Challenge---multiplication-in-a-loop">&#182;</a></h2><p>Write a loop that calculates the same result as <code>5 ** 3</code> using
+multiplication (and without exponentiation).</p>
+
+</div>
+</div>
+</div>
+<div class="cell border-box-sizing text_cell rendered celltag_solution"><div class="prompt input_prompt">
+</div><div class="inner_cell">
+<div class="text_cell_render border-box-sizing rendered_html">
+<h2 id="Solution">Solution<a class="anchor-link" href="#Solution">&#182;</a></h2>
+</div>
+</div>
+</div>
+<div class="cell border-box-sizing code_cell rendered celltag_solution">
+<div class="input">
+<div class="prompt input_prompt">In&nbsp;[27]:</div>
+<div class="inner_cell">
+    <div class="input_area">
+<div class=" highlight hl-ipython3"><pre><span></span><span class="n">result</span> <span class="o">=</span> <span class="mi">1</span>
+<span class="k">for</span> <span class="n">i</span> <span class="ow">in</span> <span class="nb">range</span><span class="p">(</span><span class="mi">0</span><span class="p">,</span> <span class="mi">3</span><span class="p">):</span>
+   <span class="n">result</span> <span class="o">=</span> <span class="n">result</span> <span class="o">*</span> <span class="mi">5</span>
+<span class="nb">print</span><span class="p">(</span><span class="n">result</span><span class="p">)</span>
+</pre></div>
+
+    </div>
+</div>
+</div>
+
+<div class="output_wrapper">
+<div class="output">
+
+
+<div class="output_area">
+
+    <div class="prompt"></div>
+
+
+<div class="output_subarea output_stream output_stdout output_text">
+<pre>125
+</pre>
+</div>
+</div>
+
+</div>
+</div>
+
+</div>
+<div class="cell border-box-sizing text_cell rendered celltag_challenge"><div class="prompt input_prompt">
+</div><div class="inner_cell">
+<div class="text_cell_render border-box-sizing rendered_html">
+<h2 id="Bonus-challenge:-reverse-a-string">Bonus challenge: reverse a string<a class="anchor-link" href="#Bonus-challenge:-reverse-a-string">&#182;</a></h2><p>Knowing that two strings can be concatenated using the <code>+</code> operator,
+write a loop that takes a string
+and produces a new string with the characters in reverse order,
+so <code>'Newton'</code> becomes <code>'notweN'</code>.</p>
+
+</div>
+</div>
+</div>
+<div class="cell border-box-sizing text_cell rendered celltag_solution"><div class="prompt input_prompt">
+</div><div class="inner_cell">
+<div class="text_cell_render border-box-sizing rendered_html">
+<h2 id="Solution">Solution<a class="anchor-link" href="#Solution">&#182;</a></h2>
+</div>
+</div>
+</div>
+<div class="cell border-box-sizing code_cell rendered celltag_solution">
+<div class="input">
+<div class="prompt input_prompt">In&nbsp;[28]:</div>
+<div class="inner_cell">
+    <div class="input_area">
+<div class=" highlight hl-ipython3"><pre><span></span><span class="n">newstring</span> <span class="o">=</span> <span class="s1">&#39;&#39;</span>
+<span class="n">oldstring</span> <span class="o">=</span> <span class="s1">&#39;Newton&#39;</span>
+<span class="k">for</span> <span class="n">char</span> <span class="ow">in</span> <span class="n">oldstring</span><span class="p">:</span>
+   <span class="n">newstring</span> <span class="o">=</span> <span class="n">char</span> <span class="o">+</span> <span class="n">newstring</span>
+<span class="nb">print</span><span class="p">(</span><span class="n">newstring</span><span class="p">)</span>
+</pre></div>
+
+    </div>
+</div>
+</div>
+
+<div class="output_wrapper">
+<div class="output">
+
+
+<div class="output_area">
+
+    <div class="prompt"></div>
+
+
+<div class="output_subarea output_stream output_stdout output_text">
+<pre>notweN
+</pre>
+</div>
+</div>
+
+</div>
+</div>
+
+</div>
+<div class="cell border-box-sizing text_cell rendered"><div class="prompt input_prompt">
+</div><div class="inner_cell">
+<div class="text_cell_render border-box-sizing rendered_html">
+<h2 id="Enumerate">Enumerate<a class="anchor-link" href="#Enumerate">&#182;</a></h2><p>The built-in function <code>enumerate</code> takes a sequence (e.g. a list) and generates a
+new sequence of the same length. Each element of the new sequence is a pair composed of the index
+(0, 1, 2,...) and the value from the original sequence:</p>
+
+<pre><code>for i, x in enumerate(xs):
+    # Do something with i and x</code></pre>
+<p>The code above loops through <code>xs</code>, assigning the index to <code>i</code> and the value to <code>x</code>.</p>
+
+</div>
+</div>
+</div>
+<div class="cell border-box-sizing text_cell rendered celltag_challenge"><div class="prompt input_prompt">
+</div><div class="inner_cell">
+<div class="text_cell_render border-box-sizing rendered_html">
+<h2 id="Bonus-challenge:-enumeration-for-computing-the-value-of-a-polynomial">Bonus challenge: enumeration for computing the value of a polynomial<a class="anchor-link" href="#Bonus-challenge:-enumeration-for-computing-the-value-of-a-polynomial">&#182;</a></h2><p>Suppose you have encoded a polynomial as a list of coefficients in
+the following way: the first element is the constant term, the
+second element is the coefficient of the linear term, the third is the
+coefficient of the quadratic term, etc.</p>
+
+<pre><code>x = 5
+cc = [2, 4, 3]</code></pre>
+
+<pre><code>y = cc[0] * x**0 + cc[1] * x**1 + cc[2] * x**2
+y = 97</code></pre>
+<p>Write a loop using <code>enumerate(cc)</code> which computes the value <code>y</code> of any
+polynomial, given <code>x</code> and <code>cc</code>.</p>
+
+</div>
+</div>
+</div>
+<div class="cell border-box-sizing text_cell rendered celltag_solution"><div class="prompt input_prompt">
+</div><div class="inner_cell">
+<div class="text_cell_render border-box-sizing rendered_html">
+<h2 id="Solution">Solution<a class="anchor-link" href="#Solution">&#182;</a></h2>
+</div>
+</div>
+</div>
+<div class="cell border-box-sizing code_cell rendered celltag_solution">
+<div class="input">
+<div class="prompt input_prompt">In&nbsp;[29]:</div>
+<div class="inner_cell">
+    <div class="input_area">
+<div class=" highlight hl-ipython3"><pre><span></span><span class="n">x</span> <span class="o">=</span> <span class="mi">5</span>
+<span class="n">cc</span> <span class="o">=</span> <span class="p">[</span><span class="mi">2</span><span class="p">,</span> <span class="mi">4</span><span class="p">,</span> <span class="mi">3</span><span class="p">]</span>
+<span class="n">y</span> <span class="o">=</span> <span class="n">cc</span><span class="p">[</span><span class="mi">0</span><span class="p">]</span> <span class="o">*</span> <span class="n">x</span><span class="o">**</span><span class="mi">0</span> <span class="o">+</span> <span class="n">cc</span><span class="p">[</span><span class="mi">1</span><span class="p">]</span> <span class="o">*</span> <span class="n">x</span><span class="o">**</span><span class="mi">1</span> <span class="o">+</span> <span class="n">cc</span><span class="p">[</span><span class="mi">2</span><span class="p">]</span> <span class="o">*</span> <span class="n">x</span><span class="o">**</span><span class="mi">2</span>
+
+<span class="n">y</span> <span class="o">=</span> <span class="mi">0</span>
+<span class="k">for</span> <span class="n">i</span><span class="p">,</span> <span class="n">c</span> <span class="ow">in</span> <span class="nb">enumerate</span><span class="p">(</span><span class="n">cc</span><span class="p">):</span>
+    <span class="n">y</span> <span class="o">=</span> <span class="n">y</span> <span class="o">+</span> <span class="n">x</span><span class="o">**</span><span class="n">i</span> <span class="o">*</span> <span class="n">c</span>
+    
+<span class="nb">print</span><span class="p">(</span><span class="n">y</span><span class="p">)</span>
+</pre></div>
+
+    </div>
+</div>
+</div>
+
+<div class="output_wrapper">
+<div class="output">
+
+
+<div class="output_area">
+
+    <div class="prompt"></div>
+
+
+<div class="output_subarea output_stream output_stdout output_text">
+<pre>97
+</pre>
+</div>
+</div>
+
+</div>
+</div>
+
+</div>
 <div class="cell border-box-sizing code_cell rendered">
 <div class="input">
 <div class="prompt input_prompt">In&nbsp;[&nbsp;]:</div>
@@ -14980,11 +15756,1425 @@ TypeError: 'tuple' object does not support item assignment</code></pre>
 <div class="cell border-box-sizing text_cell rendered"><div class="prompt input_prompt">
 </div><div class="inner_cell">
 <div class="text_cell_render border-box-sizing rendered_html">
-<h2 id="section:-1.2.2:-functions">section: 1.2.2: functions<a class="anchor-link" href="#section:-1.2.2:-functions">&#182;</a></h2><ul>
+<h1 id="section:-1.2.2:-functions">section: 1.2.2: functions<a class="anchor-link" href="#section:-1.2.2:-functions">&#182;</a></h1><ul>
 <li>data structures, functions, pkgs</li>
 </ul>
-<h2 id="section:-1.2.3:-files">section: 1.2.3: files<a class="anchor-link" href="#section:-1.2.3:-files">&#182;</a></h2><ul>
+
+</div>
+</div>
+</div>
+<div class="cell border-box-sizing text_cell rendered celltag_solution"><div class="prompt input_prompt">
+</div><div class="inner_cell">
+<div class="text_cell_render border-box-sizing rendered_html">
+<h2 id="Instructor-notes">Instructor notes<a class="anchor-link" href="#Instructor-notes">&#182;</a></h2><p><em>Estimated teaching time:</em> 30 min</p>
+<p><em>Estimated challenge time:</em> 0 min</p>
+<p><em>Key questions:</em></p>
+<p><em>Learning objectives:</em></p>
+<ul>
+<li>"Build reusable code in Python."</li>
+<li>"Write functions using conditional statements (if, then, else)"</li>
+</ul>
+<hr>
+
+</div>
+</div>
+</div>
+<div class="cell border-box-sizing text_cell rendered"><div class="prompt input_prompt">
+</div><div class="inner_cell">
+<div class="text_cell_render border-box-sizing rendered_html">
+<h2 id="Functions">Functions<a class="anchor-link" href="#Functions">&#182;</a></h2><p>Functions wrap up reusable pieces of code - they help you apply the <em>Do Not Repeat Yourself</em> (DRY) principle.</p>
+
+</div>
+</div>
+</div>
+<div class="cell border-box-sizing code_cell rendered celltag_solution">
+<div class="input">
+<div class="prompt input_prompt">In&nbsp;[1]:</div>
+<div class="inner_cell">
+    <div class="input_area">
+<div class=" highlight hl-ipython3"><pre><span></span><span class="k">def</span> <span class="nf">square</span><span class="p">(</span><span class="n">x</span><span class="p">):</span>
+    <span class="c1"># The body of the function is indicated by indenting by 4 spaces.</span>
+    <span class="k">return</span> <span class="n">x</span><span class="o">**</span><span class="mi">2</span>
+
+<span class="n">square</span><span class="p">(</span><span class="mi">4</span><span class="p">)</span>
+</pre></div>
+
+    </div>
+</div>
+</div>
+
+<div class="output_wrapper">
+<div class="output">
+
+
+<div class="output_area">
+
+    <div class="prompt output_prompt">Out[1]:</div>
+
+
+
+
+<div class="output_text output_subarea output_execute_result">
+<pre>16</pre>
+</div>
+
+</div>
+
+</div>
+</div>
+
+</div>
+<div class="cell border-box-sizing code_cell rendered celltag_solution">
+<div class="input">
+<div class="prompt input_prompt">In&nbsp;[2]:</div>
+<div class="inner_cell">
+    <div class="input_area">
+<div class=" highlight hl-ipython3"><pre><span></span><span class="k">def</span> <span class="nf">hyphenate</span><span class="p">(</span><span class="n">a</span><span class="p">,</span> <span class="n">b</span><span class="p">):</span>
+    <span class="c1"># return statements immediately return a value (or None if no value is given)</span>
+    <span class="k">return</span> <span class="n">a</span> <span class="o">+</span> <span class="s1">&#39;-&#39;</span> <span class="o">+</span> <span class="n">b</span>
+    <span class="c1"># Any code in the function after the return statement does not get executed.</span>
+    <span class="nb">print</span><span class="p">(</span><span class="s2">&quot;We will never get here&quot;</span><span class="p">)</span>
+
+<span class="n">hyphenate</span><span class="p">(</span><span class="s1">&#39;python&#39;</span><span class="p">,</span> <span class="s1">&#39;esque&#39;</span><span class="p">)</span>
+</pre></div>
+
+    </div>
+</div>
+</div>
+
+<div class="output_wrapper">
+<div class="output">
+
+
+<div class="output_area">
+
+    <div class="prompt output_prompt">Out[2]:</div>
+
+
+
+
+<div class="output_text output_subarea output_execute_result">
+<pre>&#39;python-esque&#39;</pre>
+</div>
+
+</div>
+
+</div>
+</div>
+
+</div>
+<div class="cell border-box-sizing text_cell rendered"><div class="prompt input_prompt">
+</div><div class="inner_cell">
+<div class="text_cell_render border-box-sizing rendered_html">
+<p>Suppose that separating large data files into individual yearly files is a task that we frequently have to perform. We could write a <code>for</code> loop like the one above every time we needed to do it but that would be time consuming and error prone. A more elegant solution would be to create a reusable tool that performs this task with minimum input from the user. To do this, we are going to turn the code we’ve already written into a function.</p>
+<p>Functions are reusable, self-contained pieces of code that are called with a single command. They can be designed to accept arguments as input and return values, but they don’t need to do either. Variables declared inside functions only exist while the function is running and if a variable within the function (a local variable) has the same name as a variable somewhere else in the code, the local variable hides but doesn’t overwrite the other.</p>
+<p>Every method used in Python (for example, <code>print</code>) is a function, and the libraries we import (say, <code>pandas</code>) are a collection of functions. We will only use functions that are housed within the same code that uses them, but it’s also easy to write functions that can be used by different programs.</p>
+
+</div>
+</div>
+</div>
+<div class="cell border-box-sizing text_cell rendered"><div class="prompt input_prompt">
+</div><div class="inner_cell">
+<div class="text_cell_render border-box-sizing rendered_html">
+<p>Functions are declared following this general structure:</p>
+
+</div>
+</div>
+</div>
+<div class="cell border-box-sizing text_cell rendered"><div class="prompt input_prompt">
+</div><div class="inner_cell">
+<div class="text_cell_render border-box-sizing rendered_html">
+<div class="highlight"><pre><span></span><span class="k">def</span> <span class="nf">this_is_the_function_name</span><span class="p">(</span><span class="n">input_argument1</span><span class="p">,</span> <span class="n">input_argument2</span><span class="p">):</span>
+
+    <span class="c1"># The body of the function is indented</span>
+    <span class="c1"># This function prints the two arguments to screen</span>
+    <span class="nb">print</span><span class="p">(</span><span class="s1">&#39;The function arguments are:&#39;</span><span class="p">,</span> <span class="n">input_argument1</span><span class="p">,</span> <span class="n">input_argument2</span><span class="p">,</span> <span class="s1">&#39;(this is done inside the function!)&#39;</span><span class="p">)</span>
+
+    <span class="c1"># And returns their product</span>
+    <span class="k">return</span> <span class="n">input_argument1</span> <span class="o">*</span> <span class="n">input_argument2</span>
+</pre></div>
+<p>The function declaration starts with the word <code>def</code>, followed by the function name and any arguments in parenthesis, and ends in a colon. The body of the function is indented just like loops are. If the function returns something when it is called, it includes a return statement at the end.</p>
+<p>Let's rewrite this function with shorter (but still informative) names so we don't need to type as much:</p>
+
+</div>
+</div>
+</div>
+<div class="cell border-box-sizing code_cell rendered">
+<div class="input">
+<div class="prompt input_prompt">In&nbsp;[3]:</div>
+<div class="inner_cell">
+    <div class="input_area">
+<div class=" highlight hl-ipython3"><pre><span></span><span class="k">def</span> <span class="nf">product</span><span class="p">(</span><span class="n">a</span><span class="p">,</span> <span class="n">b</span><span class="p">):</span>
+    <span class="nb">print</span><span class="p">(</span><span class="s1">&#39;The function arguments are:&#39;</span><span class="p">,</span> <span class="n">a</span><span class="p">,</span> <span class="n">b</span><span class="p">,</span> <span class="s1">&#39;(this is done inside the function!)&#39;</span><span class="p">)</span>
+
+    <span class="k">return</span> <span class="n">a</span> <span class="o">*</span> <span class="n">b</span>
+</pre></div>
+
+    </div>
+</div>
+</div>
+
+</div>
+<div class="cell border-box-sizing text_cell rendered"><div class="prompt input_prompt">
+</div><div class="inner_cell">
+<div class="text_cell_render border-box-sizing rendered_html">
+<p>This is how we call the function:</p>
+
+</div>
+</div>
+</div>
+<div class="cell border-box-sizing code_cell rendered">
+<div class="input">
+<div class="prompt input_prompt">In&nbsp;[4]:</div>
+<div class="inner_cell">
+    <div class="input_area">
+<div class=" highlight hl-ipython3"><pre><span></span><span class="n">product_of_inputs</span> <span class="o">=</span> <span class="n">product</span><span class="p">(</span><span class="mi">2</span><span class="p">,</span> <span class="mi">5</span><span class="p">)</span>
+</pre></div>
+
+    </div>
+</div>
+</div>
+
+<div class="output_wrapper">
+<div class="output">
+
+
+<div class="output_area">
+
+    <div class="prompt"></div>
+
+
+<div class="output_subarea output_stream output_stdout output_text">
+<pre>The function arguments are: 2 5 (this is done inside the function!)
+</pre>
+</div>
+</div>
+
+</div>
+</div>
+
+</div>
+<div class="cell border-box-sizing code_cell rendered">
+<div class="input">
+<div class="prompt input_prompt">In&nbsp;[5]:</div>
+<div class="inner_cell">
+    <div class="input_area">
+<div class=" highlight hl-ipython3"><pre><span></span><span class="nb">print</span><span class="p">(</span><span class="s1">&#39;Their product is:&#39;</span><span class="p">,</span> <span class="n">product_of_inputs</span><span class="p">,</span> <span class="s1">&#39;(this is done outside the function!)&#39;</span><span class="p">)</span>
+</pre></div>
+
+    </div>
+</div>
+</div>
+
+<div class="output_wrapper">
+<div class="output">
+
+
+<div class="output_area">
+
+    <div class="prompt"></div>
+
+
+<div class="output_subarea output_stream output_stdout output_text">
+<pre>Their product is: 10 (this is done outside the function!)
+</pre>
+</div>
+</div>
+
+</div>
+</div>
+
+</div>
+<div class="cell border-box-sizing text_cell rendered celltag_challenge"><div class="prompt input_prompt">
+</div><div class="inner_cell">
+<div class="text_cell_render border-box-sizing rendered_html">
+<h2 id="Challenge---Functions">Challenge - Functions<a class="anchor-link" href="#Challenge---Functions">&#182;</a></h2><ol>
+<li><p>Change the values of the input arguments in the function and check its output.</p>
+</li>
+<li><p>Try calling the function by giving it the wrong number of arguments (not 2) or not assigning the function call to a variable (no <code>product_of_inputs =</code>).</p>
+</li>
+</ol>
+<h3 id="Bonus-challenges">Bonus challenges<a class="anchor-link" href="#Bonus-challenges">&#182;</a></h3><ol>
+<li><p>Declare a variable inside the function and test to see where it exists (Hint: can you print it from outside the function?).</p>
+</li>
+<li><p>Explore what happens when a variable both inside and outside the function have the same name. What happens to the global variable when you change the value of the local variable?</p>
+</li>
+</ol>
+
+</div>
+</div>
+</div>
+<div class="cell border-box-sizing text_cell rendered celltag_solution"><div class="prompt input_prompt">
+</div><div class="inner_cell">
+<div class="text_cell_render border-box-sizing rendered_html">
+<h2 id="Solutions---Functions">Solutions - Functions<a class="anchor-link" href="#Solutions---Functions">&#182;</a></h2>
+</div>
+</div>
+</div>
+<div class="cell border-box-sizing code_cell rendered celltag_solution">
+<div class="input">
+<div class="prompt input_prompt">In&nbsp;[6]:</div>
+<div class="inner_cell">
+    <div class="input_area">
+<div class=" highlight hl-ipython3"><pre><span></span><span class="c1"># Challenge part 1</span>
+<span class="n">product_of_inputs</span> <span class="o">=</span> <span class="n">product</span><span class="p">(</span><span class="mi">2</span><span class="p">,</span> <span class="mi">6</span><span class="p">)</span>
+<span class="nb">print</span><span class="p">(</span><span class="n">product_of_inputs</span><span class="p">)</span>
+</pre></div>
+
+    </div>
+</div>
+</div>
+
+<div class="output_wrapper">
+<div class="output">
+
+
+<div class="output_area">
+
+    <div class="prompt"></div>
+
+
+<div class="output_subarea output_stream output_stdout output_text">
+<pre>The function arguments are: 2 6 (this is done inside the function!)
+12
+</pre>
+</div>
+</div>
+
+</div>
+</div>
+
+</div>
+<div class="cell border-box-sizing text_cell rendered celltag_solution"><div class="prompt input_prompt">
+</div><div class="inner_cell">
+<div class="text_cell_render border-box-sizing rendered_html">
+<p>Challenge part 2:</p>
+<div class="highlight"><pre><span></span><span class="n">product</span><span class="p">(</span><span class="mi">2</span><span class="p">,</span> <span class="mi">6</span><span class="p">,</span> <span class="s2">&quot;nope&quot;</span><span class="p">)</span>
+</pre></div>
+
+</div>
+</div>
+</div>
+<div class="cell border-box-sizing text_cell rendered celltag_solution"><div class="prompt input_prompt">
+</div><div class="inner_cell">
+<div class="text_cell_render border-box-sizing rendered_html">
+<div class="highlight"><pre><span></span><span class="o">---------------------------------------------------------------------------</span>
+<span class="ne">TypeError</span>                                 <span class="n">Traceback</span> <span class="p">(</span><span class="n">most</span> <span class="n">recent</span> <span class="n">call</span> <span class="n">last</span><span class="p">)</span>
+<span class="o">&lt;</span><span class="n">ipython</span><span class="o">-</span><span class="nb">input</span><span class="o">-</span><span class="mi">12</span><span class="o">-</span><span class="n">fe9d9cd35fe2</span><span class="o">&gt;</span> <span class="ow">in</span> <span class="o">&lt;</span><span class="n">module</span><span class="o">&gt;</span><span class="p">()</span>
+      <span class="mi">1</span> <span class="c1"># 2</span>
+<span class="o">----&gt;</span> <span class="mi">2</span> <span class="n">this_is_the_function_name</span><span class="p">(</span><span class="mi">2</span><span class="p">,</span> <span class="mi">6</span><span class="p">,</span> <span class="s2">&quot;nope&quot;</span><span class="p">)</span>
+
+<span class="ne">TypeError</span><span class="p">:</span> <span class="n">this_is_the_function_name</span><span class="p">()</span> <span class="n">takes</span> <span class="mi">2</span> <span class="n">positional</span> <span class="n">arguments</span> <span class="n">but</span> <span class="mi">3</span> <span class="n">were</span> <span class="n">given</span>
+</pre></div>
+
+</div>
+</div>
+</div>
+<div class="cell border-box-sizing text_cell rendered celltag_solution"><div class="prompt input_prompt">
+</div><div class="inner_cell">
+<div class="text_cell_render border-box-sizing rendered_html">
+<p>Challenge part 3:</p>
+<div class="highlight"><pre><span></span><span class="k">def</span> <span class="nf">product</span><span class="p">(</span><span class="n">a</span><span class="p">,</span> <span class="n">b</span><span class="p">):</span>
+
+    <span class="n">inside_fun</span> <span class="o">=</span> <span class="s2">&quot;existential crisis&quot;</span>
+    <span class="nb">print</span><span class="p">(</span><span class="s1">&#39;The function arguments are:&#39;</span><span class="p">,</span> <span class="n">a</span><span class="p">,</span> <span class="n">b</span><span class="p">,</span> <span class="s1">&#39;(this is done inside the function!)&#39;</span><span class="p">)</span>
+
+    <span class="k">return</span> <span class="n">a</span> <span class="o">*</span> <span class="n">b</span>
+
+<span class="n">product</span><span class="p">(</span><span class="mi">2</span><span class="p">,</span> <span class="mi">5</span><span class="p">)</span>
+<span class="nb">print</span><span class="p">(</span><span class="n">inside_fun</span><span class="p">)</span>
+</pre></div>
+
+</div>
+</div>
+</div>
+<div class="cell border-box-sizing text_cell rendered celltag_solution"><div class="prompt input_prompt">
+</div><div class="inner_cell">
+<div class="text_cell_render border-box-sizing rendered_html">
+<div class="highlight"><pre><span></span><span class="n">The</span> <span class="n">function</span> <span class="n">arguments</span> <span class="n">are</span><span class="p">:</span> <span class="mi">2</span> <span class="mi">5</span> <span class="p">(</span><span class="n">this</span> <span class="ow">is</span> <span class="n">done</span> <span class="n">inside</span> <span class="n">the</span> <span class="n">function</span><span class="err">!</span><span class="p">)</span>
+<span class="o">---------------------------------------------------------------------------</span>
+<span class="ne">NameError</span>                                 <span class="n">Traceback</span> <span class="p">(</span><span class="n">most</span> <span class="n">recent</span> <span class="n">call</span> <span class="n">last</span><span class="p">)</span>
+<span class="o">&lt;</span><span class="n">ipython</span><span class="o">-</span><span class="nb">input</span><span class="o">-</span><span class="mi">13</span><span class="o">-</span><span class="n">e7a0563b00a6</span><span class="o">&gt;</span> <span class="ow">in</span> <span class="o">&lt;</span><span class="n">module</span><span class="o">&gt;</span><span class="p">()</span>
+     <span class="mi">12</span> 
+     <span class="mi">13</span> <span class="n">this_is_the_function_name</span><span class="p">(</span><span class="mi">2</span><span class="p">,</span> <span class="mi">5</span><span class="p">)</span>
+<span class="o">---&gt;</span> <span class="mi">14</span> <span class="nb">print</span><span class="p">(</span><span class="n">inside_fun</span><span class="p">)</span>
+
+<span class="ne">NameError</span><span class="p">:</span> <span class="n">name</span> <span class="s1">&#39;inside_fun&#39;</span> <span class="ow">is</span> <span class="ow">not</span> <span class="n">defined</span>
+</pre></div>
+
+</div>
+</div>
+</div>
+<div class="cell border-box-sizing code_cell rendered celltag_solution">
+<div class="input">
+<div class="prompt input_prompt">In&nbsp;[7]:</div>
+<div class="inner_cell">
+    <div class="input_area">
+<div class=" highlight hl-ipython3"><pre><span></span><span class="c1"># Challenge part 4</span>
+<span class="n">outside</span> <span class="o">=</span> <span class="s2">&quot;unchanged&quot;</span>
+<span class="k">def</span> <span class="nf">product</span><span class="p">(</span><span class="n">a</span><span class="p">,</span> <span class="n">b</span><span class="p">):</span>
+    
+    <span class="n">outside</span> <span class="o">=</span> <span class="s2">&quot;I&#39;m being manipulated&quot;</span>
+    <span class="nb">print</span><span class="p">(</span><span class="s1">&#39;The function arguments are:&#39;</span><span class="p">,</span> <span class="n">a</span><span class="p">,</span> <span class="n">b</span><span class="p">,</span> <span class="s1">&#39;(this is done inside the function!)&#39;</span><span class="p">)</span>
+
+    <span class="k">return</span> <span class="n">a</span> <span class="o">*</span> <span class="n">b</span>
+
+<span class="n">product</span><span class="p">(</span><span class="mi">2</span><span class="p">,</span> <span class="mi">5</span><span class="p">)</span>
+<span class="nb">print</span><span class="p">(</span><span class="n">outside</span><span class="p">)</span>
+</pre></div>
+
+    </div>
+</div>
+</div>
+
+<div class="output_wrapper">
+<div class="output">
+
+
+<div class="output_area">
+
+    <div class="prompt"></div>
+
+
+<div class="output_subarea output_stream output_stdout output_text">
+<pre>The function arguments are: 2 5 (this is done inside the function!)
+unchanged
+</pre>
+</div>
+</div>
+
+</div>
+</div>
+
+</div>
+<div class="cell border-box-sizing text_cell rendered"><div class="prompt input_prompt">
+</div><div class="inner_cell">
+<div class="text_cell_render border-box-sizing rendered_html">
+<p>Say we had some code for taking our <code>survey.csv</code> data and splitting it out into one file for each year:</p>
+<div class="highlight"><pre><span></span><span class="c1"># First let&#39;s make sure we&#39;ve read the survey data into a pandas DataFrame.</span>
+<span class="kn">import</span> <span class="nn">pandas</span> <span class="k">as</span> <span class="nn">pd</span>
+<span class="n">all_data</span> <span class="o">=</span> <span class="n">pd</span><span class="o">.</span><span class="n">read_csv</span><span class="p">(</span><span class="s2">&quot;surveys.csv&quot;</span><span class="p">)</span>
+
+<span class="n">this_year</span> <span class="o">=</span> <span class="mi">2002</span>
+<span class="c1"># Select data for just that year</span>
+<span class="n">surveys_year</span> <span class="o">=</span> <span class="n">all_data</span><span class="p">[</span><span class="n">all_data</span><span class="o">.</span><span class="n">year</span> <span class="o">==</span> <span class="n">this_year</span><span class="p">]</span>
+
+<span class="c1"># Write the new DataFrame to a csv file</span>
+<span class="n">filename</span> <span class="o">=</span> <span class="s1">&#39;surveys&#39;</span> <span class="o">+</span> <span class="nb">str</span><span class="p">(</span><span class="n">this_year</span><span class="p">)</span> <span class="o">+</span> <span class="s1">&#39;.csv&#39;</span>
+<span class="n">surveys_year</span><span class="o">.</span><span class="n">to_csv</span><span class="p">(</span><span class="n">filename</span><span class="p">)</span>
+</pre></div>
+<p>There are many different "chunks" of this code that we can turn into functions, and we can even create functions that call other functions inside them. Let’s first write a function that separates data for just one year and saves that data to a file:</p>
+
+</div>
+</div>
+</div>
+<div class="cell border-box-sizing code_cell rendered">
+<div class="input">
+<div class="prompt input_prompt">In&nbsp;[8]:</div>
+<div class="inner_cell">
+    <div class="input_area">
+<div class=" highlight hl-ipython3"><pre><span></span><span class="k">def</span> <span class="nf">year_to_csv</span><span class="p">(</span><span class="n">year</span><span class="p">,</span> <span class="n">all_data</span><span class="p">):</span>
+    <span class="sd">&quot;&quot;&quot;</span>
+<span class="sd">    Writes a csv file for data from a given year.</span>
+
+<span class="sd">    year --- year for which data is extracted</span>
+<span class="sd">    all_data --- DataFrame with multi-year data</span>
+<span class="sd">    &quot;&quot;&quot;</span>
+
+    <span class="c1"># Select data for the year</span>
+    <span class="n">surveys_year</span> <span class="o">=</span> <span class="n">all_data</span><span class="p">[</span><span class="n">all_data</span><span class="o">.</span><span class="n">year</span> <span class="o">==</span> <span class="n">year</span><span class="p">]</span>
+
+    <span class="c1"># Write the new DataFrame to a csv file</span>
+    <span class="n">filename</span> <span class="o">=</span> <span class="s1">&#39;function_surveys&#39;</span> <span class="o">+</span> <span class="nb">str</span><span class="p">(</span><span class="n">year</span><span class="p">)</span> <span class="o">+</span> <span class="s1">&#39;.csv&#39;</span>
+    <span class="n">surveys_year</span><span class="o">.</span><span class="n">to_csv</span><span class="p">(</span><span class="n">filename</span><span class="p">)</span>
+</pre></div>
+
+    </div>
+</div>
+</div>
+
+</div>
+<div class="cell border-box-sizing text_cell rendered"><div class="prompt input_prompt">
+</div><div class="inner_cell">
+<div class="text_cell_render border-box-sizing rendered_html">
+<p>The text between the two sets of triple double quotes is called a <em>docstring</em> and contains the documentation for the function. It does nothing when the function is running and is therefore not necessary, but it is good practice to include docstrings as a reminder of what the code does. Docstrings in functions also become part of their ‘official’ documentation:</p>
+
+</div>
+</div>
+</div>
+<div class="cell border-box-sizing code_cell rendered">
+<div class="input">
+<div class="prompt input_prompt">In&nbsp;[9]:</div>
+<div class="inner_cell">
+    <div class="input_area">
+<div class=" highlight hl-ipython3"><pre><span></span><span class="o">?</span>year_to_csv
+</pre></div>
+
+    </div>
+</div>
+</div>
+
+</div>
+<div class="cell border-box-sizing text_cell rendered"><div class="prompt input_prompt">
+</div><div class="inner_cell">
+<div class="text_cell_render border-box-sizing rendered_html">
+<p><strong>Signature:</strong> <code>year_to_csv(year, all_data)</code></p>
+<p><strong><em>Docstring:</em></strong></p>
+
+<pre><code>Writes a csv file for data from a given year.
+
+year --- year for which data is extracted
+all_data --- DataFrame with multi-year data</code></pre>
+<p><strong><em>File:</em></strong>      <code>~/devel/python-workshop-base/workshops/docs/modules/notebooks/&lt;ipython-input-16-978149c5937c&gt;</code></p>
+<p><strong><em>Type:</em></strong>      <code>function</code></p>
+
+</div>
+</div>
+</div>
+<div class="cell border-box-sizing code_cell rendered">
+<div class="input">
+<div class="prompt input_prompt">In&nbsp;[10]:</div>
+<div class="inner_cell">
+    <div class="input_area">
+<div class=" highlight hl-ipython3"><pre><span></span><span class="c1"># Read the survey data into a pandas DataFrame.</span>
+<span class="c1"># (if you are jumping in to just this lesson and don&#39;t yet have the surveys.csv file yet, </span>
+<span class="c1">#  see the &quot;Data analysis in Python with Pandas&quot; `working_with_data` module)</span>
+<span class="kn">import</span> <span class="nn">pandas</span> <span class="k">as</span> <span class="nn">pd</span>
+<span class="n">surveys_df</span> <span class="o">=</span> <span class="n">pd</span><span class="o">.</span><span class="n">read_csv</span><span class="p">(</span><span class="s2">&quot;surveys.csv&quot;</span><span class="p">)</span>
+
+<span class="n">year_to_csv</span><span class="p">(</span><span class="mi">2002</span><span class="p">,</span> <span class="n">surveys_df</span><span class="p">)</span>
+</pre></div>
+
+    </div>
+</div>
+</div>
+
+</div>
+<div class="cell border-box-sizing text_cell rendered celltag_protip celltag_aside"><div class="prompt input_prompt">
+</div><div class="inner_cell">
+<div class="text_cell_render border-box-sizing rendered_html">
+<h3 id="Aside---listing-files-and-the-os-module">Aside - listing files and the <code>os</code> module<a class="anchor-link" href="#Aside---listing-files-and-the-os-module">&#182;</a></h3><p>Google Collaboratory and Juypter Notebooks have a built-in file browser, however, you can list the files and directories in the current directory ("folder") with Python code like:</p>
+<div class="highlight"><pre><span></span><span class="kn">import</span> <span class="nn">os</span>
+
+<span class="nb">print</span><span class="p">(</span><span class="n">os</span><span class="o">.</span><span class="n">listdir</span><span class="p">())</span>
+</pre></div>
+<p>You'll see a Python list, a bit like:</p>
+
+<pre><code>['surveys.csv','function_surveys2002.csv']</code></pre>
+<p>(you may have additional files listed here, generated in previous lessons)</p>
+<p>The <a href="https://docs.python.org/3/library/os.html">os</a> module contains, among other things, a bunch of useful functions for working with the filesystem and file paths.</p>
+<p>Two other useful examples (hint - these might help in a upcoming challenge):</p>
+<div class="highlight"><pre><span></span><span class="c1"># This returns True if the file or directory specified exists</span>
+<span class="n">os</span><span class="o">.</span><span class="n">path</span><span class="o">.</span><span class="n">exists</span><span class="p">(</span><span class="s1">&#39;surveys.csv&#39;</span><span class="p">)</span>
+</pre></div>
+<div class="highlight"><pre><span></span><span class="c1"># This creates empty (nested) directories based on a path (eg in a &#39;path&#39; each directory is separated by slashes)</span>
+<span class="n">os</span><span class="o">.</span><span class="n">makedirs</span><span class="p">(</span><span class="s1">&#39;data/csvs/&#39;</span><span class="p">)</span>
+</pre></div>
+<p>If a directory already exists, <code>os.makedirs</code> fails and produces an error message (in Python terminology we might say it 'raises an exception' ).</p>
+<p>We can avoid this by using <code>os.path.exists</code> and <code>os.makedirs</code> together like:</p>
+<div class="highlight"><pre><span></span><span class="k">if</span> <span class="ow">not</span> <span class="n">os</span><span class="o">.</span><span class="n">path</span><span class="o">.</span><span class="n">exists</span><span class="p">(</span><span class="s1">&#39;data/csvs/&#39;</span><span class="p">):</span>
+    <span class="n">os</span><span class="o">.</span><span class="n">makedirs</span><span class="p">(</span><span class="s1">&#39;data/csvs/&#39;</span><span class="p">)</span>
+</pre></div>
+
+</div>
+</div>
+</div>
+<div class="cell border-box-sizing text_cell rendered"><div class="prompt input_prompt">
+</div><div class="inner_cell">
+<div class="text_cell_render border-box-sizing rendered_html">
+<p>What we really want to do, though, is create files for multiple years without having to request them one by one. Let’s write another function that uses a <code>for</code> loop over a sequence of years and repeatedly calls the function we just wrote, <code>year_to_csv</code>:</p>
+
+</div>
+</div>
+</div>
+<div class="cell border-box-sizing code_cell rendered">
+<div class="input">
+<div class="prompt input_prompt">In&nbsp;[11]:</div>
+<div class="inner_cell">
+    <div class="input_area">
+<div class=" highlight hl-ipython3"><pre><span></span><span class="k">def</span> <span class="nf">create_csvs_by_year</span><span class="p">(</span><span class="n">start_year</span><span class="p">,</span> <span class="n">end_year</span><span class="p">,</span> <span class="n">all_data</span><span class="p">):</span>
+    <span class="sd">&quot;&quot;&quot;</span>
+<span class="sd">    Writes separate CSV files for each year of data.</span>
+
+<span class="sd">    start_year --- the first year of data we want</span>
+<span class="sd">    end_year --- the last year of data we want</span>
+<span class="sd">    all_data --- DataFrame with multi-year data</span>
+<span class="sd">    &quot;&quot;&quot;</span>
+
+    <span class="c1"># &quot;end_year&quot; is the last year of data we want to pull, so we loop to end_year+1</span>
+    <span class="k">for</span> <span class="n">year</span> <span class="ow">in</span> <span class="nb">range</span><span class="p">(</span><span class="n">start_year</span><span class="p">,</span> <span class="n">end_year</span><span class="o">+</span><span class="mi">1</span><span class="p">):</span>
+        <span class="n">year_to_csv</span><span class="p">(</span><span class="n">year</span><span class="p">,</span> <span class="n">all_data</span><span class="p">)</span>
+</pre></div>
+
+    </div>
+</div>
+</div>
+
+</div>
+<div class="cell border-box-sizing text_cell rendered"><div class="prompt input_prompt">
+</div><div class="inner_cell">
+<div class="text_cell_render border-box-sizing rendered_html">
+<p>Because people will naturally expect that the end year for the files is the last year with data, the <code>for</code> loop inside the function ends at <code>end_year + 1</code>. By writing the entire loop into a function, we’ve made a reusable tool for whenever we need to break a large data file into yearly files. Because we can specify the first and last year for which we want files, we can even use this function to create files for a subset of the years available. This is how we call this function:</p>
+
+</div>
+</div>
+</div>
+<div class="cell border-box-sizing code_cell rendered">
+<div class="input">
+<div class="prompt input_prompt">In&nbsp;[12]:</div>
+<div class="inner_cell">
+    <div class="input_area">
+<div class=" highlight hl-ipython3"><pre><span></span><span class="c1"># Create CSV files, one for each year in the given range</span>
+<span class="n">create_csvs_by_year</span><span class="p">(</span><span class="mi">1977</span><span class="p">,</span> <span class="mi">2002</span><span class="p">,</span> <span class="n">surveys_df</span><span class="p">)</span>
+</pre></div>
+
+    </div>
+</div>
+</div>
+
+</div>
+<div class="cell border-box-sizing text_cell rendered celltag_challenge"><div class="prompt input_prompt">
+</div><div class="inner_cell">
+<div class="text_cell_render border-box-sizing rendered_html">
+<h2 id="Challenge---More-Functions">Challenge - More Functions<a class="anchor-link" href="#Challenge---More-Functions">&#182;</a></h2><ol>
+<li><p>How could you use the function <code>create_csvs_by_year</code> to create a CSV file for only one year ? (Hint: think about the syntax for range)</p>
+</li>
+<li><p>Modify <code>year_to_csv</code> so that it has two additional arguments, <code>output_path</code> (the path of the directory where the files will be written) and <code>filename_prefix</code> (a prefix to be added to the start of the file name). Name your new function <code>year_to_csv_at_path</code>. Eg, <code>def year_to_csv_at_path(year, all_data, output_path, filename_prefix):</code>. Call your new function to create a new file with a different name in a different directory. ... <strong>Hint:</strong> You could manually create the target directory before calling the function using the Collaboratory / Jupyter file browser, <em>or</em> for bonus points you could do it in Python inside the function using the <code>os</code> module.</p>
+</li>
+<li><p>Create a new version of the <code>create_csvs_by_year</code> function called <code>create_csvs_by_year_at_path</code> that also takes the additional arguments <code>output_path</code> and <code>filename_prefix</code>. Internally <code>create_csvs_by_year_at_path</code> should pass these values to <code>year_to_csv_at_path</code>. Call your new function to create a new set of files with a different name in a different directory.</p>
+</li>
+<li><p>Make these new functions return a list of the files they have written. There are many ways you can do this (and you should try them all!): you could make the function print the filenames to screen, or you could use a <code>return</code> statement to make the function produce a list of filenames, or you can use some combination of the two. You could also try using the <code>os</code> library to list the contents of directories.</p>
+</li>
+</ol>
+
+</div>
+</div>
+</div>
+<div class="cell border-box-sizing text_cell rendered celltag_solution"><div class="prompt input_prompt">
+</div><div class="inner_cell">
+<div class="text_cell_render border-box-sizing rendered_html">
+<h2 id="Solutions---More-Functions">Solutions - More Functions<a class="anchor-link" href="#Solutions---More-Functions">&#182;</a></h2>
+</div>
+</div>
+</div>
+<div class="cell border-box-sizing code_cell rendered celltag_solution">
+<div class="input">
+<div class="prompt input_prompt">In&nbsp;[13]:</div>
+<div class="inner_cell">
+    <div class="input_area">
+<div class=" highlight hl-ipython3"><pre><span></span><span class="c1"># Solution - part 1</span>
+<span class="n">create_csvs_by_year</span><span class="p">(</span><span class="mi">2002</span><span class="p">,</span> <span class="mi">2002</span><span class="p">,</span> <span class="n">surveys_df</span><span class="p">)</span>
+</pre></div>
+
+    </div>
+</div>
+</div>
+
+</div>
+<div class="cell border-box-sizing code_cell rendered celltag_solution">
+<div class="input">
+<div class="prompt input_prompt">In&nbsp;[14]:</div>
+<div class="inner_cell">
+    <div class="input_area">
+<div class=" highlight hl-ipython3"><pre><span></span><span class="c1"># Solution - part 2 and 3</span>
+<span class="kn">import</span> <span class="nn">os</span>
+
+<span class="k">def</span> <span class="nf">year_to_csv_at_path</span><span class="p">(</span><span class="n">year</span><span class="p">,</span> <span class="n">all_data</span><span class="p">,</span> <span class="n">output_path</span><span class="p">,</span> <span class="n">filename_prefix</span><span class="p">):</span>
+    <span class="sd">&quot;&quot;&quot;</span>
+<span class="sd">    Writes a csv file for data from a given year.</span>
+
+<span class="sd">    year --- year for which data is extracted</span>
+<span class="sd">    all_data --- DataFrame with multi-year data</span>
+<span class="sd">    output_path --- The output path for the generated file</span>
+<span class="sd">    filename_prefix --- Output filename will be of the form &quot;{filename_prefix}{year}.csv&quot;</span>
+<span class="sd">    &quot;&quot;&quot;</span>
+
+    <span class="c1"># Select data for the year</span>
+    <span class="n">surveys_year</span> <span class="o">=</span> <span class="n">all_data</span><span class="p">[</span><span class="n">all_data</span><span class="o">.</span><span class="n">year</span> <span class="o">==</span> <span class="n">year</span><span class="p">]</span>
+
+    <span class="c1"># Create directories if required</span>
+    <span class="k">if</span> <span class="ow">not</span> <span class="n">os</span><span class="o">.</span><span class="n">path</span><span class="o">.</span><span class="n">exists</span><span class="p">(</span><span class="n">output_path</span><span class="p">):</span>
+        <span class="n">os</span><span class="o">.</span><span class="n">makedirs</span><span class="p">(</span><span class="n">output_path</span><span class="p">)</span>
+    
+    <span class="c1"># Write the new DataFrame to a csv file</span>
+    <span class="n">filename</span> <span class="o">=</span> <span class="n">output_path</span> <span class="o">+</span> <span class="s1">&#39;/&#39;</span> <span class="o">+</span> <span class="n">filename_prefix</span> <span class="o">+</span> <span class="nb">str</span><span class="p">(</span><span class="n">year</span><span class="p">)</span> <span class="o">+</span> <span class="s1">&#39;.csv&#39;</span>
+    <span class="n">surveys_year</span><span class="o">.</span><span class="n">to_csv</span><span class="p">(</span><span class="n">filename</span><span class="p">)</span>
+
+<span class="k">def</span> <span class="nf">create_csvs_by_year_at_path</span><span class="p">(</span><span class="n">start_year</span><span class="p">,</span> <span class="n">end_year</span><span class="p">,</span> <span class="n">all_data</span><span class="p">,</span> <span class="n">output_path</span><span class="p">,</span> <span class="n">filename_prefix</span><span class="p">):</span>
+    <span class="sd">&quot;&quot;&quot;</span>
+<span class="sd">    Writes separate CSV files for each year of data.</span>
+
+<span class="sd">    start_year --- the first year of data we want</span>
+<span class="sd">    end_year --- the last year of data we want</span>
+<span class="sd">    all_data --- DataFrame with multi-year data</span>
+<span class="sd">    output_path --- The output path for the generated file</span>
+<span class="sd">    filename_prefix --- Output filename will be of the form &quot;{filename_prefix}{year}.csv&quot;</span>
+<span class="sd">    &quot;&quot;&quot;</span>
+
+    <span class="c1"># &quot;end_year&quot; is the last year of data we want to pull, so we loop to end_year+1</span>
+    <span class="k">for</span> <span class="n">year</span> <span class="ow">in</span> <span class="nb">range</span><span class="p">(</span><span class="n">start_year</span><span class="p">,</span> <span class="n">end_year</span><span class="o">+</span><span class="mi">1</span><span class="p">):</span>
+        <span class="n">year_to_csv_at_path</span><span class="p">(</span><span class="n">year</span><span class="p">,</span> <span class="n">all_data</span><span class="p">,</span> <span class="n">output_path</span><span class="p">,</span> <span class="n">filename_prefix</span><span class="p">)</span>
+</pre></div>
+
+    </div>
+</div>
+</div>
+
+</div>
+<div class="cell border-box-sizing code_cell rendered celltag_solution">
+<div class="input">
+<div class="prompt input_prompt">In&nbsp;[15]:</div>
+<div class="inner_cell">
+    <div class="input_area">
+<div class=" highlight hl-ipython3"><pre><span></span><span class="c1"># Solution - part 4</span>
+
+<span class="k">def</span> <span class="nf">year_to_csv_return_filenames</span><span class="p">(</span><span class="n">year</span><span class="p">,</span> <span class="n">all_data</span><span class="p">):</span>
+    <span class="c1"># Select data for the year</span>
+    <span class="n">surveys_year</span> <span class="o">=</span> <span class="n">all_data</span><span class="p">[</span><span class="n">all_data</span><span class="o">.</span><span class="n">year</span> <span class="o">==</span> <span class="n">year</span><span class="p">]</span>
+
+    <span class="c1"># Write the new DataFrame to a csv file</span>
+    <span class="n">filename</span> <span class="o">=</span> <span class="s1">&#39;function_surveys&#39;</span> <span class="o">+</span> <span class="nb">str</span><span class="p">(</span><span class="n">year</span><span class="p">)</span> <span class="o">+</span> <span class="s1">&#39;.csv&#39;</span>
+    <span class="n">surveys_year</span><span class="o">.</span><span class="n">to_csv</span><span class="p">(</span><span class="n">filename</span><span class="p">)</span>
+    
+    <span class="c1"># We could just print the filename. We can see the result, but won&#39;t capture the value</span>
+    <span class="c1"># print(filename)</span>
+    
+    <span class="c1"># It&#39;s often more useful to return data rather than print it, so we can do something with it</span>
+    <span class="k">return</span> <span class="n">filename</span>
+
+<span class="k">def</span> <span class="nf">create_csvs_by_year_return_filenames</span><span class="p">(</span><span class="n">start_year</span><span class="p">,</span> <span class="n">end_year</span><span class="p">,</span> <span class="n">all_data</span><span class="p">):</span>
+    
+    <span class="n">generated_files</span> <span class="o">=</span> <span class="p">[]</span>
+    <span class="k">for</span> <span class="n">year</span> <span class="ow">in</span> <span class="nb">range</span><span class="p">(</span><span class="n">start_year</span><span class="p">,</span> <span class="n">end_year</span><span class="o">+</span><span class="mi">1</span><span class="p">):</span>
+        <span class="n">fn</span> <span class="o">=</span> <span class="n">year_to_csv_return_filenames</span><span class="p">(</span><span class="n">year</span><span class="p">,</span> <span class="n">all_data</span><span class="p">)</span>
+        <span class="n">generated_files</span><span class="o">.</span><span class="n">append</span><span class="p">(</span><span class="n">fn</span><span class="p">)</span>
+        
+    <span class="k">return</span> <span class="n">generated_files</span>
+
+<span class="nb">print</span><span class="p">(</span><span class="n">create_csvs_by_year_return_filenames</span><span class="p">(</span><span class="mi">2000</span><span class="p">,</span> <span class="mi">2002</span><span class="p">,</span> <span class="n">surveys_df</span><span class="p">))</span>
+</pre></div>
+
+    </div>
+</div>
+</div>
+
+<div class="output_wrapper">
+<div class="output">
+
+
+<div class="output_area">
+
+    <div class="prompt"></div>
+
+
+<div class="output_subarea output_stream output_stdout output_text">
+<pre>[&#39;function_surveys2000.csv&#39;, &#39;function_surveys2001.csv&#39;, &#39;function_surveys2002.csv&#39;]
+</pre>
+</div>
+</div>
+
+</div>
+</div>
+
+</div>
+<div class="cell border-box-sizing text_cell rendered"><div class="prompt input_prompt">
+</div><div class="inner_cell">
+<div class="text_cell_render border-box-sizing rendered_html">
+<p>The functions we wrote demand that we give them a value for every argument. Ideally, we would like these functions to be as flexible and independent as possible. Let’s modify the function <code>create_csvs_by_year</code> so that the <code>start_year</code> and <code>end_year</code> default to the full range of the data if they are not supplied by the user.</p>
+<p>Arguments can be given default values with an equal sign in the function declaration - we call these <strong>'keyword'</strong> arguments. Any argument in the function without a default value (here, <code>all_data</code>) is a required argument - we call these <strong>'positional'</strong> arguments. Positional arguements MUST come before any keyword arguments. Keyword arguments are optional - if you don't include them when calling the function, the default value is used.</p>
+
+</div>
+</div>
+</div>
+<div class="cell border-box-sizing code_cell rendered">
+<div class="input">
+<div class="prompt input_prompt">In&nbsp;[16]:</div>
+<div class="inner_cell">
+    <div class="input_area">
+<div class=" highlight hl-ipython3"><pre><span></span><span class="k">def</span> <span class="nf">keyword_arg_test</span><span class="p">(</span><span class="n">all_data</span><span class="p">,</span> <span class="n">start_year</span> <span class="o">=</span> <span class="mi">1977</span><span class="p">,</span> <span class="n">end_year</span> <span class="o">=</span> <span class="mi">2002</span><span class="p">):</span>
+    <span class="sd">&quot;&quot;&quot;</span>
+<span class="sd">    A simple function to demonstrate the use of keyword arguments with defaults !</span>
+
+<span class="sd">    start_year --- the first year of data we want --- default: 1977</span>
+<span class="sd">    end_year --- the last year of data we want --- default: 2002</span>
+<span class="sd">    all_data --- DataFrame with multi-year data - not actually used</span>
+<span class="sd">    &quot;&quot;&quot;</span>
+
+    <span class="k">return</span> <span class="n">start_year</span><span class="p">,</span> <span class="n">end_year</span>
+
+
+<span class="n">start</span><span class="p">,</span><span class="n">end</span> <span class="o">=</span> <span class="n">keyword_arg_test</span><span class="p">(</span><span class="n">surveys_df</span><span class="p">,</span> <span class="mi">1988</span><span class="p">,</span> <span class="mi">1993</span><span class="p">)</span>
+<span class="nb">print</span><span class="p">(</span><span class="s1">&#39;Both optional arguments:</span><span class="se">\t</span><span class="s1">&#39;</span><span class="p">,</span> <span class="n">start</span><span class="p">,</span> <span class="n">end</span><span class="p">)</span>
+
+<span class="n">start</span><span class="p">,</span><span class="n">end</span> <span class="o">=</span> <span class="n">keyword_arg_test</span><span class="p">(</span><span class="n">surveys_df</span><span class="p">)</span>
+<span class="nb">print</span><span class="p">(</span><span class="s1">&#39;Default values:</span><span class="se">\t\t\t</span><span class="s1">&#39;</span><span class="p">,</span> <span class="n">start</span><span class="p">,</span> <span class="n">end</span><span class="p">)</span>
+</pre></div>
+
+    </div>
+</div>
+</div>
+
+<div class="output_wrapper">
+<div class="output">
+
+
+<div class="output_area">
+
+    <div class="prompt"></div>
+
+
+<div class="output_subarea output_stream output_stdout output_text">
+<pre>Both optional arguments:	 1988 1993
+Default values:			 1977 2002
+</pre>
+</div>
+</div>
+
+</div>
+</div>
+
+</div>
+<div class="cell border-box-sizing text_cell rendered"><div class="prompt input_prompt">
+</div><div class="inner_cell">
+<div class="text_cell_render border-box-sizing rendered_html">
+<p>The <code>\t</code> in the print statements are tabs, used to make the text align and be easier to read.</p>
+<p>What if our dataset doesn’t start in 1977 and end in 2002? We can modify the function so that it looks for the ealiest and latest years in the dataset if those dates are not provided. Let's redefine <code>csvs_by_year</code>:</p>
+
+</div>
+</div>
+</div>
+<div class="cell border-box-sizing code_cell rendered">
+<div class="input">
+<div class="prompt input_prompt">In&nbsp;[17]:</div>
+<div class="inner_cell">
+    <div class="input_area">
+<div class=" highlight hl-ipython3"><pre><span></span><span class="k">def</span> <span class="nf">csvs_by_year</span><span class="p">(</span><span class="n">all_data</span><span class="p">,</span> <span class="n">start_year</span> <span class="o">=</span> <span class="kc">None</span><span class="p">,</span> <span class="n">end_year</span> <span class="o">=</span> <span class="kc">None</span><span class="p">):</span>
+    <span class="sd">&quot;&quot;&quot;</span>
+<span class="sd">    Writes separate CSV files for each year of data. The start year and end year can </span>
+<span class="sd">    be optionally provided, otherwise the earliest and latest year in the dataset are</span>
+<span class="sd">    used as the range.</span>
+
+<span class="sd">    start_year --- the first year of data we want --- default: None - check all_data</span>
+<span class="sd">    end_year --- the last year of data we want --- default: None - check all_data</span>
+<span class="sd">    all_data --- DataFrame with multi-year data</span>
+<span class="sd">    &quot;&quot;&quot;</span>
+
+    <span class="k">if</span> <span class="n">start_year</span> <span class="ow">is</span> <span class="kc">None</span><span class="p">:</span>
+        <span class="n">start_year</span> <span class="o">=</span> <span class="nb">min</span><span class="p">(</span><span class="n">all_data</span><span class="o">.</span><span class="n">year</span><span class="p">)</span>
+    <span class="k">if</span> <span class="n">end_year</span> <span class="ow">is</span> <span class="kc">None</span><span class="p">:</span>
+        <span class="n">end_year</span> <span class="o">=</span> <span class="nb">max</span><span class="p">(</span><span class="n">all_data</span><span class="o">.</span><span class="n">year</span><span class="p">)</span>
+
+    <span class="k">return</span> <span class="n">start_year</span><span class="p">,</span> <span class="n">end_year</span>
+
+
+<span class="n">start</span><span class="p">,</span><span class="n">end</span> <span class="o">=</span> <span class="n">csvs_by_year</span><span class="p">(</span><span class="n">surveys_df</span><span class="p">,</span> <span class="mi">1988</span><span class="p">,</span> <span class="mi">1993</span><span class="p">)</span>
+<span class="nb">print</span><span class="p">(</span><span class="s1">&#39;Both optional arguments:</span><span class="se">\t</span><span class="s1">&#39;</span><span class="p">,</span> <span class="n">start</span><span class="p">,</span> <span class="n">end</span><span class="p">)</span>
+
+<span class="n">start</span><span class="p">,</span><span class="n">end</span> <span class="o">=</span> <span class="n">csvs_by_year</span><span class="p">(</span><span class="n">surveys_df</span><span class="p">)</span>
+<span class="nb">print</span><span class="p">(</span><span class="s1">&#39;Default values:</span><span class="se">\t\t\t</span><span class="s1">&#39;</span><span class="p">,</span> <span class="n">start</span><span class="p">,</span> <span class="n">end</span><span class="p">)</span>
+</pre></div>
+
+    </div>
+</div>
+</div>
+
+<div class="output_wrapper">
+<div class="output">
+
+
+<div class="output_area">
+
+    <div class="prompt"></div>
+
+
+<div class="output_subarea output_stream output_stdout output_text">
+<pre>Both optional arguments:	 1988 1993
+Default values:			 1977 2002
+</pre>
+</div>
+</div>
+
+</div>
+</div>
+
+</div>
+<div class="cell border-box-sizing text_cell rendered"><div class="prompt input_prompt">
+</div><div class="inner_cell">
+<div class="text_cell_render border-box-sizing rendered_html">
+<p>The default values of the <code>start_year</code> and <code>end_year</code> arguments in this new version of the <code>csvs_by_year</code> function are now <code>None</code>. This is a built-in constant in Python that indicates the absence of a value - essentially, that the variable exists in the namespace of the function (the directory of variable names) but that it doesn’t correspond to any existing object.</p>
+
+</div>
+</div>
+</div>
+<div class="cell border-box-sizing text_cell rendered celltag_challenge"><div class="prompt input_prompt">
+</div><div class="inner_cell">
+<div class="text_cell_render border-box-sizing rendered_html">
+<h2 id="Challenge---Experimenting-with-keyword-arguments">Challenge - Experimenting with keyword arguments<a class="anchor-link" href="#Challenge---Experimenting-with-keyword-arguments">&#182;</a></h2><ol>
+<li><p>What type of object corresponds to a variable declared as <code>None</code> ? (Hint: create a variable set to None and use the function <code>type()</code>)</p>
+</li>
+<li><p>Compare the behavior of the function <code>csvs_by_year</code> when the keyword arguments have <code>None</code> as a default vs. calling the function by supplying (non-default) values to the keyword arguments</p>
+</li>
+<li><p>What happens if you only include a value for <code>start_year</code> in the function call? Can you write the function call with only a value for <code>end_year</code> ? (Hint: think about how the function must be assigning values to each of the arguments - this is related to the need to put the arguments without default values before those with default values in the function definition!)</p>
+</li>
+</ol>
+
+</div>
+</div>
+</div>
+<div class="cell border-box-sizing text_cell rendered celltag_solution"><div class="prompt input_prompt">
+</div><div class="inner_cell">
+<div class="text_cell_render border-box-sizing rendered_html">
+<h2 id="Solutions---Experimenting-with-keyword-arguments">Solutions - Experimenting with keyword arguments<a class="anchor-link" href="#Solutions---Experimenting-with-keyword-arguments">&#182;</a></h2>
+</div>
+</div>
+</div>
+<div class="cell border-box-sizing code_cell rendered celltag_solution">
+<div class="input">
+<div class="prompt input_prompt">In&nbsp;[18]:</div>
+<div class="inner_cell">
+    <div class="input_area">
+<div class=" highlight hl-ipython3"><pre><span></span><span class="c1"># Challenge 1</span>
+<span class="n">the_void</span> <span class="o">=</span> <span class="kc">None</span>
+<span class="nb">type</span><span class="p">(</span><span class="n">the_void</span><span class="p">)</span>
+</pre></div>
+
+    </div>
+</div>
+</div>
+
+<div class="output_wrapper">
+<div class="output">
+
+
+<div class="output_area">
+
+    <div class="prompt output_prompt">Out[18]:</div>
+
+
+
+
+<div class="output_text output_subarea output_execute_result">
+<pre>NoneType</pre>
+</div>
+
+</div>
+
+</div>
+</div>
+
+</div>
+<div class="cell border-box-sizing code_cell rendered celltag_solution">
+<div class="input">
+<div class="prompt input_prompt">In&nbsp;[19]:</div>
+<div class="inner_cell">
+    <div class="input_area">
+<div class=" highlight hl-ipython3"><pre><span></span><span class="c1"># Challenge 2</span>
+<span class="nb">print</span><span class="p">(</span><span class="n">csvs_by_year</span><span class="p">(</span><span class="n">surveys_df</span><span class="p">))</span>
+<span class="nb">print</span><span class="p">(</span><span class="n">csvs_by_year</span><span class="p">(</span><span class="n">surveys_df</span><span class="p">,</span> <span class="n">start_year</span><span class="o">=</span><span class="mi">1999</span><span class="p">,</span> <span class="n">end_year</span><span class="o">=</span><span class="mi">2001</span><span class="p">))</span>
+</pre></div>
+
+    </div>
+</div>
+</div>
+
+<div class="output_wrapper">
+<div class="output">
+
+
+<div class="output_area">
+
+    <div class="prompt"></div>
+
+
+<div class="output_subarea output_stream output_stdout output_text">
+<pre>(1977, 2002)
+(1999, 2001)
+</pre>
+</div>
+</div>
+
+</div>
+</div>
+
+</div>
+<div class="cell border-box-sizing code_cell rendered celltag_solution">
+<div class="input">
+<div class="prompt input_prompt">In&nbsp;[20]:</div>
+<div class="inner_cell">
+    <div class="input_area">
+<div class=" highlight hl-ipython3"><pre><span></span><span class="c1"># Challenge 3</span>
+<span class="nb">print</span><span class="p">(</span><span class="n">csvs_by_year</span><span class="p">(</span><span class="n">surveys_df</span><span class="p">,</span> <span class="n">start_year</span><span class="o">=</span><span class="mi">1999</span><span class="p">))</span>
+
+<span class="c1"># Keyword args are taken in order if there is no keyword used</span>
+<span class="c1"># Doing this is a bit dangerous (what if you later decide to add more keyword args to the function ?)</span>
+<span class="nb">print</span><span class="p">(</span><span class="n">csvs_by_year</span><span class="p">(</span><span class="n">surveys_df</span><span class="p">,</span> <span class="mi">1999</span><span class="p">))</span>
+<span class="nb">print</span><span class="p">(</span><span class="n">csvs_by_year</span><span class="p">(</span><span class="n">surveys_df</span><span class="p">,</span> <span class="mi">1999</span><span class="p">,</span> <span class="n">end_year</span><span class="o">=</span><span class="mi">2001</span><span class="p">))</span>
+
+<span class="c1"># But keyword args must always come last - this throws an error</span>
+<span class="c1"># print(csvs_by_year(surveys_df, start_year=1999, 2001))</span>
+
+<span class="c1"># We don&#39;t need to specify all keyword args, nor do they need to be in order</span>
+<span class="nb">print</span><span class="p">(</span><span class="n">csvs_by_year</span><span class="p">(</span><span class="n">surveys_df</span><span class="p">,</span> <span class="n">end_year</span><span class="o">=</span><span class="mi">1999</span><span class="p">))</span>
+<span class="nb">print</span><span class="p">(</span><span class="n">csvs_by_year</span><span class="p">(</span><span class="n">surveys_df</span><span class="p">,</span> <span class="n">end_year</span><span class="o">=</span><span class="mi">2001</span><span class="p">,</span> <span class="n">start_year</span><span class="o">=</span><span class="mi">1999</span><span class="p">))</span>
+</pre></div>
+
+    </div>
+</div>
+</div>
+
+<div class="output_wrapper">
+<div class="output">
+
+
+<div class="output_area">
+
+    <div class="prompt"></div>
+
+
+<div class="output_subarea output_stream output_stdout output_text">
+<pre>(1999, 2002)
+(1999, 2002)
+(1999, 2001)
+(1977, 1999)
+(1999, 2001)
+</pre>
+</div>
+</div>
+
+</div>
+</div>
+
+</div>
+<div class="cell border-box-sizing text_cell rendered"><div class="prompt input_prompt">
+</div><div class="inner_cell">
+<div class="text_cell_render border-box-sizing rendered_html">
+<h2 id="Conditionals---if-statements">Conditionals - <code>if</code> statements<a class="anchor-link" href="#Conditionals---if-statements">&#182;</a></h2>
+</div>
+</div>
+</div>
+<div class="cell border-box-sizing text_cell rendered"><div class="prompt input_prompt">
+</div><div class="inner_cell">
+<div class="text_cell_render border-box-sizing rendered_html">
+<p>The body of the test function now has two conditionals (<code>if</code> statements) that check the values of <code>start_year</code> and <code>end_year</code>. <code>if</code> statements execute a segment of code when some condition is met. They commonly look something like this:</p>
+
+</div>
+</div>
+</div>
+<div class="cell border-box-sizing code_cell rendered">
+<div class="input">
+<div class="prompt input_prompt">In&nbsp;[21]:</div>
+<div class="inner_cell">
+    <div class="input_area">
+<div class=" highlight hl-ipython3"><pre><span></span><span class="n">a</span> <span class="o">=</span> <span class="mi">5</span>
+
+<span class="k">if</span> <span class="n">a</span> <span class="o">&lt;</span> <span class="mi">0</span><span class="p">:</span>  <span class="c1"># Meets first condition?</span>
+
+    <span class="c1"># if a IS less than zero</span>
+    <span class="nb">print</span><span class="p">(</span><span class="s1">&#39;a is a negative number&#39;</span><span class="p">)</span>
+
+<span class="k">elif</span> <span class="n">a</span> <span class="o">&gt;</span> <span class="mi">0</span><span class="p">:</span>  <span class="c1"># Did not meet first condition. meets second condition?</span>
+
+    <span class="c1"># if a ISN&#39;T less than zero and IS more than zero</span>
+    <span class="nb">print</span><span class="p">(</span><span class="s1">&#39;a is a positive number&#39;</span><span class="p">)</span>
+
+<span class="k">else</span><span class="p">:</span>  <span class="c1"># Met neither condition</span>
+
+    <span class="c1"># if a ISN&#39;T less than zero and ISN&#39;T more than zero</span>
+    <span class="nb">print</span><span class="p">(</span><span class="s1">&#39;a must be zero!&#39;</span><span class="p">)</span>
+</pre></div>
+
+    </div>
+</div>
+</div>
+
+<div class="output_wrapper">
+<div class="output">
+
+
+<div class="output_area">
+
+    <div class="prompt"></div>
+
+
+<div class="output_subarea output_stream output_stdout output_text">
+<pre>a is a positive number
+</pre>
+</div>
+</div>
+
+</div>
+</div>
+
+</div>
+<div class="cell border-box-sizing text_cell rendered"><div class="prompt input_prompt">
+</div><div class="inner_cell">
+<div class="text_cell_render border-box-sizing rendered_html">
+<p>Change the value of <code>a</code> to see how this function works. The statement <code>elif</code> means “else if”, and all of the conditional statements must end in a colon.</p>
+<p>The <code>if</code> statements in the function <code>csvs_by_year</code> check whether there is an object associated with the variable names <code>start_year</code> and <code>end_year</code>. If those variables are <code>None</code>, the <code>if</code> statements return the boolean <code>True</code> and execute whatever is in their body. On the other hand, if the variable names are associated with some value (they got a number in the function call), the <code>if</code> statements return <code>False</code> and do not execute. The opposite conditional statements, which would return <code>True</code> if the variables were associated with objects (if they had received value in the function call), would be <code>if start_year</code> and <code>if end_year</code>.</p>
+<p>As we’ve written it so far, the function <code>csvs_by_year</code> associates values in the function call with arguments in the function definition just based in their order. If the function gets only two values in the function call, the first one will be associated with <code>all_data</code> and the second with <code>start_year</code>, regardless of what we intended them to be. We can get around this problem by calling the function using keyword arguments, where each of the arguments in the function definition is associated with a keyword and the function call passes values to the function using these keywords:</p>
+
+</div>
+</div>
+</div>
+<div class="cell border-box-sizing code_cell rendered">
+<div class="input">
+<div class="prompt input_prompt">In&nbsp;[22]:</div>
+<div class="inner_cell">
+    <div class="input_area">
+<div class=" highlight hl-ipython3"><pre><span></span><span class="n">start</span><span class="p">,</span><span class="n">end</span> <span class="o">=</span> <span class="n">csvs_by_year</span><span class="p">(</span><span class="n">surveys_df</span><span class="p">)</span>
+<span class="nb">print</span><span class="p">(</span><span class="s1">&#39;Default values:</span><span class="se">\t\t\t</span><span class="s1">&#39;</span><span class="p">,</span> <span class="n">start</span><span class="p">,</span> <span class="n">end</span><span class="p">)</span>
+
+<span class="n">start</span><span class="p">,</span><span class="n">end</span> <span class="o">=</span> <span class="n">csvs_by_year</span><span class="p">(</span><span class="n">surveys_df</span><span class="p">,</span> <span class="mi">1988</span><span class="p">,</span> <span class="mi">1993</span><span class="p">)</span>
+<span class="nb">print</span><span class="p">(</span><span class="s1">&#39;No keywords:</span><span class="se">\t\t\t</span><span class="s1">&#39;</span><span class="p">,</span> <span class="n">start</span><span class="p">,</span> <span class="n">end</span><span class="p">)</span>
+
+<span class="n">start</span><span class="p">,</span><span class="n">end</span> <span class="o">=</span> <span class="n">csvs_by_year</span><span class="p">(</span><span class="n">surveys_df</span><span class="p">,</span> <span class="n">start_year</span> <span class="o">=</span> <span class="mi">1988</span><span class="p">,</span> <span class="n">end_year</span> <span class="o">=</span> <span class="mi">1993</span><span class="p">)</span>
+<span class="nb">print</span><span class="p">(</span><span class="s1">&#39;Both keywords, in order:</span><span class="se">\t</span><span class="s1">&#39;</span><span class="p">,</span> <span class="n">start</span><span class="p">,</span> <span class="n">end</span><span class="p">)</span>
+
+<span class="n">start</span><span class="p">,</span><span class="n">end</span> <span class="o">=</span> <span class="n">csvs_by_year</span><span class="p">(</span><span class="n">surveys_df</span><span class="p">,</span> <span class="n">end_year</span> <span class="o">=</span> <span class="mi">1993</span><span class="p">,</span> <span class="n">start_year</span> <span class="o">=</span> <span class="mi">1988</span><span class="p">)</span>
+<span class="nb">print</span><span class="p">(</span><span class="s1">&#39;Both keywords, flipped:</span><span class="se">\t\t</span><span class="s1">&#39;</span><span class="p">,</span> <span class="n">start</span><span class="p">,</span> <span class="n">end</span><span class="p">)</span>
+
+<span class="n">start</span><span class="p">,</span><span class="n">end</span> <span class="o">=</span> <span class="n">csvs_by_year</span><span class="p">(</span><span class="n">surveys_df</span><span class="p">,</span> <span class="n">start_year</span> <span class="o">=</span> <span class="mi">1988</span><span class="p">)</span>
+<span class="nb">print</span><span class="p">(</span><span class="s1">&#39;One keyword, default end:</span><span class="se">\t</span><span class="s1">&#39;</span><span class="p">,</span> <span class="n">start</span><span class="p">,</span> <span class="n">end</span><span class="p">)</span>
+
+<span class="n">start</span><span class="p">,</span><span class="n">end</span> <span class="o">=</span> <span class="n">csvs_by_year</span><span class="p">(</span><span class="n">surveys_df</span><span class="p">,</span> <span class="n">end_year</span> <span class="o">=</span> <span class="mi">1993</span><span class="p">)</span>
+<span class="nb">print</span><span class="p">(</span><span class="s1">&#39;One keyword, default start:</span><span class="se">\t</span><span class="s1">&#39;</span><span class="p">,</span> <span class="n">start</span><span class="p">,</span> <span class="n">end</span><span class="p">)</span>
+</pre></div>
+
+    </div>
+</div>
+</div>
+
+<div class="output_wrapper">
+<div class="output">
+
+
+<div class="output_area">
+
+    <div class="prompt"></div>
+
+
+<div class="output_subarea output_stream output_stdout output_text">
+<pre>Default values:			 1977 2002
+No keywords:			 1988 1993
+Both keywords, in order:	 1988 1993
+Both keywords, flipped:		 1988 1993
+One keyword, default end:	 1988 2002
+One keyword, default start:	 1977 1993
+</pre>
+</div>
+</div>
+
+</div>
+</div>
+
+</div>
+<div class="cell border-box-sizing text_cell rendered celltag_challenge"><div class="prompt input_prompt">
+</div><div class="inner_cell">
+<div class="text_cell_render border-box-sizing rendered_html">
+<h2 id="Multiple-choice-challenge">Multiple choice challenge<a class="anchor-link" href="#Multiple-choice-challenge">&#182;</a></h2><p>What output would you expect from the <code>if</code> statement (try to figure out the answer without running the code):</p>
+<div class="highlight"><pre><span></span><span class="n">pod_bay_doors_open</span> <span class="o">=</span> <span class="kc">False</span>
+<span class="n">dave_want_doors_open</span> <span class="o">=</span> <span class="kc">False</span>
+<span class="n">hal_insanity_level</span> <span class="o">=</span> <span class="mi">2001</span>
+
+<span class="k">if</span> <span class="ow">not</span> <span class="n">pod_bay_doors_open</span><span class="p">:</span>
+    <span class="nb">print</span><span class="p">(</span><span class="s2">&quot;Dave: Open the pod bay doors please HAL.&quot;</span><span class="p">)</span>
+    <span class="n">dave_wants_doors_open</span> <span class="o">=</span> <span class="kc">True</span>
+<span class="k">elif</span> <span class="n">pod_bay_doors_open</span> <span class="ow">and</span> <span class="n">hal_insanity_level</span> <span class="o">&gt;=</span> <span class="mi">95</span><span class="p">:</span>
+    <span class="nb">print</span><span class="p">(</span><span class="s2">&quot;HAL: I&#39;m closing the pod bay doors, Dave.&quot;</span><span class="p">)</span>
+
+<span class="k">if</span> <span class="n">dave_wants_doors_open</span> <span class="ow">and</span> <span class="ow">not</span> <span class="n">pod_bay_doors_open</span> <span class="ow">and</span> <span class="n">hal_insanity_level</span> <span class="o">&gt;=</span> <span class="mi">95</span><span class="p">:</span>
+    <span class="nb">print</span><span class="p">(</span><span class="s2">&quot;HAL: I’m sorry, Dave. I’m afraid I can’t do that.&quot;</span><span class="p">)</span>
+<span class="k">elif</span> <span class="n">dave_wants_doors_open</span> <span class="ow">and</span> <span class="ow">not</span> <span class="n">pod_bay_doors_open</span><span class="p">:</span>
+    <span class="nb">print</span><span class="p">(</span><span class="s2">&quot;HAL: I&#39;m opening the pod bay doors, welcome back Dave.&quot;</span><span class="p">)</span>
+<span class="k">else</span><span class="p">:</span>
+    <span class="nb">print</span><span class="p">(</span><span class="s2">&quot;... silence of space ...&quot;</span><span class="p">)</span>
+</pre></div>
+<p><strong>a)</strong> "HAL: I'm closing the pod bay doors, Dave.", "... silence of space ..."</p>
+<p><strong>b)</strong> "Dave: Open the pod bay doors please HAL.", "HAL: I’m sorry, Dave. I’m afraid I can’t do that."</p>
+<p><strong>c)</strong> "... silence of space ..."</p>
+<p><strong>d)</strong> "Dave: Open the pod bay doors please HAL.", HAL: "I'm opening the pod bay doors, welcome back Dave."</p>
+
+</div>
+</div>
+</div>
+<div class="cell border-box-sizing text_cell rendered celltag_solution"><div class="prompt input_prompt">
+</div><div class="inner_cell">
+<div class="text_cell_render border-box-sizing rendered_html">
+<p><strong>Option (b)</strong></p>
+
+</div>
+</div>
+</div>
+<div class="cell border-box-sizing text_cell rendered celltag_challenge"><div class="prompt input_prompt">
+</div><div class="inner_cell">
+<div class="text_cell_render border-box-sizing rendered_html">
+<h2 id="Bonus-Challenge---Modifying-functions">Bonus Challenge - Modifying functions<a class="anchor-link" href="#Bonus-Challenge---Modifying-functions">&#182;</a></h2><ol>
+<li><p>Rewrite the <code>year_to_csv</code> and <code>csvs_by_year</code> functions to have keyword arguments with default values.</p>
+</li>
+<li><p>Modify the functions so that they don’t create yearly files if there is no data for a given year and display an alert to the user (Hint: use conditional statements to do this. For an extra challenge, use <code>try</code> statements !).</p>
+</li>
+<li><p>The code below checks to see whether a directory exists and creates one if it doesn’t. Add some code to your function that writes out the CSV files, to check for a directory to write to.</p>
+</li>
+</ol>
+<div class="highlight"><pre><span></span><span class="kn">import</span> <span class="nn">os</span>
+
+<span class="k">if</span> <span class="s1">&#39;dir_name_here&#39;</span> <span class="ow">in</span> <span class="n">os</span><span class="o">.</span><span class="n">listdir</span><span class="p">():</span>
+   <span class="nb">print</span><span class="p">(</span><span class="s1">&#39;Processed directory exists&#39;</span><span class="p">)</span>
+<span class="k">else</span><span class="p">:</span>
+   <span class="n">os</span><span class="o">.</span><span class="n">mkdir</span><span class="p">(</span><span class="s1">&#39;dir_name_here&#39;</span><span class="p">)</span>
+   <span class="nb">print</span><span class="p">(</span><span class="s1">&#39;Processed directory created&#39;</span><span class="p">)</span>
+</pre></div>
+<p><code>4.</code> The code that you have written so far to loop through the years is good, however it is not necessarily reproducible with different datasets. For instance, what happens to the code if we have additional years of data in our CSV files? Using the tools that you learned in the previous activities, make a list of all years represented in the data. Then create a loop to process your data, that begins at the earliest year and ends at the latest year using that list.</p>
+<p><em>HINT:</em> you can create a loop with a list as follows: <code>for years in year_list:</code></p>
+
+</div>
+</div>
+</div>
+<div class="cell border-box-sizing text_cell rendered celltag_solution"><div class="prompt input_prompt">
+</div><div class="inner_cell">
+<div class="text_cell_render border-box-sizing rendered_html">
+<h2 id="Solutions---Modifying-functions">Solutions - Modifying functions<a class="anchor-link" href="#Solutions---Modifying-functions">&#182;</a></h2>
+</div>
+</div>
+</div>
+<div class="cell border-box-sizing code_cell rendered celltag_solution">
+<div class="input">
+<div class="prompt input_prompt">In&nbsp;[23]:</div>
+<div class="inner_cell">
+    <div class="input_area">
+<div class=" highlight hl-ipython3"><pre><span></span><span class="c1"># Solution - part 1</span>
+
+<span class="k">def</span> <span class="nf">year_to_csv</span><span class="p">(</span><span class="n">year</span><span class="o">=</span><span class="kc">None</span><span class="p">,</span> <span class="n">all_data</span><span class="o">=</span><span class="kc">None</span><span class="p">):</span>
+    <span class="sd">&quot;&quot;&quot;</span>
+<span class="sd">    Writes a csv file for data from a given year.</span>
+
+<span class="sd">    year --- year for which data is extracted</span>
+<span class="sd">    all_data --- DataFrame with multi-year data</span>
+<span class="sd">    &quot;&quot;&quot;</span>
+
+    <span class="k">if</span> <span class="n">all_data</span> <span class="ow">is</span> <span class="kc">None</span><span class="p">:</span>
+        <span class="n">all_data</span> <span class="o">=</span> <span class="n">pd</span><span class="o">.</span><span class="n">read_csv</span><span class="p">(</span><span class="s2">&quot;surveys.csv&quot;</span><span class="p">)</span>
+    
+    <span class="k">if</span> <span class="n">year</span> <span class="ow">is</span> <span class="kc">None</span><span class="p">:</span>
+        <span class="n">year</span> <span class="o">=</span> <span class="nb">min</span><span class="p">(</span><span class="n">all_data</span><span class="o">.</span><span class="n">year</span><span class="p">)</span>
+    
+    <span class="c1"># Select data for the year</span>
+    <span class="n">surveys_year</span> <span class="o">=</span> <span class="n">all_data</span><span class="p">[</span><span class="n">all_data</span><span class="o">.</span><span class="n">year</span> <span class="o">==</span> <span class="n">year</span><span class="p">]</span>
+
+    <span class="c1"># Write the new DataFrame to a csv file</span>
+    <span class="n">filename</span> <span class="o">=</span> <span class="s1">&#39;function_surveys&#39;</span> <span class="o">+</span> <span class="nb">str</span><span class="p">(</span><span class="n">year</span><span class="p">)</span> <span class="o">+</span> <span class="s1">&#39;.csv&#39;</span>
+    <span class="n">surveys_year</span><span class="o">.</span><span class="n">to_csv</span><span class="p">(</span><span class="n">filename</span><span class="p">)</span>
+    
+    
+<span class="k">def</span> <span class="nf">csvs_by_year</span><span class="p">(</span><span class="n">start_year</span><span class="o">=</span><span class="kc">None</span><span class="p">,</span> <span class="n">end_year</span><span class="o">=</span><span class="kc">None</span><span class="p">,</span> <span class="n">all_data</span><span class="o">=</span><span class="kc">None</span><span class="p">):</span>
+    <span class="sd">&quot;&quot;&quot;</span>
+<span class="sd">    Writes separate CSV files for each year of data.</span>
+
+<span class="sd">    start_year --- the first year of data we want</span>
+<span class="sd">    end_year --- the last year of data we want</span>
+<span class="sd">    all_data --- DataFrame with multi-year data</span>
+<span class="sd">    &quot;&quot;&quot;</span>
+    
+    <span class="k">if</span> <span class="n">all_data</span> <span class="ow">is</span> <span class="kc">None</span><span class="p">:</span>
+        <span class="n">all_data</span> <span class="o">=</span> <span class="n">pd</span><span class="o">.</span><span class="n">read_csv</span><span class="p">(</span><span class="s2">&quot;surveys.csv&quot;</span><span class="p">)</span>
+    
+    <span class="k">if</span> <span class="n">start_year</span> <span class="ow">is</span> <span class="kc">None</span><span class="p">:</span>
+        <span class="n">start_year</span> <span class="o">=</span> <span class="nb">min</span><span class="p">(</span><span class="n">all_data</span><span class="o">.</span><span class="n">year</span><span class="p">)</span>
+        
+    <span class="k">if</span> <span class="n">end_year</span> <span class="ow">is</span> <span class="kc">None</span><span class="p">:</span>
+        <span class="n">end_year</span> <span class="o">=</span> <span class="nb">max</span><span class="p">(</span><span class="n">all_data</span><span class="o">.</span><span class="n">year</span><span class="p">)</span>
+
+    <span class="c1"># &quot;end_year&quot; is the last year of data we want to pull, so we loop to end_year+1</span>
+    <span class="k">for</span> <span class="n">year</span> <span class="ow">in</span> <span class="nb">range</span><span class="p">(</span><span class="n">start_year</span><span class="p">,</span> <span class="n">end_year</span><span class="o">+</span><span class="mi">1</span><span class="p">):</span>
+        <span class="n">year_to_csv</span><span class="p">(</span><span class="n">year</span><span class="p">,</span> <span class="n">all_data</span><span class="p">)</span>
+</pre></div>
+
+    </div>
+</div>
+</div>
+
+</div>
+<div class="cell border-box-sizing code_cell rendered celltag_solution">
+<div class="input">
+<div class="prompt input_prompt">In&nbsp;[24]:</div>
+<div class="inner_cell">
+    <div class="input_area">
+<div class=" highlight hl-ipython3"><pre><span></span><span class="c1"># Solution - part 2</span>
+
+<span class="k">def</span> <span class="nf">csvs_by_year</span><span class="p">(</span><span class="n">start_year</span><span class="o">=</span><span class="kc">None</span><span class="p">,</span> <span class="n">end_year</span><span class="o">=</span><span class="kc">None</span><span class="p">,</span> <span class="n">all_data</span><span class="o">=</span><span class="kc">None</span><span class="p">):</span>
+    <span class="sd">&quot;&quot;&quot;</span>
+<span class="sd">    Writes separate CSV files for each year of data.</span>
+
+<span class="sd">    start_year --- the first year of data we want</span>
+<span class="sd">    end_year --- the last year of data we want</span>
+<span class="sd">    all_data --- DataFrame with multi-year data</span>
+<span class="sd">    &quot;&quot;&quot;</span>
+    
+    <span class="k">if</span> <span class="n">all_data</span> <span class="ow">is</span> <span class="kc">None</span><span class="p">:</span>
+        <span class="n">all_data</span> <span class="o">=</span> <span class="n">pd</span><span class="o">.</span><span class="n">read_csv</span><span class="p">(</span><span class="s2">&quot;surveys.csv&quot;</span><span class="p">)</span>
+    
+    <span class="k">if</span> <span class="n">start_year</span> <span class="ow">is</span> <span class="kc">None</span><span class="p">:</span>
+        <span class="n">start_year</span> <span class="o">=</span> <span class="nb">min</span><span class="p">(</span><span class="n">all_data</span><span class="o">.</span><span class="n">year</span><span class="p">)</span>
+        
+    <span class="k">if</span> <span class="n">end_year</span> <span class="ow">is</span> <span class="kc">None</span><span class="p">:</span>
+        <span class="n">end_year</span> <span class="o">=</span> <span class="nb">max</span><span class="p">(</span><span class="n">all_data</span><span class="o">.</span><span class="n">year</span><span class="p">)</span>
+
+    <span class="c1"># &quot;end_year&quot; is the last year of data we want to pull, so we loop to end_year+1</span>
+    <span class="k">for</span> <span class="n">year</span> <span class="ow">in</span> <span class="nb">range</span><span class="p">(</span><span class="n">start_year</span><span class="p">,</span> <span class="n">end_year</span><span class="o">+</span><span class="mi">1</span><span class="p">):</span>
+        <span class="c1"># print(len(all_data[all_data.year == year]))</span>
+        <span class="k">if</span> <span class="nb">len</span><span class="p">(</span><span class="n">all_data</span><span class="p">[</span><span class="n">all_data</span><span class="o">.</span><span class="n">year</span> <span class="o">==</span> <span class="n">year</span><span class="p">])</span> <span class="o">&gt;</span> <span class="mi">0</span><span class="p">:</span>
+            <span class="n">year_to_csv</span><span class="p">(</span><span class="n">year</span><span class="p">,</span> <span class="n">all_data</span><span class="p">)</span>
+        <span class="k">else</span><span class="p">:</span>
+            <span class="nb">print</span><span class="p">(</span><span class="s2">&quot;Skipping: &quot;</span><span class="p">,</span> <span class="n">year</span><span class="p">,</span> <span class="s2">&quot; - no data points for this year.&quot;</span><span class="p">)</span>
+
+<span class="n">surveys_df</span> <span class="o">=</span> <span class="n">pd</span><span class="o">.</span><span class="n">read_csv</span><span class="p">(</span><span class="s2">&quot;surveys.csv&quot;</span><span class="p">)</span>
+<span class="n">csvs_by_year</span><span class="p">(</span><span class="mi">1977</span><span class="p">,</span> <span class="mi">2002</span><span class="p">,</span> <span class="n">surveys_df</span><span class="p">)</span>
+</pre></div>
+
+    </div>
+</div>
+</div>
+
+</div>
+<div class="cell border-box-sizing code_cell rendered celltag_solution">
+<div class="input">
+<div class="prompt input_prompt">In&nbsp;[25]:</div>
+<div class="inner_cell">
+    <div class="input_area">
+<div class=" highlight hl-ipython3"><pre><span></span><span class="kn">import</span> <span class="nn">os</span>
+
+<span class="c1"># Solution - part 3</span>
+<span class="k">def</span> <span class="nf">year_to_csv</span><span class="p">(</span><span class="n">year</span><span class="o">=</span><span class="kc">None</span><span class="p">,</span> <span class="n">all_data</span><span class="o">=</span><span class="kc">None</span><span class="p">,</span> <span class="n">output_dir</span><span class="o">=</span><span class="s1">&#39;output&#39;</span><span class="p">):</span>
+    <span class="sd">&quot;&quot;&quot;</span>
+<span class="sd">    Writes a csv file for data from a given year.</span>
+
+<span class="sd">    year --- year for which data is extracted</span>
+<span class="sd">    all_data --- DataFrame with multi-year data</span>
+<span class="sd">    output_dir --- the output directory when CSV files will be written</span>
+<span class="sd">    &quot;&quot;&quot;</span>
+
+    <span class="k">if</span> <span class="n">all_data</span> <span class="ow">is</span> <span class="kc">None</span><span class="p">:</span>
+        <span class="n">all_data</span> <span class="o">=</span> <span class="n">pd</span><span class="o">.</span><span class="n">read_csv</span><span class="p">(</span><span class="s2">&quot;surveys.csv&quot;</span><span class="p">)</span>
+    
+    <span class="k">if</span> <span class="n">year</span> <span class="ow">is</span> <span class="kc">None</span><span class="p">:</span>
+        <span class="n">year</span> <span class="o">=</span> <span class="nb">min</span><span class="p">(</span><span class="n">all_data</span><span class="o">.</span><span class="n">year</span><span class="p">)</span>
+    
+    <span class="c1"># Select data for the year</span>
+    <span class="n">surveys_year</span> <span class="o">=</span> <span class="n">all_data</span><span class="p">[</span><span class="n">all_data</span><span class="o">.</span><span class="n">year</span> <span class="o">==</span> <span class="n">year</span><span class="p">]</span>
+
+
+    <span class="k">if</span> <span class="n">output_dir</span> <span class="ow">in</span> <span class="n">os</span><span class="o">.</span><span class="n">listdir</span><span class="p">(</span><span class="s1">&#39;.&#39;</span><span class="p">):</span>
+        <span class="nb">print</span><span class="p">(</span><span class="s1">&#39;Processed directory exists: &#39;</span><span class="p">,</span> <span class="n">output_dir</span><span class="p">)</span>
+    <span class="k">else</span><span class="p">:</span>
+        <span class="n">os</span><span class="o">.</span><span class="n">mkdir</span><span class="p">(</span><span class="n">output_dir</span><span class="p">)</span>
+        <span class="nb">print</span><span class="p">(</span><span class="s1">&#39;Processed directory created: &#39;</span><span class="p">,</span> <span class="n">output_dir</span><span class="p">)</span>
+    
+    <span class="c1"># Write the new DataFrame to a csv file</span>
+    <span class="n">filename</span> <span class="o">=</span> <span class="n">output_dir</span> <span class="o">+</span> <span class="s1">&#39;/&#39;</span> <span class="o">+</span> <span class="s1">&#39;function_surveys&#39;</span> <span class="o">+</span> <span class="nb">str</span><span class="p">(</span><span class="n">year</span><span class="p">)</span> <span class="o">+</span> <span class="s1">&#39;.csv&#39;</span>
+    <span class="c1"># The more correct way to create paths is:</span>
+    <span class="c1"># filename = os.path.join(output_dir, &#39;function_surveys&#39; + str(year) + &#39;.csv&#39;)</span>
+    <span class="n">surveys_year</span><span class="o">.</span><span class="n">to_csv</span><span class="p">(</span><span class="n">filename</span><span class="p">)</span>
+    
+<span class="n">year_to_csv</span><span class="p">(</span><span class="mi">2002</span><span class="p">,</span> <span class="n">surveys_df</span><span class="p">)</span>
+</pre></div>
+
+    </div>
+</div>
+</div>
+
+<div class="output_wrapper">
+<div class="output">
+
+
+<div class="output_area">
+
+    <div class="prompt"></div>
+
+
+<div class="output_subarea output_stream output_stdout output_text">
+<pre>Processed directory exists:  output
+</pre>
+</div>
+</div>
+
+</div>
+</div>
+
+</div>
+<div class="cell border-box-sizing code_cell rendered celltag_solution">
+<div class="input">
+<div class="prompt input_prompt">In&nbsp;[26]:</div>
+<div class="inner_cell">
+    <div class="input_area">
+<div class=" highlight hl-ipython3"><pre><span></span><span class="c1"># Solution - part 4</span>
+<span class="k">def</span> <span class="nf">csvs_by_year</span><span class="p">(</span><span class="n">all_data</span><span class="p">):</span>
+    <span class="sd">&quot;&quot;&quot;</span>
+<span class="sd">    Writes separate CSV files for each year of data.</span>
+
+<span class="sd">    all_data --- DataFrame with multi-year data</span>
+<span class="sd">    &quot;&quot;&quot;</span>
+
+    <span class="c1"># We could do this, but missing years will be included in the &#39;range&#39;</span>
+    <span class="c1"># start_year = min(all_data.year)</span>
+    <span class="c1"># end_year = max(all_data.year)</span>
+    <span class="c1"># year_list = range(start_year, end_year+1)</span>
+    
+    <span class="c1"># Instead, we create an empty list, then loop over all the rows, adding years</span>
+    <span class="c1"># we haven&#39;t seen yet to the list.</span>
+    <span class="n">year_list</span> <span class="o">=</span> <span class="p">[]</span>
+    <span class="k">for</span> <span class="n">year</span> <span class="ow">in</span> <span class="n">surveys_df</span><span class="o">.</span><span class="n">year</span><span class="p">:</span>
+        <span class="k">if</span> <span class="n">year</span> <span class="ow">not</span> <span class="ow">in</span> <span class="n">year_list</span><span class="p">:</span>
+            <span class="n">year_list</span><span class="o">.</span><span class="n">append</span><span class="p">(</span><span class="n">year</span><span class="p">)</span>
+    
+    <span class="c1"># An elegant alternative is to use a &#39;set&#39; object.</span>
+    <span class="c1"># A &#39;set&#39; is a collection where every value is unique - no duplicates.</span>
+    <span class="c1"># This ensures no repeated years and has the advantage of also skipping missing years.</span>
+    <span class="c1"># year_list = set(surveys_df.year)</span>
+    
+    <span class="c1"># &quot;end_year&quot; is the last year of data we want to pull, so we loop to end_year+1</span>
+    <span class="k">for</span> <span class="n">year</span> <span class="ow">in</span> <span class="n">year_list</span><span class="p">:</span>
+        <span class="n">year_to_csv</span><span class="p">(</span><span class="n">year</span><span class="p">,</span> <span class="n">all_data</span><span class="p">)</span>
+        
+<span class="c1"># The &#39;list&#39; of years from each row contains duplicates (we just list the first 20 here)</span>
+<span class="nb">print</span><span class="p">(</span><span class="nb">list</span><span class="p">(</span><span class="n">surveys_df</span><span class="o">.</span><span class="n">year</span><span class="p">)[</span><span class="mi">0</span><span class="p">:</span><span class="mi">20</span><span class="p">])</span>
+
+<span class="nb">print</span><span class="p">()</span>
+
+<span class="c1"># Making it a &#39;set&#39; removes duplicates</span>
+<span class="nb">print</span><span class="p">(</span><span class="nb">list</span><span class="p">(</span><span class="nb">set</span><span class="p">(</span><span class="n">surveys_df</span><span class="o">.</span><span class="n">year</span><span class="p">)))</span>
+</pre></div>
+
+    </div>
+</div>
+</div>
+
+<div class="output_wrapper">
+<div class="output">
+
+
+<div class="output_area">
+
+    <div class="prompt"></div>
+
+
+<div class="output_subarea output_stream output_stdout output_text">
+<pre>[1977, 1977, 1977, 1977, 1977, 1977, 1977, 1977, 1977, 1977, 1977, 1977, 1977, 1977, 1977, 1977, 1977, 1977, 1977, 1977]
+
+[1977, 1978, 1979, 1980, 1981, 1982, 1983, 1984, 1985, 1986, 1987, 1988, 1989, 1990, 1991, 1992, 1993, 1994, 1995, 1996, 1997, 1998, 1999, 2000, 2001, 2002]
+</pre>
+</div>
+</div>
+
+</div>
+</div>
+
+</div>
+<div class="cell border-box-sizing text_cell rendered"><div class="prompt input_prompt">
+</div><div class="inner_cell">
+<div class="text_cell_render border-box-sizing rendered_html">
+<h1 id="section:-1.2.3:-files">section: 1.2.3: files<a class="anchor-link" href="#section:-1.2.3:-files">&#182;</a></h1><ul>
 <li>navigate file system, working dir </li>
+<li>coming in the tables section 1.3.1</li>
 </ul>
 
 </div>
