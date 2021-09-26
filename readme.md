@@ -1,8 +1,8 @@
 [home](https://nils-holmberg.github.io/)
 
-# using python in the social sciences
+# introduction to python programming
 
-computational content analyses, cognitive communication effects
+**computational content analyses, cognitive communication effects**
 
 ## social sciences methods workshops
 
@@ -16,7 +16,15 @@ computational content analyses, cognitive communication effects
 
 5. [collaborate and share python code with jupyter](web/211001-jnb/)
 
-## some headline
+## some interesting python links
+
+- [https://www.python.org/downloads/](https://www.python.org/downloads/)
+
+- [https://wiki.python.org/moin/BeginnersGuide](https://wiki.python.org/moin/BeginnersGuide)
+
+- [https://www.anaconda.com/products/individual](https://www.anaconda.com/products/individual)
+
+- [https://code.visualstudio.com/download](https://code.visualstudio.com/download)
 
 
 
