@@ -1,3 +1,18 @@
+### start jnb (210926)
+# start base env
+source ~/lib/python/anaconda3/bin/activate
+
+
+### start vis (210926)
+# start base env
+source ~/lib/python/anaconda3/bin/activate
+
+
+### start exp (210926)
+# start base env
+source ~/lib/python/anaconda3/bin/activate
+
+
 ### resume nlp (210925)
 # start base env
 source ~/lib/python/anaconda3/bin/activate
@@ -6,6 +21,8 @@ conda create -n conda-nlp
 conda install -c conda-forge -n conda-nlp ipykernel scipy spacy
 # trained pipline, language model, in conda prompt?
 python -m spacy download en_core_web_sm
+# start jnb and copy paste multiple cells with shift arrow keys
+jupyter notebook
 
 
 ### resume sci (210922)
@@ -20,12 +37,15 @@ conda update --all
 conda env list
 # activate env
 #conda activate conda-sci
-# install notebook merge support, search packages at https://anaconda.org
+# start jnb and copy paste multiple cells with shift arrow keys
+jupyter notebook
+
+
+### notebook merge (210922)
+# search packages at https://anaconda.org
 #conda install -c terradue -n base nbmerge
 # cut and paste, nbmerge only available for python2, so..
 #nbmerge file_1.ipynb file_2.ipynb file_3.ipynb > merged.ipynb
-# start jnb and copy paste multiple cells with shift arrow keys
-jupyter notebook
 
 
 ### git toggle log (210922)
