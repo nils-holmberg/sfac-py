@@ -13345,6 +13345,2507 @@ div#notebook {
 </div>
 
 </div>
+<div class="cell border-box-sizing text_cell rendered celltag_solution"><div class="prompt input_prompt">
+</div><div class="inner_cell">
+<div class="text_cell_render border-box-sizing rendered_html">
+<h2 id="Instructor-notes">Instructor notes<a class="anchor-link" href="#Instructor-notes">&#182;</a></h2><p><em>Estimated teaching time:</em> 30 min</p>
+<p><em>Estimated challenge time:</em> 30 min</p>
+<p><em>Key questions:</em></p>
+<ul>
+<li>"How can I import data in Python ?"</li>
+<li>"What is Pandas ?"</li>
+<li>"Why should I use Pandas to work with data ?"</li>
+</ul>
+<p><em>Learning objectives:</em></p>
+<ul>
+<li>"Navigate the workshop directory and download a dataset."</li>
+<li>"Explain what a library is and what libraries are used for."</li>
+<li>"Describe what the Python Data Analysis Library (Pandas) is."</li>
+<li>"Load the Python Data Analysis Library (Pandas)."</li>
+<li>"Use <code>read_csv</code> to read tabular data into Python."</li>
+<li>"Describe what a DataFrame is in Python."</li>
+<li>"Access and summarize data stored in a DataFrame."</li>
+<li>"Define indexing as it relates to data structures."</li>
+<li>"Perform basic mathematical operations and summary statistics on data in a Pandas DataFrame."</li>
+<li>"Create simple plots."</li>
+</ul>
+
+</div>
+</div>
+</div>
+<div class="cell border-box-sizing text_cell rendered"><div class="prompt input_prompt">
+</div><div class="inner_cell">
+<div class="text_cell_render border-box-sizing rendered_html">
+<h3 id="Automating-data-analysis-tasks-in-Python">Automating data analysis tasks in Python<a class="anchor-link" href="#Automating-data-analysis-tasks-in-Python">&#182;</a></h3><p>We can automate the process of performing data manipulations in Python. It's efficient to spend time
+building the code to perform these tasks because once it's built, we can use it
+over and over on different datasets that use a similar format. This makes our
+methods easily reproducible. We can also easily share our code with colleagues
+and they can replicate the same analysis.</p>
+<h3 id="The-Dataset">The Dataset<a class="anchor-link" href="#The-Dataset">&#182;</a></h3><p>For this lesson, we will be using the Portal Teaching data, a subset of the data
+from Ernst et al
+<a href="http://www.esapubs.org/archive/ecol/E090/118/default.htm">Long-term monitoring and experimental manipulation of a Chihuahuan Desert ecosystem near Portal, Arizona, USA</a></p>
+<p>We will be using this dataset, which can be downloaded here: <a href="tmp/surveys.csv">surveys.csv</a> ... but <strong>don't click</strong> to download it in your browser - <strong>we are going to use Python !</strong></p>
+
+</div>
+</div>
+</div>
+<div class="cell border-box-sizing code_cell rendered">
+<div class="input">
+<div class="prompt input_prompt">In&nbsp;[1]:</div>
+<div class="inner_cell">
+    <div class="input_area">
+<div class=" highlight hl-ipython3"><pre><span></span><span class="kn">import</span> <span class="nn">urllib.request</span>
+
+<span class="c1"># You can also get this URL value by right-clicking the `surveys.csv` link above and selecting &quot;Copy Link Address&quot;</span>
+<span class="n">url</span> <span class="o">=</span> <span class="s1">&#39;https://raw.githubusercontent.com/nils-holmberg/sfac-py/main/csv/surveys.csv&#39;</span>
+
+<span class="c1"># save file</span>
+<span class="n">urllib</span><span class="o">.</span><span class="n">request</span><span class="o">.</span><span class="n">urlretrieve</span><span class="p">(</span><span class="n">url</span><span class="p">,</span> <span class="s1">&#39;tmp/surveys.csv&#39;</span><span class="p">)</span>
+</pre></div>
+
+    </div>
+</div>
+</div>
+
+<div class="output_wrapper">
+<div class="output">
+
+
+<div class="output_area">
+
+    <div class="prompt output_prompt">Out[1]:</div>
+
+
+
+
+<div class="output_text output_subarea output_execute_result">
+<pre>(&#39;tmp/surveys.csv&#39;, &lt;http.client.HTTPMessage at 0x7f30e46e9cd0&gt;)</pre>
+</div>
+
+</div>
+
+</div>
+</div>
+
+</div>
+<div class="cell border-box-sizing text_cell rendered"><div class="prompt input_prompt">
+</div><div class="inner_cell">
+<div class="text_cell_render border-box-sizing rendered_html">
+<p>If Jupyter is running locally on your computer, you'll now have a file <code>surveys.csv</code> in the current working directory.
+You can check by clicking on <code>File</code> tab on the top left of the notebook to see if the file exists. If you are running Jupyter on a remote server or cloud service (eg Colaboratory or Azure Notebooks), the file will be there instead.</p>
+
+</div>
+</div>
+</div>
+<div class="cell border-box-sizing text_cell rendered"><div class="prompt input_prompt">
+</div><div class="inner_cell">
+<div class="text_cell_render border-box-sizing rendered_html">
+<p>We are studying the species and weight of animals caught in plots in our study
+area. The dataset is stored as a <code>.csv</code> file: each row holds information for a
+single animal, and the columns represent:</p>
+<table>
+<thead><tr>
+<th>Column</th>
+<th>Description</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>record_id</td>
+<td>Unique id for the observation</td>
+</tr>
+<tr>
+<td>month</td>
+<td>month of observation</td>
+</tr>
+<tr>
+<td>day</td>
+<td>day of observation</td>
+</tr>
+<tr>
+<td>year</td>
+<td>year of observation</td>
+</tr>
+<tr>
+<td>site_id</td>
+<td>ID of a particular plot</td>
+</tr>
+<tr>
+<td>species_id</td>
+<td>2-letter code</td>
+</tr>
+<tr>
+<td>sex</td>
+<td>sex of animal ("M", "F")</td>
+</tr>
+<tr>
+<td>hindfoot_length</td>
+<td>length of the hindfoot in mm</td>
+</tr>
+<tr>
+<td>weight</td>
+<td>weight of the animal in grams</td>
+</tr>
+</tbody>
+</table>
+<p>The first few rows of our file look like this:</p>
+
+<pre><code>record_id,month,day,year,site_id,species_id,sex,hindfoot_length,weight
+1,7,16,1977,2,NL,M,32,
+2,7,16,1977,3,NL,M,33,
+3,7,16,1977,2,DM,F,37,
+4,7,16,1977,7,DM,M,36,
+5,7,16,1977,3,DM,M,35,
+6,7,16,1977,1,PF,M,14,
+7,7,16,1977,2,PE,F,,
+8,7,16,1977,1,DM,M,37,
+9,7,16,1977,1,DM,F,34,</code></pre>
+<hr>
+
+</div>
+</div>
+</div>
+<div class="cell border-box-sizing text_cell rendered"><div class="prompt input_prompt">
+</div><div class="inner_cell">
+<div class="text_cell_render border-box-sizing rendered_html">
+<h2 id="About-Libraries">About Libraries<a class="anchor-link" href="#About-Libraries">&#182;</a></h2><p>A library in Python contains a set of tools (called functions) that perform
+tasks on our data. Importing a library is like getting a piece of lab equipment
+out of a storage locker and setting it up on the bench for use in a project.
+Once a library is set up, it can be used or called to perform many tasks.</p>
+<p>If you have noticed in the previous code <code>import urllib.request</code>, we are calling 
+a <strong>request</strong> function from library <strong>urllib</strong> to download our dataset from web.</p>
+
+</div>
+</div>
+</div>
+<div class="cell border-box-sizing text_cell rendered"><div class="prompt input_prompt">
+</div><div class="inner_cell">
+<div class="text_cell_render border-box-sizing rendered_html">
+<h2 id="Pandas-in-Python">Pandas in Python<a class="anchor-link" href="#Pandas-in-Python">&#182;</a></h2><p>The dataset we have, is in table format. One of the best options for working with tabular data in Python is to use the
+<a href="http://pandas.pydata.org/">Python Data Analysis Library</a> (a.k.a. Pandas). The
+Pandas library provides data structures, produces high quality plots with
+<a href="http://matplotlib.org/">matplotlib</a> and integrates nicely with other libraries
+that use <a href="http://www.numpy.org/">NumPy</a> (which is another Python library) arrays.</p>
+<p>First, lets make sure the Pandas and matplotlib packages are <strong>installed</strong>.</p>
+
+</div>
+</div>
+</div>
+<div class="cell border-box-sizing code_cell rendered">
+<div class="input">
+<div class="prompt input_prompt">In&nbsp;[2]:</div>
+<div class="inner_cell">
+    <div class="input_area">
+<div class=" highlight hl-ipython3"><pre><span></span><span class="c1">#conda install pandas matplotlib</span>
+</pre></div>
+
+    </div>
+</div>
+</div>
+
+</div>
+<div class="cell border-box-sizing text_cell rendered"><div class="prompt input_prompt">
+</div><div class="inner_cell">
+<div class="text_cell_render border-box-sizing rendered_html">
+<p>Python doesn't load all of the libraries available to it by default. We have to
+add an <code>import</code> statement to our code in order to use library functions. To import
+a library, we use the syntax <code>import libraryName</code>. If we want to give the
+library a nickname to shorten the command, we can add <code>as nickNameHere</code>.  An
+example of importing the pandas library using the common nickname <code>pd</code> is below.</p>
+
+</div>
+</div>
+</div>
+<div class="cell border-box-sizing code_cell rendered">
+<div class="input">
+<div class="prompt input_prompt">In&nbsp;[4]:</div>
+<div class="inner_cell">
+    <div class="input_area">
+<div class=" highlight hl-ipython3"><pre><span></span><span class="kn">import</span> <span class="nn">pandas</span> <span class="k">as</span> <span class="nn">pd</span>
+
+<span class="c1"># read data</span>
+<span class="c1">#df = pd.read_csv(&#39;https://raw.githubusercontent.com/mwaskom/seaborn-data/master/iris.csv&#39;)</span>
+<span class="c1">#df = pd.read_csv(fp, sep=&quot;\t&quot;, header=0)</span>
+</pre></div>
+
+    </div>
+</div>
+</div>
+
+</div>
+<div class="cell border-box-sizing text_cell rendered"><div class="prompt input_prompt">
+</div><div class="inner_cell">
+<div class="text_cell_render border-box-sizing rendered_html">
+<p>Each time we call a function that's in a library, we use the syntax
+<code>LibraryName.FunctionName</code>. Adding the library name with a <code>.</code> before the
+function name tells Python where to find the function. In the example above, we
+have imported Pandas as <code>pd</code>. This means we don't have to type out <code>pandas</code> each
+time we call a Pandas function.</p>
+<h1 id="Reading-CSV-Data-Using-Pandas">Reading CSV Data Using Pandas<a class="anchor-link" href="#Reading-CSV-Data-Using-Pandas">&#182;</a></h1><p>We will begin by locating and reading our survey data which are in CSV format. CSV stands for Comma-Separated Values and is a common way store formatted data. Other symbols my also be used, so you might see tab-separated, colon-separated or space separated files. It is quite easy to replace one separator with another, to match your application. The first line in the file often has headers to explain what is in each column. CSV (and other separators) make it easy to share data, and can be imported and exported from many applications, including Microsoft Excel.</p>
+<p>We can use Pandas' <code>read_csv</code> function to pull the file directly into a
+<a href="http://pandas.pydata.org/pandas-docs/stable/dsintro.html#dataframe">DataFrame</a>.</p>
+
+</div>
+</div>
+</div>
+<div class="cell border-box-sizing text_cell rendered"><div class="prompt input_prompt">
+</div><div class="inner_cell">
+<div class="text_cell_render border-box-sizing rendered_html">
+<h2 id="So-What's-a-DataFrame?">So What's a DataFrame?<a class="anchor-link" href="#So-What's-a-DataFrame?">&#182;</a></h2><p>A DataFrame is a 2-dimensional data structure that can store data of different
+types (including characters, integers, floating point values, factors and more)
+in columns. It is similar to a spreadsheet or an SQL table or the <code>data.frame</code> in
+R. A DataFrame always has an index (0-based). An index refers to the position of
+an element in the data structure.</p>
+
+</div>
+</div>
+</div>
+<div class="cell border-box-sizing code_cell rendered">
+<div class="input">
+<div class="prompt input_prompt">In&nbsp;[7]:</div>
+<div class="inner_cell">
+    <div class="input_area">
+<div class=" highlight hl-ipython3"><pre><span></span><span class="c1"># note that pd.read_csv is available because we imported pandas as pd, and data is available where we saved it</span>
+<span class="n">df</span> <span class="o">=</span> <span class="n">pd</span><span class="o">.</span><span class="n">read_csv</span><span class="p">(</span><span class="s2">&quot;tmp/surveys.csv&quot;</span><span class="p">)</span>
+<span class="n">df</span><span class="o">.</span><span class="n">head</span><span class="p">()</span>
+</pre></div>
+
+    </div>
+</div>
+</div>
+
+<div class="output_wrapper">
+<div class="output">
+
+
+<div class="output_area">
+
+    <div class="prompt output_prompt">Out[7]:</div>
+
+
+
+<div class="output_html rendered_html output_subarea output_execute_result"><div>
+<style scoped>
+    .dataframe tbody tr th:only-of-type {
+        vertical-align: middle;
+    }
+
+    .dataframe tbody tr th {
+        vertical-align: top;
+    }
+
+    .dataframe thead th {
+        text-align: right;
+    }
+</style>
+<table border="1" class="dataframe">
+  <thead>
+    <tr style="text-align: right;">
+      <th></th>
+      <th>record_id</th>
+      <th>month</th>
+      <th>day</th>
+      <th>year</th>
+      <th>site_id</th>
+      <th>species_id</th>
+      <th>sex</th>
+      <th>hindfoot_length</th>
+      <th>weight</th>
+    </tr>
+  </thead>
+  <tbody>
+    <tr>
+      <th>0</th>
+      <td>1</td>
+      <td>7</td>
+      <td>16</td>
+      <td>1977</td>
+      <td>2</td>
+      <td>NL</td>
+      <td>M</td>
+      <td>32.0</td>
+      <td>NaN</td>
+    </tr>
+    <tr>
+      <th>1</th>
+      <td>2</td>
+      <td>7</td>
+      <td>16</td>
+      <td>1977</td>
+      <td>3</td>
+      <td>NL</td>
+      <td>M</td>
+      <td>33.0</td>
+      <td>NaN</td>
+    </tr>
+    <tr>
+      <th>2</th>
+      <td>3</td>
+      <td>7</td>
+      <td>16</td>
+      <td>1977</td>
+      <td>2</td>
+      <td>DM</td>
+      <td>F</td>
+      <td>37.0</td>
+      <td>NaN</td>
+    </tr>
+    <tr>
+      <th>3</th>
+      <td>4</td>
+      <td>7</td>
+      <td>16</td>
+      <td>1977</td>
+      <td>7</td>
+      <td>DM</td>
+      <td>M</td>
+      <td>36.0</td>
+      <td>NaN</td>
+    </tr>
+    <tr>
+      <th>4</th>
+      <td>5</td>
+      <td>7</td>
+      <td>16</td>
+      <td>1977</td>
+      <td>3</td>
+      <td>DM</td>
+      <td>M</td>
+      <td>35.0</td>
+      <td>NaN</td>
+    </tr>
+  </tbody>
+</table>
+</div></div>
+
+</div>
+
+</div>
+</div>
+
+</div>
+<div class="cell border-box-sizing text_cell rendered"><div class="prompt input_prompt">
+</div><div class="inner_cell">
+<div class="text_cell_render border-box-sizing rendered_html">
+<p>The above command outputs a <code>DateFrame</code> object, which Jupyter displays as a table (snipped in the middle since there are many rows).</p>
+<p>We can see that there were 33,549 rows parsed. Each row has 9
+columns. The first column is the index of the DataFrame. The index is used to
+identify the position of the data, but it is not an actual column of the DataFrame.
+It looks like  the <code>read_csv</code> function in Pandas  read our file properly. However,
+we haven't saved any data to memory so we can work with it.We need to assign the
+DataFrame to a variable. Remember that a variable is a name for a value, such as <code>x</code>,
+or <code>data</code>. We can create a new  object with a variable name by assigning a value to it using <code>=</code>.</p>
+<p>Let's call the imported survey data <code>surveys_df</code>:</p>
+
+</div>
+</div>
+</div>
+<div class="cell border-box-sizing code_cell rendered">
+<div class="input">
+<div class="prompt input_prompt">In&nbsp;[8]:</div>
+<div class="inner_cell">
+    <div class="input_area">
+<div class=" highlight hl-ipython3"><pre><span></span><span class="n">surveys_df</span> <span class="o">=</span> <span class="n">pd</span><span class="o">.</span><span class="n">read_csv</span><span class="p">(</span><span class="s2">&quot;tmp/surveys.csv&quot;</span><span class="p">)</span>
+</pre></div>
+
+    </div>
+</div>
+</div>
+
+</div>
+<div class="cell border-box-sizing text_cell rendered"><div class="prompt input_prompt">
+</div><div class="inner_cell">
+<div class="text_cell_render border-box-sizing rendered_html">
+<p>Notice when you assign the imported DataFrame to a variable, Python does not
+produce any output on the screen. We can view the value of the <code>surveys_df</code>
+object by typing its name into the cell.</p>
+
+</div>
+</div>
+</div>
+<div class="cell border-box-sizing code_cell rendered">
+<div class="input">
+<div class="prompt input_prompt">In&nbsp;[9]:</div>
+<div class="inner_cell">
+    <div class="input_area">
+<div class=" highlight hl-ipython3"><pre><span></span><span class="n">surveys_df</span>
+</pre></div>
+
+    </div>
+</div>
+</div>
+
+<div class="output_wrapper">
+<div class="output">
+
+
+<div class="output_area">
+
+    <div class="prompt output_prompt">Out[9]:</div>
+
+
+
+<div class="output_html rendered_html output_subarea output_execute_result"><div>
+<style scoped>
+    .dataframe tbody tr th:only-of-type {
+        vertical-align: middle;
+    }
+
+    .dataframe tbody tr th {
+        vertical-align: top;
+    }
+
+    .dataframe thead th {
+        text-align: right;
+    }
+</style>
+<table border="1" class="dataframe">
+  <thead>
+    <tr style="text-align: right;">
+      <th></th>
+      <th>record_id</th>
+      <th>month</th>
+      <th>day</th>
+      <th>year</th>
+      <th>site_id</th>
+      <th>species_id</th>
+      <th>sex</th>
+      <th>hindfoot_length</th>
+      <th>weight</th>
+    </tr>
+  </thead>
+  <tbody>
+    <tr>
+      <th>0</th>
+      <td>1</td>
+      <td>7</td>
+      <td>16</td>
+      <td>1977</td>
+      <td>2</td>
+      <td>NL</td>
+      <td>M</td>
+      <td>32.0</td>
+      <td>NaN</td>
+    </tr>
+    <tr>
+      <th>1</th>
+      <td>2</td>
+      <td>7</td>
+      <td>16</td>
+      <td>1977</td>
+      <td>3</td>
+      <td>NL</td>
+      <td>M</td>
+      <td>33.0</td>
+      <td>NaN</td>
+    </tr>
+    <tr>
+      <th>2</th>
+      <td>3</td>
+      <td>7</td>
+      <td>16</td>
+      <td>1977</td>
+      <td>2</td>
+      <td>DM</td>
+      <td>F</td>
+      <td>37.0</td>
+      <td>NaN</td>
+    </tr>
+    <tr>
+      <th>3</th>
+      <td>4</td>
+      <td>7</td>
+      <td>16</td>
+      <td>1977</td>
+      <td>7</td>
+      <td>DM</td>
+      <td>M</td>
+      <td>36.0</td>
+      <td>NaN</td>
+    </tr>
+    <tr>
+      <th>4</th>
+      <td>5</td>
+      <td>7</td>
+      <td>16</td>
+      <td>1977</td>
+      <td>3</td>
+      <td>DM</td>
+      <td>M</td>
+      <td>35.0</td>
+      <td>NaN</td>
+    </tr>
+    <tr>
+      <th>...</th>
+      <td>...</td>
+      <td>...</td>
+      <td>...</td>
+      <td>...</td>
+      <td>...</td>
+      <td>...</td>
+      <td>...</td>
+      <td>...</td>
+      <td>...</td>
+    </tr>
+    <tr>
+      <th>35544</th>
+      <td>35545</td>
+      <td>12</td>
+      <td>31</td>
+      <td>2002</td>
+      <td>15</td>
+      <td>AH</td>
+      <td>NaN</td>
+      <td>NaN</td>
+      <td>NaN</td>
+    </tr>
+    <tr>
+      <th>35545</th>
+      <td>35546</td>
+      <td>12</td>
+      <td>31</td>
+      <td>2002</td>
+      <td>15</td>
+      <td>AH</td>
+      <td>NaN</td>
+      <td>NaN</td>
+      <td>NaN</td>
+    </tr>
+    <tr>
+      <th>35546</th>
+      <td>35547</td>
+      <td>12</td>
+      <td>31</td>
+      <td>2002</td>
+      <td>10</td>
+      <td>RM</td>
+      <td>F</td>
+      <td>15.0</td>
+      <td>14.0</td>
+    </tr>
+    <tr>
+      <th>35547</th>
+      <td>35548</td>
+      <td>12</td>
+      <td>31</td>
+      <td>2002</td>
+      <td>7</td>
+      <td>DO</td>
+      <td>M</td>
+      <td>36.0</td>
+      <td>51.0</td>
+    </tr>
+    <tr>
+      <th>35548</th>
+      <td>35549</td>
+      <td>12</td>
+      <td>31</td>
+      <td>2002</td>
+      <td>5</td>
+      <td>NaN</td>
+      <td>NaN</td>
+      <td>NaN</td>
+      <td>NaN</td>
+    </tr>
+  </tbody>
+</table>
+<p>35549 rows × 9 columns</p>
+</div></div>
+
+</div>
+
+</div>
+</div>
+
+</div>
+<div class="cell border-box-sizing text_cell rendered"><div class="prompt input_prompt">
+</div><div class="inner_cell">
+<div class="text_cell_render border-box-sizing rendered_html">
+<p>which prints contents like above.</p>
+
+</div>
+</div>
+</div>
+<div class="cell border-box-sizing text_cell rendered"><div class="prompt input_prompt">
+</div><div class="inner_cell">
+<div class="text_cell_render border-box-sizing rendered_html">
+<p>You can also select just a few rows, so it is easier to fit on one window, you can see that pandas has neatly formatted the data to fit our screen.</p>
+<p>Here, we will be using a function called <strong>head</strong>.</p>
+<p>The <code>head()</code> function displays the first several lines of a file. It is discussed below.</p>
+
+</div>
+</div>
+</div>
+<div class="cell border-box-sizing code_cell rendered">
+<div class="input">
+<div class="prompt input_prompt">In&nbsp;[10]:</div>
+<div class="inner_cell">
+    <div class="input_area">
+<div class=" highlight hl-ipython3"><pre><span></span><span class="n">surveys_df</span><span class="o">.</span><span class="n">head</span><span class="p">()</span>
+</pre></div>
+
+    </div>
+</div>
+</div>
+
+<div class="output_wrapper">
+<div class="output">
+
+
+<div class="output_area">
+
+    <div class="prompt output_prompt">Out[10]:</div>
+
+
+
+<div class="output_html rendered_html output_subarea output_execute_result"><div>
+<style scoped>
+    .dataframe tbody tr th:only-of-type {
+        vertical-align: middle;
+    }
+
+    .dataframe tbody tr th {
+        vertical-align: top;
+    }
+
+    .dataframe thead th {
+        text-align: right;
+    }
+</style>
+<table border="1" class="dataframe">
+  <thead>
+    <tr style="text-align: right;">
+      <th></th>
+      <th>record_id</th>
+      <th>month</th>
+      <th>day</th>
+      <th>year</th>
+      <th>site_id</th>
+      <th>species_id</th>
+      <th>sex</th>
+      <th>hindfoot_length</th>
+      <th>weight</th>
+    </tr>
+  </thead>
+  <tbody>
+    <tr>
+      <th>0</th>
+      <td>1</td>
+      <td>7</td>
+      <td>16</td>
+      <td>1977</td>
+      <td>2</td>
+      <td>NL</td>
+      <td>M</td>
+      <td>32.0</td>
+      <td>NaN</td>
+    </tr>
+    <tr>
+      <th>1</th>
+      <td>2</td>
+      <td>7</td>
+      <td>16</td>
+      <td>1977</td>
+      <td>3</td>
+      <td>NL</td>
+      <td>M</td>
+      <td>33.0</td>
+      <td>NaN</td>
+    </tr>
+    <tr>
+      <th>2</th>
+      <td>3</td>
+      <td>7</td>
+      <td>16</td>
+      <td>1977</td>
+      <td>2</td>
+      <td>DM</td>
+      <td>F</td>
+      <td>37.0</td>
+      <td>NaN</td>
+    </tr>
+    <tr>
+      <th>3</th>
+      <td>4</td>
+      <td>7</td>
+      <td>16</td>
+      <td>1977</td>
+      <td>7</td>
+      <td>DM</td>
+      <td>M</td>
+      <td>36.0</td>
+      <td>NaN</td>
+    </tr>
+    <tr>
+      <th>4</th>
+      <td>5</td>
+      <td>7</td>
+      <td>16</td>
+      <td>1977</td>
+      <td>3</td>
+      <td>DM</td>
+      <td>M</td>
+      <td>35.0</td>
+      <td>NaN</td>
+    </tr>
+  </tbody>
+</table>
+</div></div>
+
+</div>
+
+</div>
+</div>
+
+</div>
+<div class="cell border-box-sizing text_cell rendered"><div class="prompt input_prompt">
+</div><div class="inner_cell">
+<div class="text_cell_render border-box-sizing rendered_html">
+<h2 id="Exploring-Our-Species-Survey-Data">Exploring Our Species Survey Data<a class="anchor-link" href="#Exploring-Our-Species-Survey-Data">&#182;</a></h2><p>Again, we can use the <code>type</code> function to see what kind of thing <code>surveys_df</code> is:</p>
+
+</div>
+</div>
+</div>
+<div class="cell border-box-sizing code_cell rendered">
+<div class="input">
+<div class="prompt input_prompt">In&nbsp;[11]:</div>
+<div class="inner_cell">
+    <div class="input_area">
+<div class=" highlight hl-ipython3"><pre><span></span><span class="nb">type</span><span class="p">(</span><span class="n">surveys_df</span><span class="p">)</span>
+</pre></div>
+
+    </div>
+</div>
+</div>
+
+<div class="output_wrapper">
+<div class="output">
+
+
+<div class="output_area">
+
+    <div class="prompt output_prompt">Out[11]:</div>
+
+
+
+
+<div class="output_text output_subarea output_execute_result">
+<pre>pandas.core.frame.DataFrame</pre>
+</div>
+
+</div>
+
+</div>
+</div>
+
+</div>
+<div class="cell border-box-sizing text_cell rendered"><div class="prompt input_prompt">
+</div><div class="inner_cell">
+<div class="text_cell_render border-box-sizing rendered_html">
+<p>As expected, it's a DataFrame (or, to use the full name that Python uses to refer
+to it internally, a <code>pandas.core.frame.DataFrame</code>).</p>
+<p>What kind of things does <code>surveys_df</code> contain? DataFrames have an attribute
+called <code>dtypes</code> that answers this:</p>
+
+</div>
+</div>
+</div>
+<div class="cell border-box-sizing code_cell rendered">
+<div class="input">
+<div class="prompt input_prompt">In&nbsp;[12]:</div>
+<div class="inner_cell">
+    <div class="input_area">
+<div class=" highlight hl-ipython3"><pre><span></span><span class="n">surveys_df</span><span class="o">.</span><span class="n">dtypes</span>
+</pre></div>
+
+    </div>
+</div>
+</div>
+
+<div class="output_wrapper">
+<div class="output">
+
+
+<div class="output_area">
+
+    <div class="prompt output_prompt">Out[12]:</div>
+
+
+
+
+<div class="output_text output_subarea output_execute_result">
+<pre>record_id            int64
+month                int64
+day                  int64
+year                 int64
+site_id              int64
+species_id          object
+sex                 object
+hindfoot_length    float64
+weight             float64
+dtype: object</pre>
+</div>
+
+</div>
+
+</div>
+</div>
+
+</div>
+<div class="cell border-box-sizing text_cell rendered"><div class="prompt input_prompt">
+</div><div class="inner_cell">
+<div class="text_cell_render border-box-sizing rendered_html">
+<p>All the values in a single column have the same type. For example, months have type
+<code>int64</code>, which is a kind of integer. Cells in the month column cannot have
+fractional values, but the weight and hindfoot_length columns can, because they
+have type <code>float64</code>. The <code>object</code> type doesn't have a very helpful name, but in
+this case it represents strings (such as 'M' and 'F' in the case of sex).</p>
+<h3 id="Useful-Ways-to-View-DataFrame-objects-in-Python">Useful Ways to View DataFrame objects in Python<a class="anchor-link" href="#Useful-Ways-to-View-DataFrame-objects-in-Python">&#182;</a></h3><p>There are many ways to summarize and access the data stored in DataFrames,
+using attributes and methods provided by the DataFrame object.</p>
+<p>To access an attribute, use the DataFrame object name followed by the attribute
+name <code>df_object.attribute</code>. Using the DataFrame <code>surveys_df</code> and attribute
+<code>columns</code>, an index of all the column names in the DataFrame can be accessed
+with <code>surveys_df.columns</code>.</p>
+<p>Methods are called in a similar fashion using the syntax <code>df_object.method()</code>.
+As an example, <code>surveys_df.head()</code> gets the first few rows in the DataFrame
+<code>surveys_df</code> using <strong>the <code>head()</code> method</strong>. With a method, we can supply extra
+information in the parens to control behaviour.</p>
+<p>Let's look at the data using these.</p>
+
+</div>
+</div>
+</div>
+<div class="cell border-box-sizing text_cell rendered celltag_challenge"><div class="prompt input_prompt">
+</div><div class="inner_cell">
+<div class="text_cell_render border-box-sizing rendered_html">
+<h2 id="Challenge---DataFrames">Challenge - DataFrames<a class="anchor-link" href="#Challenge---DataFrames">&#182;</a></h2><p>Using our DataFrame <code>surveys_df</code>, try out the attributes &amp; methods below to see
+what they return.</p>
+<ol>
+<li><code>surveys_df.columns</code></li>
+<li><code>surveys_df.shape</code> Take note of the output of <code>shape</code> - what format does it
+return the shape of the DataFrame in?   HINT: <a href="https://docs.python.org/3/tutorial/datastructures.html#tuples-and-sequences">More on tuples, here</a>.</li>
+<li><code>surveys_df.head()</code> Also, what does <code>surveys_df.head(15)</code> do?</li>
+<li><code>surveys_df.tail()</code></li>
+</ol>
+
+</div>
+</div>
+</div>
+<div class="cell border-box-sizing text_cell rendered celltag_solution"><div class="prompt input_prompt">
+</div><div class="inner_cell">
+<div class="text_cell_render border-box-sizing rendered_html">
+<h2 id="Solution---DataFrames">Solution - DataFrames<a class="anchor-link" href="#Solution---DataFrames">&#182;</a></h2><p>... try it yourself !</p>
+
+</div>
+</div>
+</div>
+<div class="cell border-box-sizing text_cell rendered"><div class="prompt input_prompt">
+</div><div class="inner_cell">
+<div class="text_cell_render border-box-sizing rendered_html">
+<h1 id="Calculating-Statistics-From-Data">Calculating Statistics From Data<a class="anchor-link" href="#Calculating-Statistics-From-Data">&#182;</a></h1><p>We've read our data into Python. Next, let's perform some quick summary
+statistics to learn more about the data that we're working with. We might want
+to know how many animals were collected in each plot, or how many of each
+species were caught. We can perform summary stats quickly using groups. But
+first we need to figure out what we want to group by.</p>
+<p>Let's begin by exploring our data:</p>
+
+</div>
+</div>
+</div>
+<div class="cell border-box-sizing code_cell rendered">
+<div class="input">
+<div class="prompt input_prompt">In&nbsp;[13]:</div>
+<div class="inner_cell">
+    <div class="input_area">
+<div class=" highlight hl-ipython3"><pre><span></span><span class="c1"># Look at the column names</span>
+<span class="n">surveys_df</span><span class="o">.</span><span class="n">columns</span>
+</pre></div>
+
+    </div>
+</div>
+</div>
+
+<div class="output_wrapper">
+<div class="output">
+
+
+<div class="output_area">
+
+    <div class="prompt output_prompt">Out[13]:</div>
+
+
+
+
+<div class="output_text output_subarea output_execute_result">
+<pre>Index([&#39;record_id&#39;, &#39;month&#39;, &#39;day&#39;, &#39;year&#39;, &#39;site_id&#39;, &#39;species_id&#39;, &#39;sex&#39;,
+       &#39;hindfoot_length&#39;, &#39;weight&#39;],
+      dtype=&#39;object&#39;)</pre>
+</div>
+
+</div>
+
+</div>
+</div>
+
+</div>
+<div class="cell border-box-sizing text_cell rendered"><div class="prompt input_prompt">
+</div><div class="inner_cell">
+<div class="text_cell_render border-box-sizing rendered_html">
+<p>Let's get a list of all the species. The <code>pd.unique</code> function tells us all of
+the unique values in the <code>species_id</code> column.</p>
+
+</div>
+</div>
+</div>
+<div class="cell border-box-sizing code_cell rendered">
+<div class="input">
+<div class="prompt input_prompt">In&nbsp;[14]:</div>
+<div class="inner_cell">
+    <div class="input_area">
+<div class=" highlight hl-ipython3"><pre><span></span><span class="n">pd</span><span class="o">.</span><span class="n">unique</span><span class="p">(</span><span class="n">surveys_df</span><span class="p">[</span><span class="s1">&#39;species_id&#39;</span><span class="p">])</span>
+</pre></div>
+
+    </div>
+</div>
+</div>
+
+<div class="output_wrapper">
+<div class="output">
+
+
+<div class="output_area">
+
+    <div class="prompt output_prompt">Out[14]:</div>
+
+
+
+
+<div class="output_text output_subarea output_execute_result">
+<pre>array([&#39;NL&#39;, &#39;DM&#39;, &#39;PF&#39;, &#39;PE&#39;, &#39;DS&#39;, &#39;PP&#39;, &#39;SH&#39;, &#39;OT&#39;, &#39;DO&#39;, &#39;OX&#39;, &#39;SS&#39;,
+       &#39;OL&#39;, &#39;RM&#39;, nan, &#39;SA&#39;, &#39;PM&#39;, &#39;AH&#39;, &#39;DX&#39;, &#39;AB&#39;, &#39;CB&#39;, &#39;CM&#39;, &#39;CQ&#39;,
+       &#39;RF&#39;, &#39;PC&#39;, &#39;PG&#39;, &#39;PH&#39;, &#39;PU&#39;, &#39;CV&#39;, &#39;UR&#39;, &#39;UP&#39;, &#39;ZL&#39;, &#39;UL&#39;, &#39;CS&#39;,
+       &#39;SC&#39;, &#39;BA&#39;, &#39;SF&#39;, &#39;RO&#39;, &#39;AS&#39;, &#39;SO&#39;, &#39;PI&#39;, &#39;ST&#39;, &#39;CU&#39;, &#39;SU&#39;, &#39;RX&#39;,
+       &#39;PB&#39;, &#39;PL&#39;, &#39;PX&#39;, &#39;CT&#39;, &#39;US&#39;], dtype=object)</pre>
+</div>
+
+</div>
+
+</div>
+</div>
+
+</div>
+<div class="cell border-box-sizing text_cell rendered celltag_challenge"><div class="prompt input_prompt">
+</div><div class="inner_cell">
+<div class="text_cell_render border-box-sizing rendered_html">
+<h2 id="Challenge---Statistics">Challenge - Statistics<a class="anchor-link" href="#Challenge---Statistics">&#182;</a></h2><ol>
+<li><p>Create a list of unique site ID's found in the surveys data. Call it
+<code>site_names</code>. How many unique sites are there in the data? How many unique
+species are in the data?</p>
+</li>
+<li><p>What is the difference between <code>len(site_names)</code> and <code>surveys_df['site_id'].nunique()</code>?</p>
+</li>
+</ol>
+
+</div>
+</div>
+</div>
+<div class="cell border-box-sizing text_cell rendered celltag_solution"><div class="prompt input_prompt">
+</div><div class="inner_cell">
+<div class="text_cell_render border-box-sizing rendered_html">
+<h2 id="Solution---Statistics">Solution - Statistics<a class="anchor-link" href="#Solution---Statistics">&#182;</a></h2>
+</div>
+</div>
+</div>
+<div class="cell border-box-sizing code_cell rendered celltag_solution">
+<div class="input">
+<div class="prompt input_prompt">In&nbsp;[15]:</div>
+<div class="inner_cell">
+    <div class="input_area">
+<div class=" highlight hl-ipython3"><pre><span></span><span class="n">site_names</span> <span class="o">=</span> <span class="n">pd</span><span class="o">.</span><span class="n">unique</span><span class="p">(</span><span class="n">surveys_df</span><span class="p">[</span><span class="s1">&#39;site_id&#39;</span><span class="p">])</span>
+<span class="nb">print</span><span class="p">(</span><span class="nb">len</span><span class="p">(</span><span class="n">site_names</span><span class="p">),</span> <span class="n">surveys_df</span><span class="p">[</span><span class="s1">&#39;site_id&#39;</span><span class="p">]</span><span class="o">.</span><span class="n">nunique</span><span class="p">())</span>
+</pre></div>
+
+    </div>
+</div>
+</div>
+
+<div class="output_wrapper">
+<div class="output">
+
+
+<div class="output_area">
+
+    <div class="prompt"></div>
+
+
+<div class="output_subarea output_stream output_stdout output_text">
+<pre>24 24
+</pre>
+</div>
+</div>
+
+</div>
+</div>
+
+</div>
+<div class="cell border-box-sizing text_cell rendered"><div class="prompt input_prompt">
+</div><div class="inner_cell">
+<div class="text_cell_render border-box-sizing rendered_html">
+<h1 id="Groups-in-Pandas">Groups in Pandas<a class="anchor-link" href="#Groups-in-Pandas">&#182;</a></h1><p>We often want to calculate summary statistics grouped by subsets or attributes
+within fields of our data. For example, we might want to calculate the average
+weight of all individuals per site.</p>
+<p>We can calculate basic statistics for all records in a single column using the
+syntax below:</p>
+
+</div>
+</div>
+</div>
+<div class="cell border-box-sizing code_cell rendered">
+<div class="input">
+<div class="prompt input_prompt">In&nbsp;[16]:</div>
+<div class="inner_cell">
+    <div class="input_area">
+<div class=" highlight hl-ipython3"><pre><span></span><span class="n">surveys_df</span><span class="p">[</span><span class="s1">&#39;weight&#39;</span><span class="p">]</span><span class="o">.</span><span class="n">describe</span><span class="p">()</span>
+</pre></div>
+
+    </div>
+</div>
+</div>
+
+<div class="output_wrapper">
+<div class="output">
+
+
+<div class="output_area">
+
+    <div class="prompt output_prompt">Out[16]:</div>
+
+
+
+
+<div class="output_text output_subarea output_execute_result">
+<pre>count    32283.000000
+mean        42.672428
+std         36.631259
+min          4.000000
+25%         20.000000
+50%         37.000000
+75%         48.000000
+max        280.000000
+Name: weight, dtype: float64</pre>
+</div>
+
+</div>
+
+</div>
+</div>
+
+</div>
+<div class="cell border-box-sizing text_cell rendered"><div class="prompt input_prompt">
+</div><div class="inner_cell">
+<div class="text_cell_render border-box-sizing rendered_html">
+<p>We can also extract one specific metric if we wish:</p>
+
+</div>
+</div>
+</div>
+<div class="cell border-box-sizing code_cell rendered">
+<div class="input">
+<div class="prompt input_prompt">In&nbsp;[17]:</div>
+<div class="inner_cell">
+    <div class="input_area">
+<div class=" highlight hl-ipython3"><pre><span></span><span class="n">surveys_df</span><span class="p">[</span><span class="s1">&#39;weight&#39;</span><span class="p">]</span><span class="o">.</span><span class="n">min</span><span class="p">()</span>
+<span class="n">surveys_df</span><span class="p">[</span><span class="s1">&#39;weight&#39;</span><span class="p">]</span><span class="o">.</span><span class="n">max</span><span class="p">()</span>
+<span class="n">surveys_df</span><span class="p">[</span><span class="s1">&#39;weight&#39;</span><span class="p">]</span><span class="o">.</span><span class="n">mean</span><span class="p">()</span>
+<span class="n">surveys_df</span><span class="p">[</span><span class="s1">&#39;weight&#39;</span><span class="p">]</span><span class="o">.</span><span class="n">std</span><span class="p">()</span>
+<span class="c1"># only the last command shows output below - you can try the others above in new cells</span>
+<span class="n">surveys_df</span><span class="p">[</span><span class="s1">&#39;weight&#39;</span><span class="p">]</span><span class="o">.</span><span class="n">count</span><span class="p">()</span>
+</pre></div>
+
+    </div>
+</div>
+</div>
+
+<div class="output_wrapper">
+<div class="output">
+
+
+<div class="output_area">
+
+    <div class="prompt output_prompt">Out[17]:</div>
+
+
+
+
+<div class="output_text output_subarea output_execute_result">
+<pre>32283</pre>
+</div>
+
+</div>
+
+</div>
+</div>
+
+</div>
+<div class="cell border-box-sizing text_cell rendered"><div class="prompt input_prompt">
+</div><div class="inner_cell">
+<div class="text_cell_render border-box-sizing rendered_html">
+<p>But if we want to summarize by one or more variables, for example sex, we can
+use <strong>Pandas' <code>.groupby</code> method</strong>. Once we've created a groupby DataFrame, we
+can quickly calculate summary statistics by a group of our choice.</p>
+
+</div>
+</div>
+</div>
+<div class="cell border-box-sizing code_cell rendered">
+<div class="input">
+<div class="prompt input_prompt">In&nbsp;[18]:</div>
+<div class="inner_cell">
+    <div class="input_area">
+<div class=" highlight hl-ipython3"><pre><span></span><span class="c1"># Group data by sex</span>
+<span class="n">grouped_data</span> <span class="o">=</span> <span class="n">surveys_df</span><span class="o">.</span><span class="n">groupby</span><span class="p">(</span><span class="s1">&#39;sex&#39;</span><span class="p">)</span>
+</pre></div>
+
+    </div>
+</div>
+</div>
+
+</div>
+<div class="cell border-box-sizing text_cell rendered"><div class="prompt input_prompt">
+</div><div class="inner_cell">
+<div class="text_cell_render border-box-sizing rendered_html">
+<p>The <strong>pandas function <code>describe</code></strong> will return descriptive stats including: mean,
+median, max, min, std and count for a particular column in the data. <strong>Note</strong> Pandas'
+<code>describe</code> function will only return summary values for columns containing
+numeric data.</p>
+
+</div>
+</div>
+</div>
+<div class="cell border-box-sizing code_cell rendered">
+<div class="input">
+<div class="prompt input_prompt">In&nbsp;[21]:</div>
+<div class="inner_cell">
+    <div class="input_area">
+<div class=" highlight hl-ipython3"><pre><span></span><span class="c1"># Summary statistics for all numeric columns by sex</span>
+<span class="n">grouped_data</span><span class="o">.</span><span class="n">describe</span><span class="p">()</span>
+
+<span class="c1"># Provide the mean for each numeric column by sex</span>
+<span class="c1"># As above, only the last command shows output below - you can try the others above in new cells</span>
+<span class="n">grouped_data</span><span class="o">.</span><span class="n">mean</span><span class="p">()</span>
+</pre></div>
+
+    </div>
+</div>
+</div>
+
+<div class="output_wrapper">
+<div class="output">
+
+
+<div class="output_area">
+
+    <div class="prompt output_prompt">Out[21]:</div>
+
+
+
+<div class="output_html rendered_html output_subarea output_execute_result"><div>
+<style scoped>
+    .dataframe tbody tr th:only-of-type {
+        vertical-align: middle;
+    }
+
+    .dataframe tbody tr th {
+        vertical-align: top;
+    }
+
+    .dataframe thead th {
+        text-align: right;
+    }
+</style>
+<table border="1" class="dataframe">
+  <thead>
+    <tr style="text-align: right;">
+      <th></th>
+      <th>record_id</th>
+      <th>month</th>
+      <th>day</th>
+      <th>year</th>
+      <th>site_id</th>
+      <th>hindfoot_length</th>
+      <th>weight</th>
+    </tr>
+    <tr>
+      <th>sex</th>
+      <th></th>
+      <th></th>
+      <th></th>
+      <th></th>
+      <th></th>
+      <th></th>
+      <th></th>
+    </tr>
+  </thead>
+  <tbody>
+    <tr>
+      <th>F</th>
+      <td>18036.412046</td>
+      <td>6.583047</td>
+      <td>16.007138</td>
+      <td>1990.644997</td>
+      <td>11.440854</td>
+      <td>28.836780</td>
+      <td>42.170555</td>
+    </tr>
+    <tr>
+      <th>M</th>
+      <td>17754.835601</td>
+      <td>6.392668</td>
+      <td>16.184286</td>
+      <td>1990.480401</td>
+      <td>11.098282</td>
+      <td>29.709578</td>
+      <td>42.995379</td>
+    </tr>
+  </tbody>
+</table>
+</div></div>
+
+</div>
+
+</div>
+</div>
+
+</div>
+<div class="cell border-box-sizing text_cell rendered"><div class="prompt input_prompt">
+</div><div class="inner_cell">
+<div class="text_cell_render border-box-sizing rendered_html">
+<p>The <code>groupby</code> command is powerful in that it allows us to quickly generate
+summary stats.</p>
+
+</div>
+</div>
+</div>
+<div class="cell border-box-sizing text_cell rendered celltag_challenge"><div class="prompt input_prompt">
+</div><div class="inner_cell">
+<div class="text_cell_render border-box-sizing rendered_html">
+<h2 id="Challenge---Summary-Data">Challenge - Summary Data<a class="anchor-link" href="#Challenge---Summary-Data">&#182;</a></h2><ol>
+<li>How many recorded individuals are female <code>F</code> and how many male <code>M</code><ul>
+<li>A) 17348 and 15690</li>
+<li>B) 14894 and 16476</li>
+<li>C) 15303 and 16879</li>
+<li>D) 15690 and 17348</li>
+</ul>
+</li>
+</ol>
+<ol>
+<li>What happens when you group by two columns using the following syntax and
+ then grab mean values:<ul>
+<li><code>grouped_data2 = surveys_df.groupby(['site_id','sex'])</code></li>
+<li><code>grouped_data2.mean()</code></li>
+</ul>
+</li>
+</ol>
+<ol>
+<li>Summarize weight values for each site in your data. HINT: you can use the
+following syntax to only create summary statistics for one column in your data
+<code>by_site['weight'].describe()</code></li>
+</ol>
+
+</div>
+</div>
+</div>
+<div class="cell border-box-sizing text_cell rendered celltag_solution"><div class="prompt input_prompt">
+</div><div class="inner_cell">
+<div class="text_cell_render border-box-sizing rendered_html">
+<h2 id="Solution--Summary-Data">Solution- Summary Data<a class="anchor-link" href="#Solution--Summary-Data">&#182;</a></h2>
+</div>
+</div>
+</div>
+<div class="cell border-box-sizing code_cell rendered celltag_solution">
+<div class="input">
+<div class="prompt input_prompt">In&nbsp;[22]:</div>
+<div class="inner_cell">
+    <div class="input_area">
+<div class=" highlight hl-ipython3"><pre><span></span><span class="c1">## Solution Challenge 1</span>
+<span class="n">grouped_data</span><span class="o">.</span><span class="n">count</span><span class="p">()</span>
+</pre></div>
+
+    </div>
+</div>
+</div>
+
+<div class="output_wrapper">
+<div class="output">
+
+
+<div class="output_area">
+
+    <div class="prompt output_prompt">Out[22]:</div>
+
+
+
+<div class="output_html rendered_html output_subarea output_execute_result"><div>
+<style scoped>
+    .dataframe tbody tr th:only-of-type {
+        vertical-align: middle;
+    }
+
+    .dataframe tbody tr th {
+        vertical-align: top;
+    }
+
+    .dataframe thead th {
+        text-align: right;
+    }
+</style>
+<table border="1" class="dataframe">
+  <thead>
+    <tr style="text-align: right;">
+      <th></th>
+      <th>record_id</th>
+      <th>month</th>
+      <th>day</th>
+      <th>year</th>
+      <th>site_id</th>
+      <th>species_id</th>
+      <th>hindfoot_length</th>
+      <th>weight</th>
+    </tr>
+    <tr>
+      <th>sex</th>
+      <th></th>
+      <th></th>
+      <th></th>
+      <th></th>
+      <th></th>
+      <th></th>
+      <th></th>
+      <th></th>
+    </tr>
+  </thead>
+  <tbody>
+    <tr>
+      <th>F</th>
+      <td>15690</td>
+      <td>15690</td>
+      <td>15690</td>
+      <td>15690</td>
+      <td>15690</td>
+      <td>15690</td>
+      <td>14894</td>
+      <td>15303</td>
+    </tr>
+    <tr>
+      <th>M</th>
+      <td>17348</td>
+      <td>17348</td>
+      <td>17348</td>
+      <td>17348</td>
+      <td>17348</td>
+      <td>17348</td>
+      <td>16476</td>
+      <td>16879</td>
+    </tr>
+  </tbody>
+</table>
+</div></div>
+
+</div>
+
+</div>
+</div>
+
+</div>
+<div class="cell border-box-sizing text_cell rendered celltag_solution"><div class="prompt input_prompt">
+</div><div class="inner_cell">
+<div class="text_cell_render border-box-sizing rendered_html">
+<h3 id="Solution---Challenge-2">Solution - Challenge 2<a class="anchor-link" href="#Solution---Challenge-2">&#182;</a></h3><p>The mean value for each combination of site and sex is calculated. Remark that the 
+mean does not make sense for each variable, so you can specify this column-wise: 
+e.g. I want to know the last survey year, median foot-length and mean weight for each site/sex combination:</p>
+
+</div>
+</div>
+</div>
+<div class="cell border-box-sizing code_cell rendered celltag_solution">
+<div class="input">
+<div class="prompt input_prompt">In&nbsp;[23]:</div>
+<div class="inner_cell">
+    <div class="input_area">
+<div class=" highlight hl-ipython3"><pre><span></span><span class="c1"># Solution- Challenge 3</span>
+<span class="n">surveys_df</span><span class="o">.</span><span class="n">groupby</span><span class="p">([</span><span class="s1">&#39;site_id&#39;</span><span class="p">])[</span><span class="s1">&#39;weight&#39;</span><span class="p">]</span><span class="o">.</span><span class="n">describe</span><span class="p">()</span>
+</pre></div>
+
+    </div>
+</div>
+</div>
+
+<div class="output_wrapper">
+<div class="output">
+
+
+<div class="output_area">
+
+    <div class="prompt output_prompt">Out[23]:</div>
+
+
+
+<div class="output_html rendered_html output_subarea output_execute_result"><div>
+<style scoped>
+    .dataframe tbody tr th:only-of-type {
+        vertical-align: middle;
+    }
+
+    .dataframe tbody tr th {
+        vertical-align: top;
+    }
+
+    .dataframe thead th {
+        text-align: right;
+    }
+</style>
+<table border="1" class="dataframe">
+  <thead>
+    <tr style="text-align: right;">
+      <th></th>
+      <th>count</th>
+      <th>mean</th>
+      <th>std</th>
+      <th>min</th>
+      <th>25%</th>
+      <th>50%</th>
+      <th>75%</th>
+      <th>max</th>
+    </tr>
+    <tr>
+      <th>site_id</th>
+      <th></th>
+      <th></th>
+      <th></th>
+      <th></th>
+      <th></th>
+      <th></th>
+      <th></th>
+      <th></th>
+    </tr>
+  </thead>
+  <tbody>
+    <tr>
+      <th>1</th>
+      <td>1903.0</td>
+      <td>51.822911</td>
+      <td>38.176670</td>
+      <td>4.0</td>
+      <td>30.0</td>
+      <td>44.0</td>
+      <td>53.0</td>
+      <td>231.0</td>
+    </tr>
+    <tr>
+      <th>2</th>
+      <td>2074.0</td>
+      <td>52.251688</td>
+      <td>46.503602</td>
+      <td>5.0</td>
+      <td>24.0</td>
+      <td>41.0</td>
+      <td>50.0</td>
+      <td>278.0</td>
+    </tr>
+    <tr>
+      <th>3</th>
+      <td>1710.0</td>
+      <td>32.654386</td>
+      <td>35.641630</td>
+      <td>4.0</td>
+      <td>14.0</td>
+      <td>23.0</td>
+      <td>36.0</td>
+      <td>250.0</td>
+    </tr>
+    <tr>
+      <th>4</th>
+      <td>1866.0</td>
+      <td>47.928189</td>
+      <td>32.886598</td>
+      <td>4.0</td>
+      <td>30.0</td>
+      <td>43.0</td>
+      <td>50.0</td>
+      <td>200.0</td>
+    </tr>
+    <tr>
+      <th>5</th>
+      <td>1092.0</td>
+      <td>40.947802</td>
+      <td>34.086616</td>
+      <td>5.0</td>
+      <td>21.0</td>
+      <td>37.0</td>
+      <td>48.0</td>
+      <td>248.0</td>
+    </tr>
+    <tr>
+      <th>6</th>
+      <td>1463.0</td>
+      <td>36.738893</td>
+      <td>30.648310</td>
+      <td>5.0</td>
+      <td>18.0</td>
+      <td>30.0</td>
+      <td>45.0</td>
+      <td>243.0</td>
+    </tr>
+    <tr>
+      <th>7</th>
+      <td>638.0</td>
+      <td>20.663009</td>
+      <td>21.315325</td>
+      <td>4.0</td>
+      <td>11.0</td>
+      <td>17.0</td>
+      <td>23.0</td>
+      <td>235.0</td>
+    </tr>
+    <tr>
+      <th>8</th>
+      <td>1781.0</td>
+      <td>47.758001</td>
+      <td>33.192194</td>
+      <td>5.0</td>
+      <td>26.0</td>
+      <td>44.0</td>
+      <td>51.0</td>
+      <td>178.0</td>
+    </tr>
+    <tr>
+      <th>9</th>
+      <td>1811.0</td>
+      <td>51.432358</td>
+      <td>33.724726</td>
+      <td>6.0</td>
+      <td>36.0</td>
+      <td>45.0</td>
+      <td>50.0</td>
+      <td>275.0</td>
+    </tr>
+    <tr>
+      <th>10</th>
+      <td>279.0</td>
+      <td>18.541219</td>
+      <td>20.290806</td>
+      <td>4.0</td>
+      <td>10.0</td>
+      <td>12.0</td>
+      <td>21.0</td>
+      <td>237.0</td>
+    </tr>
+    <tr>
+      <th>11</th>
+      <td>1793.0</td>
+      <td>43.451757</td>
+      <td>28.975514</td>
+      <td>5.0</td>
+      <td>26.0</td>
+      <td>42.0</td>
+      <td>48.0</td>
+      <td>212.0</td>
+    </tr>
+    <tr>
+      <th>12</th>
+      <td>2219.0</td>
+      <td>49.496169</td>
+      <td>41.630035</td>
+      <td>6.0</td>
+      <td>26.0</td>
+      <td>42.0</td>
+      <td>50.0</td>
+      <td>280.0</td>
+    </tr>
+    <tr>
+      <th>13</th>
+      <td>1371.0</td>
+      <td>40.445660</td>
+      <td>34.042767</td>
+      <td>5.0</td>
+      <td>20.5</td>
+      <td>33.0</td>
+      <td>45.0</td>
+      <td>241.0</td>
+    </tr>
+    <tr>
+      <th>14</th>
+      <td>1728.0</td>
+      <td>46.277199</td>
+      <td>27.570389</td>
+      <td>5.0</td>
+      <td>36.0</td>
+      <td>44.0</td>
+      <td>49.0</td>
+      <td>222.0</td>
+    </tr>
+    <tr>
+      <th>15</th>
+      <td>869.0</td>
+      <td>27.042578</td>
+      <td>35.178142</td>
+      <td>4.0</td>
+      <td>11.0</td>
+      <td>18.0</td>
+      <td>26.0</td>
+      <td>259.0</td>
+    </tr>
+    <tr>
+      <th>16</th>
+      <td>480.0</td>
+      <td>24.585417</td>
+      <td>17.682334</td>
+      <td>4.0</td>
+      <td>12.0</td>
+      <td>20.0</td>
+      <td>34.0</td>
+      <td>158.0</td>
+    </tr>
+    <tr>
+      <th>17</th>
+      <td>1893.0</td>
+      <td>47.889593</td>
+      <td>35.802399</td>
+      <td>4.0</td>
+      <td>27.0</td>
+      <td>42.0</td>
+      <td>50.0</td>
+      <td>216.0</td>
+    </tr>
+    <tr>
+      <th>18</th>
+      <td>1351.0</td>
+      <td>40.005922</td>
+      <td>38.480856</td>
+      <td>5.0</td>
+      <td>17.5</td>
+      <td>30.0</td>
+      <td>44.0</td>
+      <td>256.0</td>
+    </tr>
+    <tr>
+      <th>19</th>
+      <td>1084.0</td>
+      <td>21.105166</td>
+      <td>13.269840</td>
+      <td>4.0</td>
+      <td>11.0</td>
+      <td>19.0</td>
+      <td>27.0</td>
+      <td>139.0</td>
+    </tr>
+    <tr>
+      <th>20</th>
+      <td>1222.0</td>
+      <td>48.665303</td>
+      <td>50.111539</td>
+      <td>5.0</td>
+      <td>17.0</td>
+      <td>31.0</td>
+      <td>47.0</td>
+      <td>223.0</td>
+    </tr>
+    <tr>
+      <th>21</th>
+      <td>1029.0</td>
+      <td>24.627794</td>
+      <td>21.199819</td>
+      <td>4.0</td>
+      <td>10.0</td>
+      <td>22.0</td>
+      <td>31.0</td>
+      <td>190.0</td>
+    </tr>
+    <tr>
+      <th>22</th>
+      <td>1298.0</td>
+      <td>54.146379</td>
+      <td>38.743967</td>
+      <td>5.0</td>
+      <td>29.0</td>
+      <td>42.0</td>
+      <td>54.0</td>
+      <td>212.0</td>
+    </tr>
+    <tr>
+      <th>23</th>
+      <td>369.0</td>
+      <td>19.634146</td>
+      <td>18.382678</td>
+      <td>4.0</td>
+      <td>10.0</td>
+      <td>14.0</td>
+      <td>23.0</td>
+      <td>199.0</td>
+    </tr>
+    <tr>
+      <th>24</th>
+      <td>960.0</td>
+      <td>43.679167</td>
+      <td>45.936588</td>
+      <td>4.0</td>
+      <td>19.0</td>
+      <td>27.5</td>
+      <td>45.0</td>
+      <td>251.0</td>
+    </tr>
+  </tbody>
+</table>
+</div></div>
+
+</div>
+
+</div>
+</div>
+
+</div>
+<div class="cell border-box-sizing text_cell rendered celltag_solution"><div class="prompt input_prompt">
+</div><div class="inner_cell">
+<div class="text_cell_render border-box-sizing rendered_html">
+<h2 id="Did-you-get-%233-right?">Did you get #3 right?<a class="anchor-link" href="#Did-you-get-%233-right?">&#182;</a></h2><p><strong>A Snippet of the Output from part 3 of the challenge looks like:</strong></p>
+
+<pre><code>    site_id
+    1     count    1903.000000
+          mean       51.822911
+          std        38.176670
+          min         4.000000
+          25%        30.000000
+          50%        44.000000
+          75%        53.000000
+          max       231.000000
+         ...</code></pre>
+
+</div>
+</div>
+</div>
+<div class="cell border-box-sizing text_cell rendered"><div class="prompt input_prompt">
+</div><div class="inner_cell">
+<div class="text_cell_render border-box-sizing rendered_html">
+<h2 id="Quickly-Creating-Summary-Counts-in-Pandas">Quickly Creating Summary Counts in Pandas<a class="anchor-link" href="#Quickly-Creating-Summary-Counts-in-Pandas">&#182;</a></h2><p>Let's next count the number of samples for each species. We can do this in a few
+ways, but we'll use <code>groupby</code> combined with <strong>a <code>count()</code> method</strong>.</p>
+
+</div>
+</div>
+</div>
+<div class="cell border-box-sizing code_cell rendered">
+<div class="input">
+<div class="prompt input_prompt">In&nbsp;[24]:</div>
+<div class="inner_cell">
+    <div class="input_area">
+<div class=" highlight hl-ipython3"><pre><span></span><span class="c1"># Count the number of samples by species</span>
+<span class="n">species_counts</span> <span class="o">=</span> <span class="n">surveys_df</span><span class="o">.</span><span class="n">groupby</span><span class="p">(</span><span class="s1">&#39;species_id&#39;</span><span class="p">)[</span><span class="s1">&#39;record_id&#39;</span><span class="p">]</span><span class="o">.</span><span class="n">count</span><span class="p">()</span>
+<span class="nb">print</span><span class="p">(</span><span class="n">species_counts</span><span class="p">)</span>
+</pre></div>
+
+    </div>
+</div>
+</div>
+
+<div class="output_wrapper">
+<div class="output">
+
+
+<div class="output_area">
+
+    <div class="prompt"></div>
+
+
+<div class="output_subarea output_stream output_stdout output_text">
+<pre>species_id
+AB      303
+AH      437
+AS        2
+BA       46
+CB       50
+CM       13
+CQ       16
+CS        1
+CT        1
+CU        1
+CV        1
+DM    10596
+DO     3027
+DS     2504
+DX       40
+NL     1252
+OL     1006
+OT     2249
+OX       12
+PB     2891
+PC       39
+PE     1299
+PF     1597
+PG        8
+PH       32
+PI        9
+PL       36
+PM      899
+PP     3123
+PU        5
+PX        6
+RF       75
+RM     2609
+RO        8
+RX        2
+SA       75
+SC        1
+SF       43
+SH      147
+SO       43
+SS      248
+ST        1
+SU        5
+UL        4
+UP        8
+UR       10
+US        4
+ZL        2
+Name: record_id, dtype: int64
+</pre>
+</div>
+</div>
+
+</div>
+</div>
+
+</div>
+<div class="cell border-box-sizing text_cell rendered"><div class="prompt input_prompt">
+</div><div class="inner_cell">
+<div class="text_cell_render border-box-sizing rendered_html">
+<p>Or, we can also count just the rows that have the species "DO":</p>
+
+</div>
+</div>
+</div>
+<div class="cell border-box-sizing code_cell rendered">
+<div class="input">
+<div class="prompt input_prompt">In&nbsp;[25]:</div>
+<div class="inner_cell">
+    <div class="input_area">
+<div class=" highlight hl-ipython3"><pre><span></span><span class="n">surveys_df</span><span class="o">.</span><span class="n">groupby</span><span class="p">(</span><span class="s1">&#39;species_id&#39;</span><span class="p">)[</span><span class="s1">&#39;record_id&#39;</span><span class="p">]</span><span class="o">.</span><span class="n">count</span><span class="p">()[</span><span class="s1">&#39;DO&#39;</span><span class="p">]</span>
+</pre></div>
+
+    </div>
+</div>
+</div>
+
+<div class="output_wrapper">
+<div class="output">
+
+
+<div class="output_area">
+
+    <div class="prompt output_prompt">Out[25]:</div>
+
+
+
+
+<div class="output_text output_subarea output_execute_result">
+<pre>3027</pre>
+</div>
+
+</div>
+
+</div>
+</div>
+
+</div>
+<div class="cell border-box-sizing text_cell rendered"><div class="prompt input_prompt">
+</div><div class="inner_cell">
+<div class="text_cell_render border-box-sizing rendered_html">
+<h2 id="Basic-Math-Functions">Basic Math Functions<a class="anchor-link" href="#Basic-Math-Functions">&#182;</a></h2><p>If we wanted to, we could perform math on an entire column of our data. For
+example let's multiply all weight values by 2. A more practical use of this might
+be to normalize the data according to a mean, area, or some other value
+calculated from our data.</p>
+
+</div>
+</div>
+</div>
+<div class="cell border-box-sizing code_cell rendered">
+<div class="input">
+<div class="prompt input_prompt">In&nbsp;[27]:</div>
+<div class="inner_cell">
+    <div class="input_area">
+<div class=" highlight hl-ipython3"><pre><span></span><span class="c1"># Multiply all weight values by 2 but does not change the original weight data</span>
+<span class="n">surveys_df</span><span class="p">[</span><span class="s1">&#39;weight&#39;</span><span class="p">]</span><span class="o">*</span><span class="mi">2</span>
+</pre></div>
+
+    </div>
+</div>
+</div>
+
+<div class="output_wrapper">
+<div class="output">
+
+
+<div class="output_area">
+
+    <div class="prompt output_prompt">Out[27]:</div>
+
+
+
+
+<div class="output_text output_subarea output_execute_result">
+<pre>0          NaN
+1          NaN
+2          NaN
+3          NaN
+4          NaN
+         ...  
+35544      NaN
+35545      NaN
+35546     28.0
+35547    102.0
+35548      NaN
+Name: weight, Length: 35549, dtype: float64</pre>
+</div>
+
+</div>
+
+</div>
+</div>
+
+</div>
+<div class="cell border-box-sizing text_cell rendered"><div class="prompt input_prompt">
+</div><div class="inner_cell">
+<div class="text_cell_render border-box-sizing rendered_html">
+<h2 id="Quick-&amp;-Easy-Plotting-Data-Using-Pandas">Quick &amp; Easy Plotting Data Using Pandas<a class="anchor-link" href="#Quick-&amp;-Easy-Plotting-Data-Using-Pandas">&#182;</a></h2><p>We can plot our summary stats using Pandas, too.</p>
+
+</div>
+</div>
+</div>
+<div class="cell border-box-sizing code_cell rendered">
+<div class="input">
+<div class="prompt input_prompt">In&nbsp;[28]:</div>
+<div class="inner_cell">
+    <div class="input_area">
+<div class=" highlight hl-ipython3"><pre><span></span><span class="c1">## To make sure figures appear inside Jupyter Notebook</span>
+<span class="o">%</span><span class="k">matplotlib</span> inline
+
+<span class="c1"># Create a quick bar chart</span>
+<span class="n">species_counts</span><span class="o">.</span><span class="n">plot</span><span class="p">(</span><span class="n">kind</span><span class="o">=</span><span class="s1">&#39;bar&#39;</span><span class="p">)</span>
+</pre></div>
+
+    </div>
+</div>
+</div>
+
+<div class="output_wrapper">
+<div class="output">
+
+
+<div class="output_area">
+
+    <div class="prompt output_prompt">Out[28]:</div>
+
+
+
+
+<div class="output_text output_subarea output_execute_result">
+<pre>&lt;AxesSubplot:xlabel=&#39;species_id&#39;&gt;</pre>
+</div>
+
+</div>
+
+<div class="output_area">
+
+    <div class="prompt"></div>
+
+
+
+
+<div class="output_png output_subarea ">
+<img src="data:image/png;base64,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
+"
+>
+</div>
+
+</div>
+
+</div>
+</div>
+
+</div>
+<div class="cell border-box-sizing text_cell rendered"><div class="prompt input_prompt">
+</div><div class="inner_cell">
+<div class="text_cell_render border-box-sizing rendered_html">
+<h4 id="Animals-per-site-plot">Animals per site plot<a class="anchor-link" href="#Animals-per-site-plot">&#182;</a></h4><p>We can also look at how many animals were captured in each site.</p>
+
+</div>
+</div>
+</div>
+<div class="cell border-box-sizing code_cell rendered">
+<div class="input">
+<div class="prompt input_prompt">In&nbsp;[29]:</div>
+<div class="inner_cell">
+    <div class="input_area">
+<div class=" highlight hl-ipython3"><pre><span></span><span class="n">total_count</span> <span class="o">=</span> <span class="n">surveys_df</span><span class="o">.</span><span class="n">groupby</span><span class="p">(</span><span class="s1">&#39;site_id&#39;</span><span class="p">)[</span><span class="s1">&#39;record_id&#39;</span><span class="p">]</span><span class="o">.</span><span class="n">nunique</span><span class="p">()</span>
+<span class="c1"># Let&#39;s plot that too</span>
+<span class="n">total_count</span><span class="o">.</span><span class="n">plot</span><span class="p">(</span><span class="n">kind</span><span class="o">=</span><span class="s1">&#39;bar&#39;</span><span class="p">)</span>
+</pre></div>
+
+    </div>
+</div>
+</div>
+
+<div class="output_wrapper">
+<div class="output">
+
+
+<div class="output_area">
+
+    <div class="prompt output_prompt">Out[29]:</div>
+
+
+
+
+<div class="output_text output_subarea output_execute_result">
+<pre>&lt;AxesSubplot:xlabel=&#39;site_id&#39;&gt;</pre>
+</div>
+
+</div>
+
+<div class="output_area">
+
+    <div class="prompt"></div>
+
+
+
+
+<div class="output_png output_subarea ">
+<img src="data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAAX0AAAEKCAYAAAD+XoUoAAAAOXRFWHRTb2Z0d2FyZQBNYXRwbG90bGliIHZlcnNpb24zLjQuMiwgaHR0cHM6Ly9tYXRwbG90bGliLm9yZy8rg+JYAAAACXBIWXMAAAsTAAALEwEAmpwYAAAT9ElEQVR4nO3de9BcdX3H8feXBGmQi0DCNWAYG0XAEiVGpmrF4mC8ghYqaAEdalpEoF6mBrUFHVNDq7RWC2MUBFREvCCoXI1StEVCwEi41hQCZIgQxQvUDpXw7R/nF93Z7J7nefZ5srn83q+ZM3v2d873nLO3z5797dmzkZlIkuqw1cbeAEnS8Bj6klQRQ1+SKmLoS1JFDH1JqoihL0kVmbyxN2AkU6dOzRkzZmzszZCkzcott9zys8yc1t2+yYf+jBkzWLp06cbeDEnarETE/b3a7d6RpIoY+pJUEUNfkipi6EtSRQx9SaqIoS9JFTH0Jakihr4kVWST/3GWNGwz5n+777SVC18zxC2RJp57+pJUEUNfkipi6EtSRQx9SaqIoS9JFTH0Jakihr4kVcTQl6SKGPqSVBFDX5IqYuhLUkUMfUmqiKEvSRUx9CWpIlWcWtlT5UpSwz19SaqIoS9JFTH0Jakihr4kVcTQl6SKGPqSVBFDX5IqYuhLUkUMfUmqiKEvSRUx9CWpIoa+JFXE0Jekiox4ls2I2Bu4CNgdeApYlJmfiIidgS8DM4CVwJ9n5i9KzenAicBa4NTMvKa0HwxcAEwBrgROy8yc2JskaaJ5ptotx2j29J8E3pOZzwUOAU6OiP2B+cDizJwJLC7XKdOOAQ4A5gLnRMSksqxzgXnAzDLMncDbIkkawYihn5mrM/PWMv4YcBewF3AEcGGZ7ULgyDJ+BHBJZj6RmfcBK4A5EbEHsENm3lj27i/qqJEkDcGY/kQlImYAzwduAnbLzNXQvDFExK5ltr2AH3aUrSptvy3j3e291jOP5hMB++yzz+/a/YgpSeMz6i9yI2I74GvA32Tmr9tm7dGWLe3rN2YuyszZmTl72rRpo91ESdIIRhX6EbE1TeB/MTO/XpofLl02lMtHSvsqYO+O8unAQ6V9eo92SdKQjObonQDOA+7KzLM7Jl0BnAAsLJeXd7RfHBFnA3vSfGG7JDPXRsRjEXEITffQ8cAnJ+yWbELshpK0qRpNn/6LgeOA5RGxrLS9nybsL42IE4EHgKMBMvOOiLgUuJPmyJ+TM3NtqTuJ3x+yeVUZJElDMmLoZ+YP6N0fD3BYn5oFwIIe7UuBA8eygZKkiTOmo3ek8bDbS9r4DH1tsXyTkdbnuXckqSKGviRVxO4djZndJhPL+1PD5J6+JFXE0Jekihj6klQRQ1+SKuIXuS38gk3SlsY9fUmqiKEvSRUx9CWpIoa+JFXE0Jekihj6klQRQ1+SKmLoS1JFDH1JqoihL0kVMfQlqSKGviRVxNCXpIoY+pJUEUNfkipi6EtSRQx9SaqIoS9JFTH0Jakihr4kVcTQl6SKTN7YG6DxmzH/232nrVz4miFuiaRNnXv6klQRQ1+SKjJi905EnA+8FngkMw8sbWcCbwfWlNnen5lXlmmnAycCa4FTM/Oa0n4wcAEwBbgSOC0zcyJvjLQx2c2mzcFo9vQvAOb2aP/nzJxVhnWBvz9wDHBAqTknIiaV+c8F5gEzy9BrmZKkDWjE0M/MG4BHR7m8I4BLMvOJzLwPWAHMiYg9gB0y88ayd38RcOSA2yxJGtB4+vTfGRG3RcT5EbFTadsLeLBjnlWlba8y3t0uSRqiQUP/XOBZwCxgNfDx0h495s2W9p4iYl5ELI2IpWvWrOk3myRpjAYK/cx8ODPXZuZTwGeAOWXSKmDvjlmnAw+V9uk92vstf1Fmzs7M2dOmTRtkEyVJPQwU+qWPfp03ALeX8SuAYyJim4jYl+YL2yWZuRp4LCIOiYgAjgcuH8d2S5IGMJpDNr8EHApMjYhVwBnAoRExi6aLZiXwVwCZeUdEXArcCTwJnJyZa8uiTuL3h2xeVQZJ0hCNGPqZeWyP5vNa5l8ALOjRvhQ4cExbJ0maUJ57R9IG4w/WNj2ehkGSKmLoS1JFDH1Jqoh9+pK2GMP+DmFz/M7CPX1JqoihL0kVMfQlqSKGviRVxNCXpIoY+pJUEUNfkipi6EtSRQx9SaqIoS9JFTH0Jakihr4kVcTQl6SKGPqSVBFDX5IqYuhLUkUMfUmqiP+ctQnZHP+FR9oQfC1sOIa+pOrV9CZj944kVcTQl6SKGPqSVBFDX5IqYuhLUkUMfUmqiKEvSRUx9CWpIoa+JFXEX+RKm6GafkGqiWXoS9JmYiLe7Efs3omI8yPikYi4vaNt54i4LiJ+Ui536ph2ekSsiIh7IuKVHe0HR8TyMu1fIyJGtYWSpAkzmj79C4C5XW3zgcWZORNYXK4TEfsDxwAHlJpzImJSqTkXmAfMLEP3MiVJG9iIoZ+ZNwCPdjUfAVxYxi8EjuxovyQzn8jM+4AVwJyI2APYITNvzMwELuqokSQNyaBH7+yWmasByuWupX0v4MGO+VaVtr3KeHe7JGmIJvqQzV799NnS3nshEfMiYmlELF2zZs2EbZwk1W7Q0H+4dNlQLh8p7auAvTvmmw48VNqn92jvKTMXZebszJw9bdq0ATdRktRt0NC/AjihjJ8AXN7RfkxEbBMR+9J8YbukdAE9FhGHlKN2ju+okSQNyYjH6UfEl4BDgakRsQo4A1gIXBoRJwIPAEcDZOYdEXEpcCfwJHByZq4tizqJ5kigKcBVZZAkDdGIoZ+Zx/aZdFif+RcAC3q0LwUOHNPWSZImlOfekaSKGPqSVBFDX5IqYuhLUkUMfUmqiKEvSRUx9CWpIoa+JFXE0Jekihj6klQRQ1+SKuIfo1dsIv5kWdLmxT19SaqIoS9JFTH0Jakihr4kVcTQl6SKGPqSVBFDX5IqYuhLUkUMfUmqiKEvSRUx9CWpIoa+JFXE0Jekihj6klQRT60sVcTTacs9fUmqiKEvSRUx9CWpIoa+JFXE0Jekinj0jiQN2cY8iso9fUmqiKEvSRUZV+hHxMqIWB4RyyJiaWnbOSKui4iflMudOuY/PSJWRMQ9EfHK8W68JGlsJmJP/+WZOSszZ5fr84HFmTkTWFyuExH7A8cABwBzgXMiYtIErF+SNEobonvnCODCMn4hcGRH+yWZ+URm3gesAOZsgPVLkvoYb+gncG1E3BIR80rbbpm5GqBc7lra9wIe7KhdVdrWExHzImJpRCxds2bNODdRkrTOeA/ZfHFmPhQRuwLXRcTdLfNGj7bsNWNmLgIWAcyePbvnPJKksRvXnn5mPlQuHwEuo+mueTgi9gAol4+U2VcBe3eUTwceGs/6JUljM/CefkQ8HdgqMx8r44cDHwauAE4AFpbLy0vJFcDFEXE2sCcwE1gyjm1XJTwdsDRxxtO9sxtwWUSsW87FmXl1RNwMXBoRJwIPAEcDZOYdEXEpcCfwJHByZq4d19ZLksZk4NDPzHuBg3q0/xw4rE/NAmDBoOuUJI2Pv8iVpIoY+pJUEUNfkipi6EtSRQx9SaqIoS9JFTH0Jakihr4kVcTQl6SKGPqSVBFDX5IqYuhLUkUMfUmqiKEvSRUx9CWpIoa+JFXE0Jekihj6klQRQ1+SKmLoS1JFDH1JqoihL0kVMfQlqSKGviRVxNCXpIoY+pJUEUNfkipi6EtSRQx9SaqIoS9JFTH0Jakihr4kVcTQl6SKGPqSVBFDX5IqMvTQj4i5EXFPRKyIiPnDXr8k1WyooR8Rk4B/A14F7A8cGxH7D3MbJKlmw97TnwOsyMx7M/P/gEuAI4a8DZJUrcjM4a0s4ihgbmb+Zbl+HPCizHxn13zzgHnl6nOAe/oscirwswE2ZXOo2xy20TrrrNt0656ZmdPWa83MoQ3A0cBnO64fB3xyHMtbuqXWbQ7baJ111m1+dcPu3lkF7N1xfTrw0JC3QZKqNezQvxmYGRH7RsTTgGOAK4a8DZJUrcnDXFlmPhkR7wSuASYB52fmHeNY5KItuG5z2EbrrLNuM6sb6he5kqSNy1/kSlJFDH1JqoihL0kV2eJDPyL2i4jDImK7rva5I9TNiYgXlvH9I+LdEfHqAdZ/0QA1LynrO3yE+V4UETuU8SkR8aGI+GZEnBURO7bUnRoRe/eb3lL3tIg4PiJeUa6/OSI+FREnR8TWI9Q+KyLeGxGfiIiPR8Rft22jpHYRsetAdVvCF7kR8bbM/FyP9lOBk4G7gFnAaZl5eZl2a2a+oM/yzqA5P9Bk4DrgRcD1wCuAazJzQZ+67sNPA3g58F2AzHx9n7olmTmnjL+9bPNlwOHANzNzYZ+6O4CDylFRi4DfAF8FDivtb+xT9yvgf4D/Br4EfCUz1/Sat6vuizT3ybbAL4HtgK+X9UVmntCn7lTgdcC/A68GlgG/AN4AvCMzrx9p3bWIiF0z85Ehrm+XzPz5sNa3oZQdiNOBI4F1v0J9BLgcWJiZvxxgmVdl5qv6TNuhrG86cFVmXtwx7ZzMfEefut2BM4CngL8HTgH+jCajTsvM1X3qdu5uAm4Bnk/z2nt01DdskF+BbWoD8ECf9uXAdmV8BrC03LEAP2pZ3nKaQ0q3BX4N7FDapwC3tdTdCnwBOBR4WblcXcZf1lL3o47xm4FpZfzpwPKWurs61901bVnb+mg+5R0OnAesAa4GTgC2b6m7rVxOBh4GJpXrMcL9srxj3m2B68v4PiM8DjsCC4G7gZ+X4a7S9owBnytXtUzbAfgo8HngzV3Tzmmp2x04l+ZkgrsAZ5bbfCmwR0vdzl3DLsBKYCdg55a6uV330XnAbcDFwG4tdQuBqWV8NnAvsAK4f4Tn563AB4FnjfG+ng18r7wm9qbZgfpVeY4/v6VuO+DDwB1l/jXAD4G3ttRcA7wP2L3rcXkfcF1L3Qv6DAcDq1vqvlbuzyNpfmv0NWCbXq/FrrqraYJ+fnnM3ldeB6cAl7fUPQXc1zX8tlzeO6bHZZAXzsYYyh3Ua1gOPNGn5s4eT6argbMZIRR7jZfrbXVbAe8qT+5ZpW3EBwT4cXmh70LXz6q719817SvA28r454DZZfzZwM0tdd1vEFsDr6fZ61/TUnc78LSyrY9Rggn4AzregHrULe94QewE3NK5zJY6X8gjPH7AZ4GPAM8sz71vtD0OHePfA17Y8Xzp+3P+sj0fAx4AlpT17DmK5/USmk/MxwIPAkeV9sOAG1vqLgfeSrMX/W7g74CZwIXAP/SpuadleW3T1tJ8Ev9ej+F/W+qWdV3/APAfNK/htufKjzrGH2hbZte095bn2fM6H5eRHoOeyxqkaGMMNHuWs8qTu3OYATzUp+a7lPDtaJsMXASsbVnXTcC2ZXyrjvYd2x7Qjvmm0wTyp7of2D7zr6TZ67qvXO5e2rcb4YmwI3ABTTfNTSUw7qXpRjloNE+8HtOmtEx7V1n+/cCpwGLgMzShfkZL3Wk0YbiIZq993RvVNOCGljpfyL3rbu23/BHWdzcwuYz/sGta2yfKzvW9FDgH+Gm5P+cNeL+0PQd/3HX95nK5FXB3n5prgb+l45MOsBvNG/B3WtZ1OzCzz7QHW+ruoiMbStsJNJ9O7h/NbQM+MtrHoExflytnA9szxj383y1nkKKNMdB8hH1Jn2kXt9xJu/eZ9uKWdW3Tp31q5wt0FNv8GvrsmYyyfltg31HMtz1wEM2ebN+P9x3zP3sc27QnZS8PeAZwFDBnFHUHlHn3G8O6fCH3rllFswf8Hpo34eiY1tbNdkq5T/+UpgvqX4A/AT4EfL6lbr03PJruz7nA51rqbqTpQjyaZkfhyNL+Mto/Wfznutc6zXdB13RM6/lmT/MJ8iyaN7ZfAI+Wx/Ms2rvKjgKe02fakS11/wi8okf7XOAnLXUfpnQ5d7X/IfDVUb4uXkfT3fXT0cy/Xv0gRQ4Owxi6XsiPdr2Qd2qp26JfyDRfBHYO674D2h24aITaQ4Ev03yvsxy4kuY05pNbai4Z8PE7iKaL7ipgP+ATNAcA3AH8cUvdH9F0Df0S+AFlJ4Xmk+GpLXX70RxssV1X+9wRtnM/mi6niap71YZeH833iweOpm695QzyYDo4bOyB0kW0JdV1vZA32e3cFOtouhvvAb5B0116RMe0tq65QetOGXLdQNvZc1mD3PEODht7YBTflVhXTx3jO1Jvi63rNQz1LJvSWETEbf0m0fTtW2fdOpMy83GAzFwZEYcCX42IZ5a6frb0uvUY+tqU7Qa8kuaLuU5B82Wfddat89OImJWZywAy8/GIeC1wPvC8lnVt6XXrMfS1KfsWzUfaZd0TIuJ666zrcDzwZGdDZj4JHB8Rn25Z15Zet54t4jQMkqTR2eJPuCZJ+j1DX5IqYuhLUkUMfalLRHw2IvYv4+8fx3KujIhn9Gg/MyLeO45NlAbmF7lSi4h4PDO3G3nOMS3zTODxzPzYRC5XGg339FW1iHh6RHw7In4cEbdHxJsi4vqImB0RC4EpEbGs/IEMEfEXEbGktH06Iia1LHtlREwt4x+IiHsi4jvAc4Zz66T1Gfqq3VyaU3MflJkH0pzqGIDMnE9zKuZZmfmWiHgu8CaaM7TOojmF81tGWkFEHAwcQ/MvR28EXjjxN0MaHX+cpdotBz4WEWcB38rM70f0/VX7YTSnr765zDOF5i/5RvJS4LLM/A30/FtNaWgMfVUtM/+r7Im/GvhoRFzbMnsAF2bm6YOsaqANlCaY3TuqWkTsCfwmM79A85eAL+ia5bcRsXUZXwwcFRG7ltqdywmvRnID8IaImBIR29OcO1/aKNzTV+2eB/xTRDxF83eTJ9GE/zqLgNsi4tbSr/9B4NqI2KrMfzLNv0L1lZm3RsSXgWVl3u9P/M2QRsdDNiWpInbvSFJF7N6RxikibgK26Wo+LjOXb4ztkdrYvSNJFbF7R5IqYuhLUkUMfUmqiKEvSRUx9CWpIv8PRnaIVN0UXMgAAAAASUVORK5CYII=
+"
+>
+</div>
+
+</div>
+
+</div>
+</div>
+
+</div>
+<div class="cell border-box-sizing text_cell rendered celltag_challenge"><div class="prompt input_prompt">
+</div><div class="inner_cell">
+<div class="text_cell_render border-box-sizing rendered_html">
+<h2 id="Extra-Plotting-Challenge"><em>Extra Plotting Challenge</em><a class="anchor-link" href="#Extra-Plotting-Challenge">&#182;</a></h2><ol>
+<li><p>Create a plot of average weight across all species per plot.</p>
+</li>
+<li><p>Create a plot of total males versus total females for the entire dataset.</p>
+</li>
+<li><p>Create a stacked bar plot, with weight on the Y axis, and the stacked variable being sex. The plot should show total weight by sex for each plot. Some tips are below to help you solve this challenge:
+<a href="http://pandas.pydata.org/pandas-docs/stable/visualization.html#basic-plotting-plot">For more on Pandas plots, visit this link.</a></p>
+</li>
+</ol>
+
+</div>
+</div>
+</div>
+<div class="cell border-box-sizing text_cell rendered celltag_solution"><div class="prompt input_prompt">
+</div><div class="inner_cell">
+<div class="text_cell_render border-box-sizing rendered_html">
+<h3 id="Solution-to-Extra-Plotting-Challenge-1"><em>Solution to Extra Plotting Challenge 1</em><a class="anchor-link" href="#Solution-to-Extra-Plotting-Challenge-1">&#182;</a></h3>
+</div>
+</div>
+</div>
+<div class="cell border-box-sizing code_cell rendered celltag_solution">
+<div class="input">
+<div class="prompt input_prompt">In&nbsp;[30]:</div>
+<div class="inner_cell">
+    <div class="input_area">
+<div class=" highlight hl-ipython3"><pre><span></span><span class="c1">## Solution Plotting Challenge 1</span>
+<span class="n">surveys_df</span><span class="o">.</span><span class="n">groupby</span><span class="p">(</span><span class="s1">&#39;site_id&#39;</span><span class="p">)</span><span class="o">.</span><span class="n">mean</span><span class="p">()[</span><span class="s2">&quot;weight&quot;</span><span class="p">]</span><span class="o">.</span><span class="n">plot</span><span class="p">(</span><span class="n">kind</span><span class="o">=</span><span class="s1">&#39;bar&#39;</span><span class="p">)</span>
+</pre></div>
+
+    </div>
+</div>
+</div>
+
+<div class="output_wrapper">
+<div class="output">
+
+
+<div class="output_area">
+
+    <div class="prompt output_prompt">Out[30]:</div>
+
+
+
+
+<div class="output_text output_subarea output_execute_result">
+<pre>&lt;AxesSubplot:xlabel=&#39;site_id&#39;&gt;</pre>
+</div>
+
+</div>
+
+<div class="output_area">
+
+    <div class="prompt"></div>
+
+
+
+
+<div class="output_png output_subarea ">
+<img src="data:image/png;base64,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
+"
+>
+</div>
+
+</div>
+
+</div>
+</div>
+
+</div>
+<div class="cell border-box-sizing text_cell rendered celltag_solution"><div class="prompt input_prompt">
+</div><div class="inner_cell">
+<div class="text_cell_render border-box-sizing rendered_html">
+<h3 id="Solution-to-Extra-Plotting-Challenge-2"><em>Solution to Extra Plotting Challenge 2</em><a class="anchor-link" href="#Solution-to-Extra-Plotting-Challenge-2">&#182;</a></h3>
+</div>
+</div>
+</div>
+<div class="cell border-box-sizing code_cell rendered celltag_solution">
+<div class="input">
+<div class="prompt input_prompt">In&nbsp;[31]:</div>
+<div class="inner_cell">
+    <div class="input_area">
+<div class=" highlight hl-ipython3"><pre><span></span><span class="c1"># Solution Plotting Challenge 2</span>
+<span class="c1">## Create plot of total males versus total females for the entire dataset.</span>
+
+<span class="n">surveys_df</span><span class="o">.</span><span class="n">groupby</span><span class="p">(</span><span class="s1">&#39;sex&#39;</span><span class="p">)</span><span class="o">.</span><span class="n">count</span><span class="p">()[</span><span class="s2">&quot;record_id&quot;</span><span class="p">]</span><span class="o">.</span><span class="n">plot</span><span class="p">(</span><span class="n">kind</span><span class="o">=</span><span class="s1">&#39;bar&#39;</span><span class="p">)</span>
+</pre></div>
+
+    </div>
+</div>
+</div>
+
+<div class="output_wrapper">
+<div class="output">
+
+
+<div class="output_area">
+
+    <div class="prompt output_prompt">Out[31]:</div>
+
+
+
+
+<div class="output_text output_subarea output_execute_result">
+<pre>&lt;AxesSubplot:xlabel=&#39;sex&#39;&gt;</pre>
+</div>
+
+</div>
+
+<div class="output_area">
+
+    <div class="prompt"></div>
+
+
+
+
+<div class="output_png output_subarea ">
+<img src="data:image/png;base64,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
+"
+>
+</div>
+
+</div>
+
+</div>
+</div>
+
+</div>
+<div class="cell border-box-sizing text_cell rendered celltag_solution"><div class="prompt input_prompt">
+</div><div class="inner_cell">
+<div class="text_cell_render border-box-sizing rendered_html">
+<h3 id="Solution-to-Extra-Plotting-Challenge-3"><em>Solution to Extra Plotting Challenge 3</em><a class="anchor-link" href="#Solution-to-Extra-Plotting-Challenge-3">&#182;</a></h3><p>First we group data by site and by sex, and then calculate a total for each site.</p>
+
+</div>
+</div>
+</div>
+<div class="cell border-box-sizing code_cell rendered celltag_solution">
+<div class="input">
+<div class="prompt input_prompt">In&nbsp;[32]:</div>
+<div class="inner_cell">
+    <div class="input_area">
+<div class=" highlight hl-ipython3"><pre><span></span><span class="n">by_site_sex</span> <span class="o">=</span> <span class="n">surveys_df</span><span class="o">.</span><span class="n">groupby</span><span class="p">([</span><span class="s1">&#39;site_id&#39;</span><span class="p">,</span><span class="s1">&#39;sex&#39;</span><span class="p">])</span>
+<span class="n">site_sex_count</span> <span class="o">=</span> <span class="n">by_site_sex</span><span class="p">[</span><span class="s1">&#39;weight&#39;</span><span class="p">]</span><span class="o">.</span><span class="n">sum</span><span class="p">()</span>
+</pre></div>
+
+    </div>
+</div>
+</div>
+
+</div>
+<div class="cell border-box-sizing text_cell rendered celltag_solution"><div class="prompt input_prompt">
+</div><div class="inner_cell">
+<div class="text_cell_render border-box-sizing rendered_html">
+<p>This calculates the sums of weights for each sex within each plot as a table</p>
+
+<pre><code>site  sex
+site_id  sex
+1        F      38253
+         M      59979
+2        F      50144
+         M      57250
+3        F      27251
+         M      28253
+4        F      39796
+         M      49377
+&lt;other sites removed for brevity&gt;</code></pre>
+<p>Below we'll use <code>.unstack()</code> on our grouped data to figure out the total weight that each sex contributed to each plot.</p>
+
+</div>
+</div>
+</div>
+<div class="cell border-box-sizing code_cell rendered celltag_solution">
+<div class="input">
+<div class="prompt input_prompt">In&nbsp;[33]:</div>
+<div class="inner_cell">
+    <div class="input_area">
+<div class=" highlight hl-ipython3"><pre><span></span><span class="n">by_site_sex</span> <span class="o">=</span> <span class="n">surveys_df</span><span class="o">.</span><span class="n">groupby</span><span class="p">([</span><span class="s1">&#39;site_id&#39;</span><span class="p">,</span><span class="s1">&#39;sex&#39;</span><span class="p">])</span>
+<span class="n">site_sex_count</span> <span class="o">=</span> <span class="n">by_site_sex</span><span class="p">[</span><span class="s1">&#39;weight&#39;</span><span class="p">]</span><span class="o">.</span><span class="n">sum</span><span class="p">()</span>
+<span class="n">site_sex_count</span><span class="o">.</span><span class="n">unstack</span><span class="p">()</span>
+</pre></div>
+
+    </div>
+</div>
+</div>
+
+<div class="output_wrapper">
+<div class="output">
+
+
+<div class="output_area">
+
+    <div class="prompt output_prompt">Out[33]:</div>
+
+
+
+<div class="output_html rendered_html output_subarea output_execute_result"><div>
+<style scoped>
+    .dataframe tbody tr th:only-of-type {
+        vertical-align: middle;
+    }
+
+    .dataframe tbody tr th {
+        vertical-align: top;
+    }
+
+    .dataframe thead th {
+        text-align: right;
+    }
+</style>
+<table border="1" class="dataframe">
+  <thead>
+    <tr style="text-align: right;">
+      <th>sex</th>
+      <th>F</th>
+      <th>M</th>
+    </tr>
+    <tr>
+      <th>site_id</th>
+      <th></th>
+      <th></th>
+    </tr>
+  </thead>
+  <tbody>
+    <tr>
+      <th>1</th>
+      <td>38253.0</td>
+      <td>59979.0</td>
+    </tr>
+    <tr>
+      <th>2</th>
+      <td>50144.0</td>
+      <td>57250.0</td>
+    </tr>
+    <tr>
+      <th>3</th>
+      <td>27251.0</td>
+      <td>28253.0</td>
+    </tr>
+    <tr>
+      <th>4</th>
+      <td>39796.0</td>
+      <td>49377.0</td>
+    </tr>
+    <tr>
+      <th>5</th>
+      <td>21143.0</td>
+      <td>23326.0</td>
+    </tr>
+    <tr>
+      <th>6</th>
+      <td>26210.0</td>
+      <td>27245.0</td>
+    </tr>
+    <tr>
+      <th>7</th>
+      <td>6522.0</td>
+      <td>6422.0</td>
+    </tr>
+    <tr>
+      <th>8</th>
+      <td>37274.0</td>
+      <td>47755.0</td>
+    </tr>
+    <tr>
+      <th>9</th>
+      <td>44128.0</td>
+      <td>48727.0</td>
+    </tr>
+    <tr>
+      <th>10</th>
+      <td>2359.0</td>
+      <td>2776.0</td>
+    </tr>
+    <tr>
+      <th>11</th>
+      <td>34638.0</td>
+      <td>43106.0</td>
+    </tr>
+    <tr>
+      <th>12</th>
+      <td>51825.0</td>
+      <td>57420.0</td>
+    </tr>
+    <tr>
+      <th>13</th>
+      <td>24720.0</td>
+      <td>30354.0</td>
+    </tr>
+    <tr>
+      <th>14</th>
+      <td>32770.0</td>
+      <td>46469.0</td>
+    </tr>
+    <tr>
+      <th>15</th>
+      <td>12455.0</td>
+      <td>11037.0</td>
+    </tr>
+    <tr>
+      <th>16</th>
+      <td>5446.0</td>
+      <td>6310.0</td>
+    </tr>
+    <tr>
+      <th>17</th>
+      <td>42106.0</td>
+      <td>48082.0</td>
+    </tr>
+    <tr>
+      <th>18</th>
+      <td>27353.0</td>
+      <td>26433.0</td>
+    </tr>
+    <tr>
+      <th>19</th>
+      <td>11297.0</td>
+      <td>11514.0</td>
+    </tr>
+    <tr>
+      <th>20</th>
+      <td>33206.0</td>
+      <td>25988.0</td>
+    </tr>
+    <tr>
+      <th>21</th>
+      <td>15481.0</td>
+      <td>9815.0</td>
+    </tr>
+    <tr>
+      <th>22</th>
+      <td>34656.0</td>
+      <td>35363.0</td>
+    </tr>
+    <tr>
+      <th>23</th>
+      <td>3352.0</td>
+      <td>3883.0</td>
+    </tr>
+    <tr>
+      <th>24</th>
+      <td>22951.0</td>
+      <td>18835.0</td>
+    </tr>
+  </tbody>
+</table>
+</div></div>
+
+</div>
+
+</div>
+</div>
+
+</div>
+<div class="cell border-box-sizing text_cell rendered celltag_solution"><div class="prompt input_prompt">
+</div><div class="inner_cell">
+<div class="text_cell_render border-box-sizing rendered_html">
+<p>Now, create a stacked bar plot with that data where the weights for each sex are stacked by plot.</p>
+<p>Rather than display it as a table, we can plot the above data by stacking the values of each sex as follows:</p>
+
+</div>
+</div>
+</div>
+<div class="cell border-box-sizing code_cell rendered celltag_solution">
+<div class="input">
+<div class="prompt input_prompt">In&nbsp;[34]:</div>
+<div class="inner_cell">
+    <div class="input_area">
+<div class=" highlight hl-ipython3"><pre><span></span><span class="n">by_site_sex</span> <span class="o">=</span> <span class="n">surveys_df</span><span class="o">.</span><span class="n">groupby</span><span class="p">([</span><span class="s1">&#39;site_id&#39;</span><span class="p">,</span> <span class="s1">&#39;sex&#39;</span><span class="p">])</span>
+<span class="n">site_sex_count</span> <span class="o">=</span> <span class="n">by_site_sex</span><span class="p">[</span><span class="s1">&#39;weight&#39;</span><span class="p">]</span><span class="o">.</span><span class="n">sum</span><span class="p">()</span>
+<span class="n">spc</span> <span class="o">=</span> <span class="n">site_sex_count</span><span class="o">.</span><span class="n">unstack</span><span class="p">()</span>
+<span class="n">s_plot</span> <span class="o">=</span> <span class="n">spc</span><span class="o">.</span><span class="n">plot</span><span class="p">(</span><span class="n">kind</span><span class="o">=</span><span class="s1">&#39;bar&#39;</span><span class="p">,</span> <span class="n">stacked</span><span class="o">=</span><span class="kc">True</span><span class="p">,</span> <span class="n">title</span><span class="o">=</span><span class="s2">&quot;Total weight by site and sex&quot;</span><span class="p">)</span>
+<span class="n">s_plot</span><span class="o">.</span><span class="n">set_ylabel</span><span class="p">(</span><span class="s2">&quot;Weight&quot;</span><span class="p">)</span>
+<span class="n">s_plot</span><span class="o">.</span><span class="n">set_xlabel</span><span class="p">(</span><span class="s2">&quot;Site&quot;</span><span class="p">)</span>
+</pre></div>
+
+    </div>
+</div>
+</div>
+
+<div class="output_wrapper">
+<div class="output">
+
+
+<div class="output_area">
+
+    <div class="prompt output_prompt">Out[34]:</div>
+
+
+
+
+<div class="output_text output_subarea output_execute_result">
+<pre>Text(0.5, 0, &#39;Site&#39;)</pre>
+</div>
+
+</div>
+
+<div class="output_area">
+
+    <div class="prompt"></div>
+
+
+
+
+<div class="output_png output_subarea ">
+<img src="data:image/png;base64,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
+"
+>
+</div>
+
+</div>
+
+</div>
+</div>
+
+</div>
 <div class="cell border-box-sizing code_cell rendered">
 <div class="input">
 <div class="prompt input_prompt">In&nbsp;[&nbsp;]:</div>
