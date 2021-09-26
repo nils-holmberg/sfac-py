@@ -6,6 +6,9 @@ source ~/lib/python/anaconda3/bin/activate
 ### start vis (210926)
 # start base env
 source ~/lib/python/anaconda3/bin/activate
+# create new venv with ipython kernel
+conda create -n conda-vis
+conda install -c conda-forge -n conda-vis ipykernel plotly dash
 
 
 ### start exp (210926)

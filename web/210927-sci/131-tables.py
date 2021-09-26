@@ -17,7 +17,7 @@
 # - intro to day 2, nlp and spacy
 # 
 
-# In[1]:
+# In[ ]:
 
 
 import pandas as pd
@@ -28,13 +28,13 @@ df = sns.load_dataset('iris')
 df.head()
 
 
-# In[2]:
+# In[ ]:
 
 
 df.to_csv("csv/iris.csv", sep="\t", header=True, index=False)
 
 
-# In[3]:
+# In[ ]:
 
 
 # file path on google colab
@@ -87,7 +87,7 @@ df.head()
 # 
 # We will be using this dataset, which can be downloaded here: [surveys.csv](tmp/surveys.csv) ... but **don't click** to download it in your browser - **we are going to use Python !**
 
-# In[1]:
+# In[ ]:
 
 
 import urllib.request
@@ -157,7 +157,7 @@ urllib.request.urlretrieve(url, 'tmp/surveys.csv')
 # 
 # First, lets make sure the Pandas and matplotlib packages are **installed**.
 
-# In[2]:
+# In[ ]:
 
 
 #conda install pandas matplotlib
@@ -169,7 +169,7 @@ urllib.request.urlretrieve(url, 'tmp/surveys.csv')
 # library a nickname to shorten the command, we can add `as nickNameHere`.  An
 # example of importing the pandas library using the common nickname `pd` is below.
 
-# In[4]:
+# In[ ]:
 
 
 import pandas as pd
@@ -206,7 +206,7 @@ import pandas as pd
 # 
 # 
 
-# In[7]:
+# In[ ]:
 
 
 # note that pd.read_csv is available because we imported pandas as pd, and data is available where we saved it
@@ -226,17 +226,17 @@ df.head()
 # 
 # Let's call the imported survey data `surveys_df`:
 
-# In[8]:
+# In[ ]:
 
 
-surveys_df = pd.read_csv("tmp/surveys.csv")
+surveys_df = pd.read_csv("../../csv/surveys.csv")
 
 
 # Notice when you assign the imported DataFrame to a variable, Python does not
 # produce any output on the screen. We can view the value of the `surveys_df`
 # object by typing its name into the cell.
 
-# In[9]:
+# In[ ]:
 
 
 surveys_df
@@ -252,7 +252,7 @@ surveys_df
 # The `head()` function displays the first several lines of a file. It is discussed below.
 # 
 
-# In[10]:
+# In[ ]:
 
 
 surveys_df.head()
@@ -264,7 +264,7 @@ surveys_df.head()
 # 
 # 
 
-# In[11]:
+# In[ ]:
 
 
 type(surveys_df)
@@ -279,7 +279,7 @@ type(surveys_df)
 # 
 # 
 
-# In[12]:
+# In[ ]:
 
 
 surveys_df.dtypes
@@ -338,7 +338,7 @@ surveys_df.dtypes
 # 
 # 
 
-# In[13]:
+# In[ ]:
 
 
 # Look at the column names
@@ -348,7 +348,7 @@ surveys_df.columns
 # Let's get a list of all the species. The `pd.unique` function tells us all of
 # the unique values in the `species_id` column.
 
-# In[14]:
+# In[ ]:
 
 
 pd.unique(surveys_df['species_id'])
@@ -364,7 +364,7 @@ pd.unique(surveys_df['species_id'])
 
 # ## Solution - Statistics
 
-# In[15]:
+# In[ ]:
 
 
 site_names = pd.unique(surveys_df['site_id'])
@@ -380,7 +380,7 @@ print(len(site_names), surveys_df['site_id'].nunique())
 # We can calculate basic statistics for all records in a single column using the
 # syntax below:
 
-# In[16]:
+# In[ ]:
 
 
 surveys_df['weight'].describe()
@@ -391,7 +391,7 @@ surveys_df['weight'].describe()
 # 
 # 
 
-# In[17]:
+# In[ ]:
 
 
 surveys_df['weight'].min()
@@ -409,7 +409,7 @@ surveys_df['weight'].count()
 # 
 # 
 
-# In[18]:
+# In[ ]:
 
 
 # Group data by sex
@@ -424,7 +424,7 @@ grouped_data = surveys_df.groupby('sex')
 # 
 # 
 
-# In[21]:
+# In[ ]:
 
 
 # Summary statistics for all numeric columns by sex
@@ -464,7 +464,7 @@ grouped_data.mean()
 
 # ## Solution- Summary Data
 
-# In[22]:
+# In[ ]:
 
 
 ## Solution Challenge 1
@@ -477,7 +477,7 @@ grouped_data.count()
 # mean does not make sense for each variable, so you can specify this column-wise: 
 # e.g. I want to know the last survey year, median foot-length and mean weight for each site/sex combination:
 
-# In[23]:
+# In[ ]:
 
 
 # Solution- Challenge 3
@@ -510,7 +510,7 @@ surveys_df.groupby(['site_id'])['weight'].describe()
 # 
 # 
 
-# In[24]:
+# In[ ]:
 
 
 # Count the number of samples by species
@@ -523,7 +523,7 @@ print(species_counts)
 # 
 # 
 
-# In[25]:
+# In[ ]:
 
 
 surveys_df.groupby('species_id')['record_id'].count()['DO']
@@ -538,7 +538,7 @@ surveys_df.groupby('species_id')['record_id'].count()['DO']
 # 
 # 
 
-# In[27]:
+# In[ ]:
 
 
 # Multiply all weight values by 2 but does not change the original weight data
@@ -587,7 +587,7 @@ surveys_df['weight']*2
 
 # ## Ensure the Pandas package is installed
 
-# In[1]:
+# In[ ]:
 
 
 get_ipython().system('pip install pandas matplotlib')
@@ -599,7 +599,7 @@ get_ipython().system('pip install pandas matplotlib')
 # 
 # 
 
-# In[2]:
+# In[ ]:
 
 
 # Make sure pandas is loaded
@@ -626,14 +626,14 @@ surveys_df = pd.read_csv("surveys.csv")
 # 
 # 
 
-# In[3]:
+# In[ ]:
 
 
 # Method 1: select a 'subset' of the data using the column name
 surveys_df['species_id'].head()
 
 
-# In[4]:
+# In[ ]:
 
 
 # Method 2: use the column name as an 'attribute'; gives the same output
@@ -646,7 +646,7 @@ surveys_df.species_id.head()
 # 
 # 
 
-# In[5]:
+# In[ ]:
 
 
 # Creates an object, surveys_species, that only contains the `species_id` column
@@ -662,7 +662,7 @@ surveys_species = surveys_df['species_id']
 # 
 # 
 
-# In[6]:
+# In[ ]:
 
 
 # Select the species and plot columns from the DataFrame
@@ -753,7 +753,7 @@ surveys_df[['species_id', 'site_id']].head()
 
 # Python tells us what type of error it is in the traceback, at the bottom it says `KeyError: 'speciess'` which means that `speciess` is not a column name (or Key in the related python data type dictionary).
 
-# In[7]:
+# In[ ]:
 
 
 # What happens when you flip the order?
@@ -771,7 +771,7 @@ surveys_df[['site_id', 'species_id']].head()
 # 
 # 
 
-# In[8]:
+# In[ ]:
 
 
 # Create a list of numbers:
@@ -796,13 +796,13 @@ a = [1, 2, 3, 4, 5]
 
 # ## Solutions - Extracting data
 
-# In[9]:
+# In[ ]:
 
 
 a[0]
 
 
-# In[10]:
+# In[ ]:
 
 
 # Solution #2
@@ -813,7 +813,7 @@ a[0]
 # 
 # In above example, the error says `list index out of range`. This means we don't have index 5 in our list. The maximum index for `a` is `4`, as indexing starts at `0`.
 
-# In[11]:
+# In[ ]:
 
 
 # Solution #3
@@ -833,7 +833,7 @@ a[0]
 # 
 # 
 
-# In[12]:
+# In[ ]:
 
 
 # Select rows 0, 1, 2 (row 3 is not selected)
@@ -847,13 +847,13 @@ surveys_df[0:3]
 # Now lets select the `first 5 rows (rows 0, 1, 2, 3, 4)`.
 # 
 
-# In[13]:
+# In[ ]:
 
 
 surveys_df[:5]
 
 
-# In[14]:
+# In[ ]:
 
 
 # Select the last element in the list
@@ -870,7 +870,7 @@ surveys_df[-1:]
 # 
 # 
 
-# In[15]:
+# In[ ]:
 
 
 surveys_df = pd.read_csv("surveys.csv")
@@ -893,7 +893,7 @@ surveys_df = pd.read_csv("surveys.csv")
 # 
 # 
 
-# In[16]:
+# In[ ]:
 
 
 surveys_df.iloc[0:3, 1:4]
@@ -907,21 +907,21 @@ surveys_df.iloc[0:3, 1:4]
 # 
 # 
 
-# In[17]:
+# In[ ]:
 
 
 # Select all columns for rows of index values 0 and 10
 surveys_df.loc[[0, 10], :]
 
 
-# In[18]:
+# In[ ]:
 
 
 # What does this do?
 surveys_df.loc[0, ['species_id', 'site_id', 'weight']]
 
 
-# In[19]:
+# In[ ]:
 
 
 # What happens when you type the code below?
@@ -947,7 +947,7 @@ surveys_df.loc[[0, 10, 35549], :]
 # 
 # In following iloc example:
 
-# In[20]:
+# In[ ]:
 
 
 surveys_df.iloc[2, 6]
@@ -971,28 +971,28 @@ surveys_df.iloc[2, 6]
 
 # ## Solution - Range
 
-# In[21]:
+# In[ ]:
 
 
 # Solution - Range - #1 (a)
 surveys_df[0:1]
 
 
-# In[22]:
+# In[ ]:
 
 
 # Solution - Range - #1 (b)
 surveys_df[:4]
 
 
-# In[23]:
+# In[ ]:
 
 
 # Solution - Range - #1 (c)
 surveys_df[:-1]
 
 
-# In[24]:
+# In[ ]:
 
 
 # Solution - Range - #2
@@ -1006,7 +1006,7 @@ surveys_df.iloc[0:4, 1:4]
 # 
 # 
 
-# In[25]:
+# In[ ]:
 
 
 surveys_df[surveys_df.year == 2002].head()
@@ -1017,7 +1017,7 @@ surveys_df[surveys_df.year == 2002].head()
 # 
 # 
 
-# In[26]:
+# In[ ]:
 
 
 surveys_df[surveys_df.year != 2002]
@@ -1028,7 +1028,7 @@ surveys_df[surveys_df.year != 2002]
 # 
 # 
 
-# In[27]:
+# In[ ]:
 
 
 surveys_df[(surveys_df.year >= 1980) & (surveys_df.year <= 1985)]
@@ -1068,28 +1068,28 @@ surveys_df[(surveys_df.year >= 1980) & (surveys_df.year <= 1985)]
 
 # ## Solution - Queries 
 
-# In[28]:
+# In[ ]:
 
 
 ## Solution - Queries #1
 surveys_df[(surveys_df["year"] == 1999) & (surveys_df["weight"] <= 8)]
 
 
-# In[29]:
+# In[ ]:
 
 
 # when only interested in how many, the sum of True values could be used as well: 
 sum((surveys_df["year"] == 1999) & (surveys_df["weight"] <= 8))
 
 
-# In[30]:
+# In[ ]:
 
 
 # Solution - Queries #2
 surveys_df[surveys_df['species_id'].isin(['PB', 'PL'])]['site_id'].unique()
 
 
-# In[31]:
+# In[ ]:
 
 
 # To get number of records
@@ -1107,13 +1107,13 @@ surveys_df[surveys_df['species_id'].isin(['PB', 'PL'])].shape
 #    Write a query that selects all rows with sex NOT equal to 'M' or 'F' in
 #    the "surveys" data.
 
-# In[32]:
+# In[ ]:
 
 
 sum(surveys_df["weight"]>=0)
 
 
-# In[33]:
+# In[ ]:
 
 
 surveys_df[~surveys_df["sex"].isin(['M', 'F'])]
@@ -1127,21 +1127,21 @@ surveys_df[~surveys_df["sex"].isin(['M', 'F'])]
 # 
 # Boolean values include `True` or `False`. For example,
 
-# In[34]:
+# In[ ]:
 
 
 # Set x to 5
 x = 5
 
 
-# In[35]:
+# In[ ]:
 
 
 # What does the code below return?
 x > 5
 
 
-# In[36]:
+# In[ ]:
 
 
 # How about this?
@@ -1164,7 +1164,7 @@ x == 5
 
 # ## Solution _Extra Challenges_
 
-# In[37]:
+# In[ ]:
 
 
 # Solution extra challenge 1
@@ -1173,14 +1173,14 @@ new['sex']='x'
 print(len(new))
 
 
-# In[38]:
+# In[ ]:
 
 
 # We can verify the number of NaN values with
 sum(surveys_df['sex'].isnull())
 
 
-# In[39]:
+# In[ ]:
 
 
 # Solution extra challenge 2
@@ -1205,26 +1205,7 @@ stack_selection.plot(kind='bar', stacked=True)
 
 # To work through the examples below, we first need to load the species and surveys files into pandas DataFrames. Before we start, we will make sure that libraries are currectly installed. 
 
-# ```python
-# !pip install pandas matplotlib
-# ```
-
-# ```python 
-# Requirement already satisfied: pandas in /Users/asha0035/.local/share/virtualenvs/python-workshop-base-LFzz33nP/lib/python3.6/site-packages (0.23.0)
-# Requirement already satisfied: matplotlib in /Users/asha0035/.local/share/virtualenvs/python-workshop-base-LFzz33nP/lib/python3.6/site-packages (2.2.2)
-# Requirement already satisfied: python-dateutil>=2.5.0 in /Users/asha0035/.local/share/virtualenvs/python-workshop-base-LFzz33nP/lib/python3.6/site-packages (from pandas) (2.7.3)
-# Requirement already satisfied: pytz>=2011k in /Users/asha0035/.local/share/virtualenvs/python-workshop-base-LFzz33nP/lib/python3.6/site-packages (from pandas) (2018.4)
-# Requirement already satisfied: numpy>=1.9.0 in /Users/asha0035/.local/share/virtualenvs/python-workshop-base-LFzz33nP/lib/python3.6/site-packages (from pandas) (1.14.3)
-# Requirement already satisfied: cycler>=0.10 in /Users/asha0035/.local/share/virtualenvs/python-workshop-base-LFzz33nP/lib/python3.6/site-packages (from matplotlib) (0.10.0)
-# Requirement already satisfied: six>=1.10 in /Users/asha0035/.local/share/virtualenvs/python-workshop-base-LFzz33nP/lib/python3.6/site-packages (from matplotlib) (1.11.0)
-# Requirement already satisfied: pyparsing!=2.0.4,!=2.1.2,!=2.1.6,>=2.0.1 in /Users/asha0035/.local/share/virtualenvs/python-workshop-base-LFzz33nP/lib/python3.6/site-packages (from matplotlib) (2.2.0)
-# Requirement already satisfied: kiwisolver>=1.0.1 in /Users/asha0035/.local/share/virtualenvs/python-workshop-base-LFzz33nP/lib/python3.6/site-packages (from matplotlib) (1.0.1)
-# Requirement already satisfied: setuptools in /Users/asha0035/.local/share/virtualenvs/python-workshop-base-LFzz33nP/lib/python3.6/site-packages (from kiwisolver>=1.0.1->matplotlib) (39.2.0)
-# You are using pip version 10.0.1, however version 18.1 is available.
-# You should consider upgrading via the 'pip install --upgrade pip' command.
-# ```
-
-# In[1]:
+# In[ ]:
 
 
 import pandas as pd
@@ -1237,7 +1218,7 @@ surveys_df
 # 
 # We can use the concat function in pandas to append either columns or rows from one DataFrame to another. Let’s grab two subsets of our data to see how this works.
 
-# In[2]:
+# In[ ]:
 
 
 # Read in first 10 lines of surveys table
@@ -1251,7 +1232,7 @@ survey_sub_last10=survey_sub_last10.reset_index(drop=True)
 
 # When we concatenate DataFrames, we need to specify the axis. axis=0 tells pandas to stack the second DataFrame under the first one. It will automatically detect whether the column names are the same and will stack accordingly. axis=1 will stack the columns in the second DataFrame to the RIGHT of the first DataFrame. To stack the data vertically, we need to make sure we have the same columns and associated column format in both datasets. When we stack horizonally, we want to make sure what we are doing makes sense (ie the data are related in some way).
 
-# In[3]:
+# In[ ]:
 
 
 # Stack the DataFrames on top of each other
@@ -1271,7 +1252,7 @@ horizontal_stack = pd.concat([survey_sub, survey_sub_last10], axis=1)
 # 
 # We can use the to_csv command to do export a DataFrame in CSV format. Note that the code below will by default save the data into the current working directory. We can save it to a different folder by adding the foldername and a slash to the file `vertical_stack.to_csv('foldername/out.csv')`. We use the ‘index=False’ so that pandas doesn’t include the index number for each line.
 
-# In[4]:
+# In[ ]:
 
 
 # Write DataFrame to CSV
@@ -1280,7 +1261,7 @@ vertical_stack.to_csv('output/out.csv', index=False)
 
 # Check out your working directory to make sure the CSV wrote out properly, and that you can open it! If you want, try to bring it back into Python to make sure it imports properly.
 
-# In[5]:
+# In[ ]:
 
 
 # For kicks read our output back into Python and make sure all looks good
@@ -1309,7 +1290,7 @@ new_output = pd.read_csv('output/out.csv', keep_default_na=False, na_values=[""]
 # 
 # To better understand joins, let’s grab the first 10 lines of our data as a subset to work with. We’ll use the `.head` method to do this. We’ll also read in a subset of the species table.
 
-# In[6]:
+# In[ ]:
 
 
 # Read in first 10 lines of surveys table
@@ -1318,7 +1299,7 @@ survey_sub = surveys_df.head(10)
 ### Download speciesSubset.csv file from web
 import urllib.request
 
-url = 'https://bit.ly/2DfqN6C'
+url = 'https://raw.githubusercontent.com/nils-holmberg/sfac-py/main/csv/speciesSubset.csv'
 
 
 urllib.request.urlretrieve(url, 'speciesSubset.csv')
@@ -1330,13 +1311,13 @@ species_sub = pd.read_csv('speciesSubset.csv', keep_default_na=False, na_values=
 
 # In this example, `species_sub` is the lookup table containing genus, species, and taxa names that we want to join with the data in `survey_sub` to produce a new DataFrame that contains all of the columns from both `species_df` and `survey_df`
 
-# In[7]:
+# In[ ]:
 
 
 species_sub.columns
 
 
-# In[8]:
+# In[ ]:
 
 
 survey_sub.columns
@@ -1352,11 +1333,11 @@ survey_sub.columns
 # 
 # Inner joins yield a DataFrame that contains only rows where the value being joins exists in BOTH tables. An example of an inner join, adapted from [this page](https://blog.codinghorror.com/a-visual-explanation-of-sql-joins/) is below:
 
-# ![inner join](images/inner-join.png)
+# ![inner join](../../fig/inner-join.png)
 
 # The pandas function for performing joins is called `merge` and an Inner join is the default option:
 
-# In[9]:
+# In[ ]:
 
 
 merged_inner = pd.merge(left=survey_sub,right=species_sub, left_on='species_id', right_on='species_id')
@@ -1390,7 +1371,7 @@ merged_inner
 
 # A left join is performed in pandas by calling the same `merge` function used for inner join, but using the `how='left'` argument:
 
-# In[10]:
+# In[ ]:
 
 
 merged_left = pd.merge(left=survey_sub,right=species_sub, how='left', left_on='species_id', right_on='species_id')
@@ -1400,7 +1381,7 @@ merged_left
 
 # The result DataFrame from a left join (`merged_left`) looks very much like the result DataFrame from an inner join (`merged_inner`) in terms of the columns it contains. However, unlike `merged_inner`, merged_left contains the same number of rows as the original `survey_sub` DataFrame. When we inspect `merged_left`, we find there are rows where the information that should have come from `species_sub (i.e., species_id, genus, and taxa)` is missing (they contain NaN values):
 
-# In[11]:
+# In[ ]:
 
 
 merged_left[ pd.isnull(merged_left.genus) ]

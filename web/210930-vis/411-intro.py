@@ -6,11 +6,17 @@
 # # data visualization using matplotlib, seaborn (210930)
 # some line
 # 
-# ## exercise 1
+# # section 4.1.1
+# some line
+# 
+# # section 4.1.2
+# some line
+# 
+# # section 4.1.3
 # some line
 # 
 
-# In[ ]:
+# In[4]:
 
 
 import numpy as np
@@ -24,7 +30,7 @@ import seaborn as sns
 #%autoreload 2
 
 
-# In[ ]:
+# In[5]:
 
 
 #dfc = pd.read_csv('some.csv')
@@ -33,7 +39,7 @@ dfc = sns.load_dataset('car_crashes')
 dfc.head()
 
 
-# In[ ]:
+# In[6]:
 
 
 sns.displot(dfc['not_distracted'])
@@ -44,8 +50,10 @@ sns.displot(dfc['not_distracted'])
 # Let's next count the number of samples for each species. We can do this in a few
 # ways, but we'll use `groupby` combined with **a `count()` method**.
 
-# In[ ]:
+# In[7]:
 
+
+surveys_df = pd.read_csv("../../csv/surveys.csv")
 
 # Count the number of samples by species
 species_counts = surveys_df.groupby('species_id')['record_id'].count()
@@ -57,7 +65,7 @@ print(species_counts)
 # 
 # 
 
-# In[ ]:
+# In[8]:
 
 
 surveys_df.groupby('species_id')['record_id'].count()['DO']
@@ -72,7 +80,7 @@ surveys_df.groupby('species_id')['record_id'].count()['DO']
 # 
 # 
 
-# In[ ]:
+# In[9]:
 
 
 # Multiply all weight values by 2 but does not change the original weight data
@@ -85,7 +93,7 @@ surveys_df['weight']*2
 # 
 # 
 
-# In[ ]:
+# In[10]:
 
 
 ## To make sure figures appear inside Jupyter Notebook
@@ -99,7 +107,7 @@ species_counts.plot(kind='bar')
 # 
 # We can also look at how many animals were captured in each site.
 
-# In[ ]:
+# In[11]:
 
 
 total_count = surveys_df.groupby('site_id')['record_id'].nunique()
@@ -122,7 +130,7 @@ total_count.plot(kind='bar')
 
 # ### _Solution to Extra Plotting Challenge 1_
 
-# In[ ]:
+# In[12]:
 
 
 ## Solution Plotting Challenge 1
@@ -131,7 +139,7 @@ surveys_df.groupby('site_id').mean()["weight"].plot(kind='bar')
 
 # ### _Solution to Extra Plotting Challenge 2_
 
-# In[ ]:
+# In[13]:
 
 
 # Solution Plotting Challenge 2
@@ -144,7 +152,7 @@ surveys_df.groupby('sex').count()["record_id"].plot(kind='bar')
 # 
 # First we group data by site and by sex, and then calculate a total for each site.
 
-# In[ ]:
+# In[14]:
 
 
 by_site_sex = surveys_df.groupby(['site_id','sex'])
@@ -172,7 +180,7 @@ site_sex_count = by_site_sex['weight'].sum()
 # 
 # 
 
-# In[ ]:
+# In[15]:
 
 
 by_site_sex = surveys_df.groupby(['site_id','sex'])
@@ -184,7 +192,7 @@ site_sex_count.unstack()
 # 
 # Rather than display it as a table, we can plot the above data by stacking the values of each sex as follows:
 
-# In[ ]:
+# In[16]:
 
 
 by_site_sex = surveys_df.groupby(['site_id', 'sex'])
@@ -193,6 +201,12 @@ spc = site_sex_count.unstack()
 s_plot = spc.plot(kind='bar', stacked=True, title="Total weight by site and sex")
 s_plot.set_ylabel("Weight")
 s_plot.set_xlabel("Site")
+
+
+# In[ ]:
+
+
+
 
 
 # In[ ]:

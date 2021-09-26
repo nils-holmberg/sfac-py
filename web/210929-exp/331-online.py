@@ -6,13 +6,13 @@
 # # web experiments with the psychopy package (210929)
 # some line
 # 
-# # section 3.1.1
+# # section 3.3.1
 # some line
 # 
-# # section 3.1.2
+# # section 3.3.2
 # some line
 # 
-# # section 3.1.3
+# # section 3.3.3
 # some line
 # 
 
