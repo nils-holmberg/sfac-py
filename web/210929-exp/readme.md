@@ -1,6 +1,6 @@
 [home](https://nils-holmberg.github.io/sfac-py/)
 
-# 3. web experiments with the psychopy package (210929)
+## 3. web experiments with the psychopy package (210929)
 
 - 3.1.1: [psychopy](311-intro.html), 
 - 3.1.2: python syntax, practice data structures, conditional statements, flow control

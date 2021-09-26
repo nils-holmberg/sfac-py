@@ -1,6 +1,6 @@
 [home](https://nils-holmberg.github.io/sfac-py/)
 
-# 1. python for research using the scipy stack (210927)
+## 1. python for research using the scipy stack (210927)
 
 - 1.1.1: [anaconda3](111-intro.html), understand install location, create and update virtual environments
 - 1.1.2: jupyter, download course material, open notebooks, edit in web browser

@@ -1,6 +1,6 @@
 [home](https://nils-holmberg.github.io/sfac-py/)
 
-# 4. data visualization using matplotlib, seaborn (210930)
+## 4. data visualization using matplotlib, seaborn (210930)
 
 - 4.1.1: [graphics](411-intro.html), basic python graphics
 - 4.1.2: python syntax, practice data structures, conditional statements, flow control

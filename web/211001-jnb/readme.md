@@ -1,6 +1,6 @@
 [home](https://nils-holmberg.github.io/sfac-py/)
 
-# 5. collaborate and share python code with jupyter (211001)
+## 5. collaborate and share python code with jupyter (211001)
 
 - 5.1.1: some, 
 - 5.1.2: python syntax, practice data structures, conditional statements, flow control

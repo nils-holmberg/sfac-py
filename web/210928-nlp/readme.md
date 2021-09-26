@@ -1,6 +1,6 @@
 [home](https://nils-holmberg.github.io/sfac-py/)
 
-# 2. natural language processing with spacy (210928)
+## 2. natural language processing with spacy (210928)
 
 - 2.1.1: [spacy](211-intro.html), install spacy packages to anaconda venv
 - 2.1.2: python syntax, practice data structures, conditional statements, flow control
