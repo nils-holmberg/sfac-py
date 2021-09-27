@@ -27,8 +27,20 @@
 # 
 # ## section 1.1.1: anaconda
 # - check anaconda3 installation (backup with google colab)
-# - anaconda console, conda update, create venv, install scipy
+# - **anaconda console**, conda update, create venv, install scipy
 # - python interpreter prompt, spyder ide, script editor
+# 
+# ```python
+# # update anaconda, spyder
+# conda update anaconda
+# conda install spyder=5.0.5
+# # update packages in env
+# conda update --all
+# # list envs
+# conda env list
+# # start jupyter notebook
+# jupyter notebook
+# ```
 # 
 # ## section 1.1.2: jupyter
 # - download course [github repository](https://github.com/nils-holmberg/sfac-py.git)

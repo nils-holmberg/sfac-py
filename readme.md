@@ -26,6 +26,10 @@
 
 - [https://code.visualstudio.com/download](https://code.visualstudio.com/download)
 
+- [https://github.com/jupyterlab/jupyterlab_app#download](https://github.com/jupyterlab/jupyterlab_app#download)
+
+- [https://trinket.io/home](https://trinket.io/home)
+
 
 
 

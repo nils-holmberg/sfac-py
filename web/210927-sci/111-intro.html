@@ -13200,9 +13200,19 @@ div#notebook {
 <p><img src="../../fig/Microsoft_Office_Excel_2019_present.svg.png" width="100"/></p>
 <h2 id="section-1.1.1:-anaconda">section 1.1.1: anaconda<a class="anchor-link" href="#section-1.1.1:-anaconda">&#182;</a></h2><ul>
 <li>check anaconda3 installation (backup with google colab)</li>
-<li>anaconda console, conda update, create venv, install scipy</li>
+<li><strong>anaconda console</strong>, conda update, create venv, install scipy</li>
 <li>python interpreter prompt, spyder ide, script editor</li>
 </ul>
+<div class="highlight"><pre><span></span><span class="c1"># update anaconda, spyder</span>
+<span class="n">conda</span> <span class="n">update</span> <span class="n">anaconda</span>
+<span class="n">conda</span> <span class="n">install</span> <span class="n">spyder</span><span class="o">=</span><span class="mf">5.0.5</span>
+<span class="c1"># update packages in env</span>
+<span class="n">conda</span> <span class="n">update</span> <span class="o">--</span><span class="nb">all</span>
+<span class="c1"># list envs</span>
+<span class="n">conda</span> <span class="n">env</span> <span class="nb">list</span>
+<span class="c1"># start jupyter notebook</span>
+<span class="n">jupyter</span> <span class="n">notebook</span>
+</pre></div>
 <h2 id="section-1.1.2:-jupyter">section 1.1.2: jupyter<a class="anchor-link" href="#section-1.1.2:-jupyter">&#182;</a></h2><ul>
 <li>download course <a href="https://github.com/nils-holmberg/sfac-py.git">github repository</a></li>
 <li>launch jupyter notebook, connect anaconda python kernel</li>
