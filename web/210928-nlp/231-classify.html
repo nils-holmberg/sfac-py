@@ -13193,11 +13193,225 @@ div#notebook {
 </tr>
 </tbody>
 </table>
-<h2 id="section-2.1.1">section 2.1.1<a class="anchor-link" href="#section-2.1.1">&#182;</a></h2><ul>
-<li>check anaconda installation, create nlp venv</li>
-<li>conda install spacy, english language models</li>
-<li>start course jupyter notebook</li>
+<ul>
+<li>section 2.1.1 python syntax<ul>
+<li><a href="#variables">variables and data types</a></li>
 </ul>
+</li>
+<li>section 2.1.2 functions<ul>
+<li><a href="#functions">functions and modules</a></li>
+</ul>
+</li>
+<li>section 2.1.3 files<ul>
+<li><a href="#files">files and directories</a></li>
+</ul>
+</li>
+</ul>
+<h1 id="section-2.1.1">section 2.1.1<a class="anchor-link" href="#section-2.1.1">&#182;</a></h1><ul>
+<li>check, update anaconda installation, create nlp venv</li>
+</ul>
+<div class="highlight"><pre><span></span><span class="c1"># update anaconda, env packages</span>
+<span class="n">conda</span> <span class="n">update</span> <span class="n">anaconda</span>
+<span class="n">conda</span> <span class="n">update</span> <span class="o">--</span><span class="nb">all</span>
+<span class="c1"># install spacy nlp package</span>
+<span class="n">conda</span> <span class="n">install</span> <span class="o">-</span><span class="n">c</span> <span class="n">conda</span><span class="o">-</span><span class="n">forge</span> <span class="o">-</span><span class="n">n</span> <span class="n">base</span> <span class="n">spacy</span>
+<span class="c1"># get trained pipline, language model</span>
+<span class="n">python</span> <span class="o">-</span><span class="n">m</span> <span class="n">spacy</span> <span class="n">download</span> <span class="n">en_core_web_sm</span>
+<span class="c1"># start jupyter notebook</span>
+<span class="n">jupyter</span> <span class="n">notebook</span>
+</pre></div>
+<h1 id="section-2.1.2">section 2.1.2<a class="anchor-link" href="#section-2.1.2">&#182;</a></h1><ul>
+<li>some text</li>
+</ul>
+<h1 id="section-2.1.3">section 2.1.3<a class="anchor-link" href="#section-2.1.3">&#182;</a></h1><ul>
+<li>some text</li>
+</ul>
+
+</div>
+</div>
+</div>
+<div class="cell border-box-sizing code_cell rendered">
+<div class="input">
+<div class="prompt input_prompt">In&nbsp;[8]:</div>
+<div class="inner_cell">
+    <div class="input_area">
+<div class=" highlight hl-ipython3"><pre><span></span><span class="kn">import</span> <span class="nn">spacy</span>
+<span class="kn">from</span> <span class="nn">spacy</span> <span class="kn">import</span> <span class="n">displacy</span>
+
+<span class="n">nlp</span> <span class="o">=</span> <span class="n">spacy</span><span class="o">.</span><span class="n">load</span><span class="p">(</span><span class="s2">&quot;en_core_web_sm&quot;</span><span class="p">)</span>
+</pre></div>
+
+    </div>
+</div>
+</div>
+
+</div>
+<div class="cell border-box-sizing text_cell rendered"><div class="prompt input_prompt">
+</div><div class="inner_cell">
+<div class="text_cell_render border-box-sizing rendered_html">
+<h3 id="spaCy-Features">spaCy Features<a class="anchor-link" href="#spaCy-Features">&#182;</a></h3><p>In the documentation, you'll come across mentions of spaCy's features and
+capabilities. Some of them refer to linguistic concepts, while others are
+related to more general machine learning functionality.</p>
+<table>
+<thead><tr>
+<th>Name</th>
+<th>Description</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td><strong>Tokenization</strong></td>
+<td>Segmenting text into words, punctuations marks etc.</td>
+</tr>
+<tr>
+<td><strong>Part-of-speech</strong> (POS) <strong>Tagging</strong></td>
+<td>Assigning word types to tokens, like verb or noun.</td>
+</tr>
+<tr>
+<td><strong>Dependency Parsing</strong></td>
+<td>Assigning syntactic dependency labels, describing the relations between individual tokens, like subject or object.</td>
+</tr>
+<tr>
+<td><strong>Lemmatization</strong></td>
+<td>Assigning the base forms of words. For example, the lemma of "was" is "be", and the lemma of "rats" is "rat".</td>
+</tr>
+<tr>
+<td><strong>Sentence Boundary Detection</strong> (SBD)</td>
+<td>Finding and segmenting individual sentences.</td>
+</tr>
+<tr>
+<td><strong>Named Entity Recognition</strong> (NER)</td>
+<td>Labelling named "real-world" objects, like persons, companies or locations.</td>
+</tr>
+<tr>
+<td><strong>Entity Linking</strong> (EL)</td>
+<td>Disambiguating textual entities to unique identifiers in a knowledge base.</td>
+</tr>
+<tr>
+<td><strong>Similarity</strong></td>
+<td>Comparing words, text spans and documents and how similar they are to each other.</td>
+</tr>
+<tr>
+<td><strong>Text Classification</strong></td>
+<td>Assigning categories or labels to a whole document, or parts of a document.</td>
+</tr>
+<tr>
+<td><strong>Rule-based Matching</strong></td>
+<td>Finding sequences of tokens based on their texts and linguistic annotations, similar to regular expressions.</td>
+</tr>
+<tr>
+<td><strong>Training</strong></td>
+<td>Updating and improving a statistical model's predictions.</td>
+</tr>
+<tr>
+<td><strong>Serialization</strong></td>
+<td>Saving objects to files or byte strings.</td>
+</tr>
+</tbody>
+</table>
+<h3 id="Tokenization">Tokenization<a class="anchor-link" href="#Tokenization">&#182;</a></h3><p>First, the raw text is split on whitespace characters, similar to
+<code>text.split(' ')</code>. Then, the tokenizer processes the text from left to right. On
+each substring, it performs two checks:</p>
+<ol>
+<li><p><strong>Does the substring match a tokenizer exception rule?</strong> For example, "don't"
+does not contain whitespace, but should be split into two tokens, "do" and
+"n't", while "U.K." should always remain one token.</p>
+</li>
+<li><p><strong>Can a prefix, suffix or infix be split off?</strong> For example punctuation like
+commas, periods, hyphens or quotes.</p>
+</li>
+</ol>
+<p>If there's a match, the rule is applied and the tokenizer continues its loop,
+starting with the newly split substrings. This way, spaCy can split <strong>complex,
+nested tokens</strong> like combinations of abbreviations and multiple punctuation
+marks.</p>
+<table>
+<thead><tr>
+<th style="text-align:center">0</th>
+<th style="text-align:center">1</th>
+<th style="text-align:center">2</th>
+<th style="text-align:center">3</th>
+<th style="text-align:center">4</th>
+<th style="text-align:center">5</th>
+<th style="text-align:center">6</th>
+<th style="text-align:center">7</th>
+<th style="text-align:center">8</th>
+<th style="text-align:center">9</th>
+<th style="text-align:center">10</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td style="text-align:center">Apple</td>
+<td style="text-align:center">is</td>
+<td style="text-align:center">looking</td>
+<td style="text-align:center">at</td>
+<td style="text-align:center">buying</td>
+<td style="text-align:center">U.K.</td>
+<td style="text-align:center">startup</td>
+<td style="text-align:center">for</td>
+<td style="text-align:center">\$</td>
+<td style="text-align:center">1</td>
+<td style="text-align:center">billion</td>
+</tr>
+</tbody>
+</table>
+
+</div>
+</div>
+</div>
+<div class="cell border-box-sizing code_cell rendered">
+<div class="input">
+<div class="prompt input_prompt">In&nbsp;[4]:</div>
+<div class="inner_cell">
+    <div class="input_area">
+<div class=" highlight hl-ipython3"><pre><span></span><span class="n">doc</span> <span class="o">=</span> <span class="n">nlp</span><span class="p">(</span><span class="s2">&quot;Apple is looking at buying U.K. startup for $1 billion&quot;</span><span class="p">)</span>
+<span class="k">for</span> <span class="n">token</span> <span class="ow">in</span> <span class="n">doc</span><span class="p">:</span>
+    <span class="nb">print</span><span class="p">(</span><span class="n">token</span><span class="o">.</span><span class="n">text</span><span class="p">)</span>
+</pre></div>
+
+    </div>
+</div>
+</div>
+
+<div class="output_wrapper">
+<div class="output">
+
+
+<div class="output_area">
+
+    <div class="prompt"></div>
+
+
+<div class="output_subarea output_stream output_stdout output_text">
+<pre>Apple
+is
+looking
+at
+buying
+U.K.
+startup
+for
+$
+1
+billion
+</pre>
+</div>
+</div>
+
+</div>
+</div>
+
+</div>
+<div class="cell border-box-sizing text_cell rendered"><div class="prompt input_prompt">
+</div><div class="inner_cell">
+<div class="text_cell_render border-box-sizing rendered_html">
+<h3 id="Linguistic-annotations">Linguistic annotations<a class="anchor-link" href="#Linguistic-annotations">&#182;</a></h3><p>spaCy provides a variety of linguistic annotations to give you <strong>insights into a
+text's grammatical structure</strong>. This includes the word types, like the parts of
+speech, and how the words are related to each other. For example, if you're
+analyzing text, it makes a huge difference whether a noun is the subject of a
+sentence, or the object – or whether "google" is used as a verb, or refers to
+the website or company in a specific context.</p>
 
 </div>
 </div>
@@ -13207,24 +13421,9 @@ div#notebook {
 <div class="prompt input_prompt">In&nbsp;[2]:</div>
 <div class="inner_cell">
     <div class="input_area">
-<div class=" highlight hl-ipython3"><pre><span></span><span class="kn">import</span> <span class="nn">numpy</span> <span class="k">as</span> <span class="nn">np</span>
-<span class="kn">import</span> <span class="nn">pandas</span> <span class="k">as</span> <span class="nn">pd</span>
-</pre></div>
-
-    </div>
-</div>
-</div>
-
-</div>
-<div class="cell border-box-sizing code_cell rendered">
-<div class="input">
-<div class="prompt input_prompt">In&nbsp;[1]:</div>
-<div class="inner_cell">
-    <div class="input_area">
-<div class=" highlight hl-ipython3"><pre><span></span><span class="kn">import</span> <span class="nn">spacy</span>
-<span class="c1">#from spacy.lang.sv import Swedish</span>
-<span class="c1">#nlp = Swedish()  # use directly</span>
-<span class="c1">#nlp = spacy.blank(&quot;sv&quot;)  # blank instance</span>
+<div class=" highlight hl-ipython3"><pre><span></span><span class="n">doc</span> <span class="o">=</span> <span class="n">nlp</span><span class="p">(</span><span class="s2">&quot;Apple is looking at buying U.K. startup for $1 billion&quot;</span><span class="p">)</span>
+<span class="k">for</span> <span class="n">token</span> <span class="ow">in</span> <span class="n">doc</span><span class="p">:</span>
+    <span class="nb">print</span><span class="p">(</span><span class="n">token</span><span class="o">.</span><span class="n">text</span><span class="p">,</span> <span class="n">token</span><span class="o">.</span><span class="n">pos_</span><span class="p">,</span> <span class="n">token</span><span class="o">.</span><span class="n">dep_</span><span class="p">)</span>
 </pre></div>
 
     </div>
@@ -13240,17 +13439,19 @@ div#notebook {
     <div class="prompt"></div>
 
 
-<div class="output_subarea output_text output_error">
-<pre>
-<span class="ansi-red-fg">---------------------------------------------------------------------------</span>
-<span class="ansi-red-fg">ModuleNotFoundError</span>                       Traceback (most recent call last)
-<span class="ansi-green-fg">&lt;ipython-input-1-68b18a625ddd&gt;</span> in <span class="ansi-cyan-fg">&lt;module&gt;</span>
-<span class="ansi-green-fg">----&gt; 1</span><span class="ansi-red-fg"> </span><span class="ansi-green-fg">import</span> spacy
-<span class="ansi-green-intense-fg ansi-bold">      2</span> <span class="ansi-red-fg">#from spacy.lang.sv import Swedish</span>
-<span class="ansi-green-intense-fg ansi-bold">      3</span> <span class="ansi-red-fg">#nlp = Swedish()  # use directly</span>
-<span class="ansi-green-intense-fg ansi-bold">      4</span> <span class="ansi-red-fg">#nlp = spacy.blank(&#34;sv&#34;)  # blank instance</span>
-
-<span class="ansi-red-fg">ModuleNotFoundError</span>: No module named &#39;spacy&#39;</pre>
+<div class="output_subarea output_stream output_stdout output_text">
+<pre>Apple PROPN nsubj
+is AUX aux
+looking VERB ROOT
+at ADP prep
+buying VERB pcomp
+U.K. PROPN compound
+startup NOUN dobj
+for ADP prep
+$ SYM quantmod
+1 NUM compound
+billion NUM pobj
+</pre>
 </div>
 </div>
 
@@ -13258,139 +13459,174 @@ div#notebook {
 </div>
 
 </div>
-<div class="cell border-box-sizing code_cell rendered">
-<div class="input">
-<div class="prompt input_prompt">In&nbsp;[3]:</div>
-<div class="inner_cell">
-    <div class="input_area">
-<div class=" highlight hl-ipython3"><pre><span></span><span class="n">doc</span> <span class="o">=</span> <span class="n">nlp</span><span class="p">(</span><span class="s2">&quot;jag heter nils&quot;</span><span class="p">)</span>
-</pre></div>
+<div class="cell border-box-sizing text_cell rendered"><div class="prompt input_prompt">
+</div><div class="inner_cell">
+<div class="text_cell_render border-box-sizing rendered_html">
+<h3 id="Part-of-speech-tags-and-dependencies">Part-of-speech tags and dependencies<a class="anchor-link" href="#Part-of-speech-tags-and-dependencies">&#182;</a></h3><p>After tokenization, spaCy can <strong>parse</strong> and <strong>tag</strong> a given <code>Doc</code>. This is where
+the trained pipeline and its statistical models come in, which enable spaCy to
+<strong>make predictions</strong> of which tag or label most likely applies in this context.
+A trained component includes binary data that is produced by showing a system
+enough examples for it to make predictions that generalize across the language –
+for example, a word following "the" in English is most likely a noun.</p>
+<p>Linguistic annotations are available as
+<a href="/api/token#attributes"><code>Token</code> attributes</a>. Like many NLP libraries, spaCy
+<strong>encodes all strings to hash values</strong> to reduce memory usage and improve
+efficiency. So to get the readable string representation of an attribute, we
+need to add an underscore <code>_</code> to its name:</p>
+<p>To learn more about <strong>part-of-speech tagging</strong> and rule-based morphology, and
+how to <strong>navigate and use the parse tree</strong> effectively, see the usage guides on
+<a href="/usage/linguistic-features#pos-tagging">part-of-speech tagging</a> and
+<a href="/usage/linguistic-features#dependency-parse">using the dependency parse</a>.</p>
+<blockquote><ul>
+<li><strong>Text:</strong> The original word text.</li>
+<li><strong>Lemma:</strong> The base form of the word.</li>
+<li><strong>POS:</strong> The simple <a href="https://universaldependencies.org/docs/u/pos/">UPOS</a>
+part-of-speech tag.</li>
+<li><strong>Tag:</strong> The detailed part-of-speech tag.</li>
+<li><strong>Dep:</strong> Syntactic dependency, i.e. the relation between tokens.</li>
+<li><strong>Shape:</strong> The word shape – capitalization, punctuation, digits.</li>
+<li><strong>is alpha:</strong> Is the token an alpha character?</li>
+<li><strong>is stop:</strong> Is the token part of a stop list, i.e. the most common words of
+the language?</li>
+</ul>
+</blockquote>
+<table>
+<thead><tr>
+<th>Text</th>
+<th>Lemma</th>
+<th>POS</th>
+<th>Tag</th>
+<th>Dep</th>
+<th>Shape</th>
+<th>alpha</th>
+<th>stop</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>Apple</td>
+<td>apple</td>
+<td><code>PROPN</code></td>
+<td><code>NNP</code></td>
+<td><code>nsubj</code></td>
+<td><code>Xxxxx</code></td>
+<td><code>True</code></td>
+<td><code>False</code></td>
+</tr>
+<tr>
+<td>is</td>
+<td>be</td>
+<td><code>AUX</code></td>
+<td><code>VBZ</code></td>
+<td><code>aux</code></td>
+<td><code>xx</code></td>
+<td><code>True</code></td>
+<td><code>True</code></td>
+</tr>
+<tr>
+<td>looking</td>
+<td>look</td>
+<td><code>VERB</code></td>
+<td><code>VBG</code></td>
+<td><code>ROOT</code></td>
+<td><code>xxxx</code></td>
+<td><code>True</code></td>
+<td><code>False</code></td>
+</tr>
+<tr>
+<td>at</td>
+<td>at</td>
+<td><code>ADP</code></td>
+<td><code>IN</code></td>
+<td><code>prep</code></td>
+<td><code>xx</code></td>
+<td><code>True</code></td>
+<td><code>True</code></td>
+</tr>
+<tr>
+<td>buying</td>
+<td>buy</td>
+<td><code>VERB</code></td>
+<td><code>VBG</code></td>
+<td><code>pcomp</code></td>
+<td><code>xxxx</code></td>
+<td><code>True</code></td>
+<td><code>False</code></td>
+</tr>
+<tr>
+<td>U.K.</td>
+<td>u.k.</td>
+<td><code>PROPN</code></td>
+<td><code>NNP</code></td>
+<td><code>compound</code></td>
+<td><code>X.X.</code></td>
+<td><code>False</code></td>
+<td><code>False</code></td>
+</tr>
+<tr>
+<td>startup</td>
+<td>startup</td>
+<td><code>NOUN</code></td>
+<td><code>NN</code></td>
+<td><code>dobj</code></td>
+<td><code>xxxx</code></td>
+<td><code>True</code></td>
+<td><code>False</code></td>
+</tr>
+<tr>
+<td>for</td>
+<td>for</td>
+<td><code>ADP</code></td>
+<td><code>IN</code></td>
+<td><code>prep</code></td>
+<td><code>xxx</code></td>
+<td><code>True</code></td>
+<td><code>True</code></td>
+</tr>
+<tr>
+<td>\$</td>
+<td>\$</td>
+<td><code>SYM</code></td>
+<td><code>$</code></td>
+<td><code>quantmod</code></td>
+<td><code>$</code></td>
+<td><code>False</code></td>
+<td><code>False</code></td>
+</tr>
+<tr>
+<td>1</td>
+<td>1</td>
+<td><code>NUM</code></td>
+<td><code>CD</code></td>
+<td><code>compound</code></td>
+<td><code>d</code></td>
+<td><code>False</code></td>
+<td><code>False</code></td>
+</tr>
+<tr>
+<td>billion</td>
+<td>billion</td>
+<td><code>NUM</code></td>
+<td><code>CD</code></td>
+<td><code>pobj</code></td>
+<td><code>xxxx</code></td>
+<td><code>True</code></td>
+<td><code>False</code></td>
+</tr>
+</tbody>
+</table>
 
-    </div>
 </div>
 </div>
-
-</div>
-<div class="cell border-box-sizing code_cell rendered">
-<div class="input">
-<div class="prompt input_prompt">In&nbsp;[4]:</div>
-<div class="inner_cell">
-    <div class="input_area">
-<div class=" highlight hl-ipython3"><pre><span></span><span class="n">doc</span>
-</pre></div>
-
-    </div>
-</div>
-</div>
-
-<div class="output_wrapper">
-<div class="output">
-
-
-<div class="output_area">
-
-    <div class="prompt output_prompt">Out[4]:</div>
-
-
-
-
-<div class="output_text output_subarea output_execute_result">
-<pre>jag heter nils</pre>
-</div>
-
-</div>
-
-</div>
-</div>
-
 </div>
 <div class="cell border-box-sizing code_cell rendered">
 <div class="input">
 <div class="prompt input_prompt">In&nbsp;[5]:</div>
 <div class="inner_cell">
     <div class="input_area">
-<div class=" highlight hl-ipython3"><pre><span></span><span class="nb">type</span><span class="p">(</span><span class="n">doc</span><span class="p">)</span>
-</pre></div>
-
-    </div>
-</div>
-</div>
-
-<div class="output_wrapper">
-<div class="output">
-
-
-<div class="output_area">
-
-    <div class="prompt output_prompt">Out[5]:</div>
-
-
-
-
-<div class="output_text output_subarea output_execute_result">
-<pre>spacy.tokens.doc.Doc</pre>
-</div>
-
-</div>
-
-</div>
-</div>
-
-</div>
-<div class="cell border-box-sizing code_cell rendered">
-<div class="input">
-<div class="prompt input_prompt">In&nbsp;[6]:</div>
-<div class="inner_cell">
-    <div class="input_area">
-<div class=" highlight hl-ipython3"><pre><span></span><span class="n">doc</span><span class="p">[</span><span class="mi">0</span><span class="p">]</span>
-</pre></div>
-
-    </div>
-</div>
-</div>
-
-<div class="output_wrapper">
-<div class="output">
-
-
-<div class="output_area">
-
-    <div class="prompt output_prompt">Out[6]:</div>
-
-
-
-
-<div class="output_text output_subarea output_execute_result">
-<pre>jag</pre>
-</div>
-
-</div>
-
-</div>
-</div>
-
-</div>
-<div class="cell border-box-sizing code_cell rendered">
-<div class="input">
-<div class="prompt input_prompt">In&nbsp;[7]:</div>
-<div class="inner_cell">
-    <div class="input_area">
-<div class=" highlight hl-ipython3"><pre><span></span><span class="n">t</span> <span class="o">=</span> <span class="n">doc</span><span class="p">[</span><span class="mi">0</span><span class="p">]</span>
-</pre></div>
-
-    </div>
-</div>
-</div>
-
-</div>
-<div class="cell border-box-sizing code_cell rendered">
-<div class="input">
-<div class="prompt input_prompt">In&nbsp;[8]:</div>
-<div class="inner_cell">
-    <div class="input_area">
-<div class=" highlight hl-ipython3"><pre><span></span><span class="kn">from</span> <span class="nn">spacy</span> <span class="kn">import</span> <span class="n">displacy</span>
-
-<span class="n">displacy</span><span class="o">.</span><span class="n">render</span><span class="p">(</span><span class="n">doc</span><span class="p">)</span>
+<div class=" highlight hl-ipython3"><pre><span></span><span class="k">for</span> <span class="n">token</span> <span class="ow">in</span> <span class="n">doc</span><span class="p">:</span>
+    <span class="nb">print</span><span class="p">(</span><span class="n">token</span><span class="o">.</span><span class="n">text</span><span class="p">,</span> <span class="n">token</span><span class="o">.</span><span class="n">lemma_</span><span class="p">,</span> <span class="n">token</span><span class="o">.</span><span class="n">pos_</span><span class="p">,</span> <span class="n">token</span><span class="o">.</span><span class="n">tag_</span><span class="p">,</span> <span class="n">token</span><span class="o">.</span><span class="n">dep_</span><span class="p">,</span>
+            <span class="n">token</span><span class="o">.</span><span class="n">shape_</span><span class="p">,</span> <span class="n">token</span><span class="o">.</span><span class="n">is_alpha</span><span class="p">,</span> <span class="n">token</span><span class="o">.</span><span class="n">is_stop</span><span class="p">)</span>
 </pre></div>
 
     </div>
@@ -13406,40 +13642,22 @@ div#notebook {
     <div class="prompt"></div>
 
 
-<div class="output_subarea output_stream output_stderr output_text">
-<pre>/usr/lib/python3.7/runpy.py:193: UserWarning: [W005] Doc object not parsed. This means displaCy won&#39;t be able to generate a dependency visualization for it. Make sure the Doc was processed with a model that supports dependency parsing, and not just a language class like `English()`. For more info, see the docs:
-https://spacy.io/usage/models
-  &#34;__main__&#34;, mod_spec)
+<div class="output_subarea output_stream output_stdout output_text">
+<pre>Apple Apple PROPN NNP nsubj Xxxxx True False
+is be AUX VBZ aux xx True True
+looking look VERB VBG ROOT xxxx True False
+at at ADP IN prep xx True True
+buying buy VERB VBG pcomp xxxx True False
+U.K. U.K. PROPN NNP compound X.X. False False
+startup startup NOUN NN dobj xxxx True False
+for for ADP IN prep xxx True True
+$ $ SYM $ quantmod $ False False
+1 1 NUM CD compound d False False
+billion billion NUM CD pobj xxxx True False
 </pre>
 </div>
 </div>
 
-<div class="output_area">
-
-    <div class="prompt output_prompt">Out[8]:</div>
-
-
-
-
-<div class="output_text output_subarea output_execute_result">
-<pre>&#39;&lt;svg xmlns=&#34;http://www.w3.org/2000/svg&#34; xmlns:xlink=&#34;http://www.w3.org/1999/xlink&#34; xml:lang=&#34;sv&#34; id=&#34;cd3df3602f304ed9914996212adcadb5-0&#34; class=&#34;displacy&#34; width=&#34;575&#34; height=&#34;137.0&#34; direction=&#34;ltr&#34; style=&#34;max-width: none; height: 137.0px; color: #000000; background: #ffffff; font-family: Arial; direction: ltr&#34;&gt;\n&lt;text class=&#34;displacy-token&#34; fill=&#34;currentColor&#34; text-anchor=&#34;middle&#34; y=&#34;47.0&#34;&gt;\n    &lt;tspan class=&#34;displacy-word&#34; fill=&#34;currentColor&#34; x=&#34;50&#34;&gt;jag&lt;/tspan&gt;\n    &lt;tspan class=&#34;displacy-tag&#34; dy=&#34;2em&#34; fill=&#34;currentColor&#34; x=&#34;50&#34;&gt;&lt;/tspan&gt;\n&lt;/text&gt;\n\n&lt;text class=&#34;displacy-token&#34; fill=&#34;currentColor&#34; text-anchor=&#34;middle&#34; y=&#34;47.0&#34;&gt;\n    &lt;tspan class=&#34;displacy-word&#34; fill=&#34;currentColor&#34; x=&#34;225&#34;&gt;heter&lt;/tspan&gt;\n    &lt;tspan class=&#34;displacy-tag&#34; dy=&#34;2em&#34; fill=&#34;currentColor&#34; x=&#34;225&#34;&gt;&lt;/tspan&gt;\n&lt;/text&gt;\n\n&lt;text class=&#34;displacy-token&#34; fill=&#34;currentColor&#34; text-anchor=&#34;middle&#34; y=&#34;47.0&#34;&gt;\n    &lt;tspan class=&#34;displacy-word&#34; fill=&#34;currentColor&#34; x=&#34;400&#34;&gt;nils&lt;/tspan&gt;\n    &lt;tspan class=&#34;displacy-tag&#34; dy=&#34;2em&#34; fill=&#34;currentColor&#34; x=&#34;400&#34;&gt;&lt;/tspan&gt;\n&lt;/text&gt;\n&lt;/svg&gt;&#39;</pre>
-</div>
-
-</div>
-
-</div>
-</div>
-
-</div>
-<div class="cell border-box-sizing code_cell rendered">
-<div class="input">
-<div class="prompt input_prompt">In&nbsp;[9]:</div>
-<div class="inner_cell">
-    <div class="input_area">
-<div class=" highlight hl-ipython3"><pre><span></span><span class="n">nlp</span> <span class="o">=</span> <span class="n">spacy</span><span class="o">.</span><span class="n">load</span><span class="p">(</span><span class="s2">&quot;en_core_web_sm&quot;</span><span class="p">)</span>
-</pre></div>
-
-    </div>
 </div>
 </div>
 
@@ -13447,19 +13665,6 @@ https://spacy.io/usage/models
 <div class="cell border-box-sizing code_cell rendered">
 <div class="input">
 <div class="prompt input_prompt">In&nbsp;[10]:</div>
-<div class="inner_cell">
-    <div class="input_area">
-<div class=" highlight hl-ipython3"><pre><span></span><span class="n">doc</span> <span class="o">=</span> <span class="n">nlp</span><span class="p">(</span><span class="s2">&quot;my name is nils&quot;</span><span class="p">)</span>
-</pre></div>
-
-    </div>
-</div>
-</div>
-
-</div>
-<div class="cell border-box-sizing code_cell rendered">
-<div class="input">
-<div class="prompt input_prompt">In&nbsp;[12]:</div>
 <div class="inner_cell">
     <div class="input_area">
 <div class=" highlight hl-ipython3"><pre><span></span><span class="n">displacy</span><span class="o">.</span><span class="n">render</span><span class="p">(</span><span class="n">doc</span><span class="p">,</span> <span class="n">jupyter</span><span class="o">=</span><span class="kc">True</span><span class="p">)</span>
@@ -13479,49 +13684,140 @@ https://spacy.io/usage/models
 
 
 
-<div class="output_html rendered_html output_subarea "><span class="tex2jax_ignore"><svg xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink" xml:lang="en" id="2abd4164c0914d5abf0c9e86ab24f023-0" class="displacy" width="750" height="224.5" direction="ltr" style="max-width: none; height: 224.5px; color: #000000; background: #ffffff; font-family: Arial; direction: ltr">
-<text class="displacy-token" fill="currentColor" text-anchor="middle" y="134.5">
-    <tspan class="displacy-word" fill="currentColor" x="50">my</tspan>
-    <tspan class="displacy-tag" dy="2em" fill="currentColor" x="50">DET</tspan>
+<div class="output_html rendered_html output_subarea "><span class="tex2jax_ignore"><svg xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink" xml:lang="en" id="acc063eba04843e289d37263ce427c92-0" class="displacy" width="1975" height="399.5" direction="ltr" style="max-width: none; height: 399.5px; color: #000000; background: #ffffff; font-family: Arial; direction: ltr">
+<text class="displacy-token" fill="currentColor" text-anchor="middle" y="309.5">
+    <tspan class="displacy-word" fill="currentColor" x="50">Apple</tspan>
+    <tspan class="displacy-tag" dy="2em" fill="currentColor" x="50">PROPN</tspan>
 </text>
 
-<text class="displacy-token" fill="currentColor" text-anchor="middle" y="134.5">
-    <tspan class="displacy-word" fill="currentColor" x="225">name</tspan>
-    <tspan class="displacy-tag" dy="2em" fill="currentColor" x="225">NOUN</tspan>
+<text class="displacy-token" fill="currentColor" text-anchor="middle" y="309.5">
+    <tspan class="displacy-word" fill="currentColor" x="225">is</tspan>
+    <tspan class="displacy-tag" dy="2em" fill="currentColor" x="225">AUX</tspan>
 </text>
 
-<text class="displacy-token" fill="currentColor" text-anchor="middle" y="134.5">
-    <tspan class="displacy-word" fill="currentColor" x="400">is</tspan>
-    <tspan class="displacy-tag" dy="2em" fill="currentColor" x="400">AUX</tspan>
+<text class="displacy-token" fill="currentColor" text-anchor="middle" y="309.5">
+    <tspan class="displacy-word" fill="currentColor" x="400">looking</tspan>
+    <tspan class="displacy-tag" dy="2em" fill="currentColor" x="400">VERB</tspan>
 </text>
 
-<text class="displacy-token" fill="currentColor" text-anchor="middle" y="134.5">
-    <tspan class="displacy-word" fill="currentColor" x="575">nils</tspan>
-    <tspan class="displacy-tag" dy="2em" fill="currentColor" x="575">VERB</tspan>
+<text class="displacy-token" fill="currentColor" text-anchor="middle" y="309.5">
+    <tspan class="displacy-word" fill="currentColor" x="575">at</tspan>
+    <tspan class="displacy-tag" dy="2em" fill="currentColor" x="575">ADP</tspan>
+</text>
+
+<text class="displacy-token" fill="currentColor" text-anchor="middle" y="309.5">
+    <tspan class="displacy-word" fill="currentColor" x="750">buying</tspan>
+    <tspan class="displacy-tag" dy="2em" fill="currentColor" x="750">VERB</tspan>
+</text>
+
+<text class="displacy-token" fill="currentColor" text-anchor="middle" y="309.5">
+    <tspan class="displacy-word" fill="currentColor" x="925">U.K.</tspan>
+    <tspan class="displacy-tag" dy="2em" fill="currentColor" x="925">PROPN</tspan>
+</text>
+
+<text class="displacy-token" fill="currentColor" text-anchor="middle" y="309.5">
+    <tspan class="displacy-word" fill="currentColor" x="1100">startup</tspan>
+    <tspan class="displacy-tag" dy="2em" fill="currentColor" x="1100">NOUN</tspan>
+</text>
+
+<text class="displacy-token" fill="currentColor" text-anchor="middle" y="309.5">
+    <tspan class="displacy-word" fill="currentColor" x="1275">for</tspan>
+    <tspan class="displacy-tag" dy="2em" fill="currentColor" x="1275">ADP</tspan>
+</text>
+
+<text class="displacy-token" fill="currentColor" text-anchor="middle" y="309.5">
+    <tspan class="displacy-word" fill="currentColor" x="1450">$</tspan>
+    <tspan class="displacy-tag" dy="2em" fill="currentColor" x="1450">SYM</tspan>
+</text>
+
+<text class="displacy-token" fill="currentColor" text-anchor="middle" y="309.5">
+    <tspan class="displacy-word" fill="currentColor" x="1625">1</tspan>
+    <tspan class="displacy-tag" dy="2em" fill="currentColor" x="1625">NUM</tspan>
+</text>
+
+<text class="displacy-token" fill="currentColor" text-anchor="middle" y="309.5">
+    <tspan class="displacy-word" fill="currentColor" x="1800">billion</tspan>
+    <tspan class="displacy-tag" dy="2em" fill="currentColor" x="1800">NUM</tspan>
 </text>
 
 <g class="displacy-arrow">
-    <path class="displacy-arc" id="arrow-2abd4164c0914d5abf0c9e86ab24f023-0-0" stroke-width="2px" d="M70,89.5 C70,2.0 225.0,2.0 225.0,89.5" fill="none" stroke="currentColor"/>
+    <path class="displacy-arc" id="arrow-acc063eba04843e289d37263ce427c92-0-0" stroke-width="2px" d="M70,264.5 C70,89.5 395.0,89.5 395.0,264.5" fill="none" stroke="currentColor"/>
     <text dy="1.25em" style="font-size: 0.8em; letter-spacing: 1px">
-        <textPath xlink:href="#arrow-2abd4164c0914d5abf0c9e86ab24f023-0-0" class="displacy-label" startOffset="50%" side="left" fill="currentColor" text-anchor="middle">poss</textPath>
+        <textPath xlink:href="#arrow-acc063eba04843e289d37263ce427c92-0-0" class="displacy-label" startOffset="50%" side="left" fill="currentColor" text-anchor="middle">nsubj</textPath>
     </text>
-    <path class="displacy-arrowhead" d="M70,91.5 L62,79.5 78,79.5" fill="currentColor"/>
+    <path class="displacy-arrowhead" d="M70,266.5 L62,254.5 78,254.5" fill="currentColor"/>
 </g>
 
 <g class="displacy-arrow">
-    <path class="displacy-arc" id="arrow-2abd4164c0914d5abf0c9e86ab24f023-0-1" stroke-width="2px" d="M245,89.5 C245,2.0 400.0,2.0 400.0,89.5" fill="none" stroke="currentColor"/>
+    <path class="displacy-arc" id="arrow-acc063eba04843e289d37263ce427c92-0-1" stroke-width="2px" d="M245,264.5 C245,177.0 390.0,177.0 390.0,264.5" fill="none" stroke="currentColor"/>
     <text dy="1.25em" style="font-size: 0.8em; letter-spacing: 1px">
-        <textPath xlink:href="#arrow-2abd4164c0914d5abf0c9e86ab24f023-0-1" class="displacy-label" startOffset="50%" side="left" fill="currentColor" text-anchor="middle">nsubj</textPath>
+        <textPath xlink:href="#arrow-acc063eba04843e289d37263ce427c92-0-1" class="displacy-label" startOffset="50%" side="left" fill="currentColor" text-anchor="middle">aux</textPath>
     </text>
-    <path class="displacy-arrowhead" d="M245,91.5 L237,79.5 253,79.5" fill="currentColor"/>
+    <path class="displacy-arrowhead" d="M245,266.5 L237,254.5 253,254.5" fill="currentColor"/>
 </g>
 
 <g class="displacy-arrow">
-    <path class="displacy-arc" id="arrow-2abd4164c0914d5abf0c9e86ab24f023-0-2" stroke-width="2px" d="M420,89.5 C420,2.0 575.0,2.0 575.0,89.5" fill="none" stroke="currentColor"/>
+    <path class="displacy-arc" id="arrow-acc063eba04843e289d37263ce427c92-0-2" stroke-width="2px" d="M420,264.5 C420,177.0 565.0,177.0 565.0,264.5" fill="none" stroke="currentColor"/>
     <text dy="1.25em" style="font-size: 0.8em; letter-spacing: 1px">
-        <textPath xlink:href="#arrow-2abd4164c0914d5abf0c9e86ab24f023-0-2" class="displacy-label" startOffset="50%" side="left" fill="currentColor" text-anchor="middle">attr</textPath>
+        <textPath xlink:href="#arrow-acc063eba04843e289d37263ce427c92-0-2" class="displacy-label" startOffset="50%" side="left" fill="currentColor" text-anchor="middle">prep</textPath>
     </text>
-    <path class="displacy-arrowhead" d="M575.0,91.5 L583.0,79.5 567.0,79.5" fill="currentColor"/>
+    <path class="displacy-arrowhead" d="M565.0,266.5 L573.0,254.5 557.0,254.5" fill="currentColor"/>
+</g>
+
+<g class="displacy-arrow">
+    <path class="displacy-arc" id="arrow-acc063eba04843e289d37263ce427c92-0-3" stroke-width="2px" d="M595,264.5 C595,177.0 740.0,177.0 740.0,264.5" fill="none" stroke="currentColor"/>
+    <text dy="1.25em" style="font-size: 0.8em; letter-spacing: 1px">
+        <textPath xlink:href="#arrow-acc063eba04843e289d37263ce427c92-0-3" class="displacy-label" startOffset="50%" side="left" fill="currentColor" text-anchor="middle">pcomp</textPath>
+    </text>
+    <path class="displacy-arrowhead" d="M740.0,266.5 L748.0,254.5 732.0,254.5" fill="currentColor"/>
+</g>
+
+<g class="displacy-arrow">
+    <path class="displacy-arc" id="arrow-acc063eba04843e289d37263ce427c92-0-4" stroke-width="2px" d="M945,264.5 C945,177.0 1090.0,177.0 1090.0,264.5" fill="none" stroke="currentColor"/>
+    <text dy="1.25em" style="font-size: 0.8em; letter-spacing: 1px">
+        <textPath xlink:href="#arrow-acc063eba04843e289d37263ce427c92-0-4" class="displacy-label" startOffset="50%" side="left" fill="currentColor" text-anchor="middle">compound</textPath>
+    </text>
+    <path class="displacy-arrowhead" d="M945,266.5 L937,254.5 953,254.5" fill="currentColor"/>
+</g>
+
+<g class="displacy-arrow">
+    <path class="displacy-arc" id="arrow-acc063eba04843e289d37263ce427c92-0-5" stroke-width="2px" d="M770,264.5 C770,89.5 1095.0,89.5 1095.0,264.5" fill="none" stroke="currentColor"/>
+    <text dy="1.25em" style="font-size: 0.8em; letter-spacing: 1px">
+        <textPath xlink:href="#arrow-acc063eba04843e289d37263ce427c92-0-5" class="displacy-label" startOffset="50%" side="left" fill="currentColor" text-anchor="middle">dobj</textPath>
+    </text>
+    <path class="displacy-arrowhead" d="M1095.0,266.5 L1103.0,254.5 1087.0,254.5" fill="currentColor"/>
+</g>
+
+<g class="displacy-arrow">
+    <path class="displacy-arc" id="arrow-acc063eba04843e289d37263ce427c92-0-6" stroke-width="2px" d="M770,264.5 C770,2.0 1275.0,2.0 1275.0,264.5" fill="none" stroke="currentColor"/>
+    <text dy="1.25em" style="font-size: 0.8em; letter-spacing: 1px">
+        <textPath xlink:href="#arrow-acc063eba04843e289d37263ce427c92-0-6" class="displacy-label" startOffset="50%" side="left" fill="currentColor" text-anchor="middle">prep</textPath>
+    </text>
+    <path class="displacy-arrowhead" d="M1275.0,266.5 L1283.0,254.5 1267.0,254.5" fill="currentColor"/>
+</g>
+
+<g class="displacy-arrow">
+    <path class="displacy-arc" id="arrow-acc063eba04843e289d37263ce427c92-0-7" stroke-width="2px" d="M1470,264.5 C1470,89.5 1795.0,89.5 1795.0,264.5" fill="none" stroke="currentColor"/>
+    <text dy="1.25em" style="font-size: 0.8em; letter-spacing: 1px">
+        <textPath xlink:href="#arrow-acc063eba04843e289d37263ce427c92-0-7" class="displacy-label" startOffset="50%" side="left" fill="currentColor" text-anchor="middle">quantmod</textPath>
+    </text>
+    <path class="displacy-arrowhead" d="M1470,266.5 L1462,254.5 1478,254.5" fill="currentColor"/>
+</g>
+
+<g class="displacy-arrow">
+    <path class="displacy-arc" id="arrow-acc063eba04843e289d37263ce427c92-0-8" stroke-width="2px" d="M1645,264.5 C1645,177.0 1790.0,177.0 1790.0,264.5" fill="none" stroke="currentColor"/>
+    <text dy="1.25em" style="font-size: 0.8em; letter-spacing: 1px">
+        <textPath xlink:href="#arrow-acc063eba04843e289d37263ce427c92-0-8" class="displacy-label" startOffset="50%" side="left" fill="currentColor" text-anchor="middle">compound</textPath>
+    </text>
+    <path class="displacy-arrowhead" d="M1645,266.5 L1637,254.5 1653,254.5" fill="currentColor"/>
+</g>
+
+<g class="displacy-arrow">
+    <path class="displacy-arc" id="arrow-acc063eba04843e289d37263ce427c92-0-9" stroke-width="2px" d="M1295,264.5 C1295,2.0 1800.0,2.0 1800.0,264.5" fill="none" stroke="currentColor"/>
+    <text dy="1.25em" style="font-size: 0.8em; letter-spacing: 1px">
+        <textPath xlink:href="#arrow-acc063eba04843e289d37263ce427c92-0-9" class="displacy-label" startOffset="50%" side="left" fill="currentColor" text-anchor="middle">pobj</textPath>
+    </text>
+    <path class="displacy-arrowhead" d="M1800.0,266.5 L1808.0,254.5 1792.0,254.5" fill="currentColor"/>
 </g>
 </svg></span></div>
 
@@ -13530,6 +13826,111 @@ https://spacy.io/usage/models
 </div>
 </div>
 
+</div>
+<div class="cell border-box-sizing text_cell rendered"><div class="prompt input_prompt">
+</div><div class="inner_cell">
+<div class="text_cell_render border-box-sizing rendered_html">
+<h3 id="Named-Entities">Named Entities<a class="anchor-link" href="#Named-Entities">&#182;</a></h3><p>To learn more about entity recognition in spaCy, how to <strong>add your own
+entities</strong> to a document and how to <strong>train and update</strong> the entity predictions
+of a model, see the usage guides on
+<a href="/usage/linguistic-features#named-entities">named entity recognition</a> and
+<a href="/usage/training">training pipelines</a>.</p>
+<p>A named entity is a "real-world object" that's assigned a name – for example, a
+person, a country, a product or a book title. spaCy can <strong>recognize various
+types of named entities in a document, by asking the model for a
+prediction</strong>. Because models are statistical and strongly depend on the
+examples they were trained on, this doesn't always work <em>perfectly</em> and might
+need some tuning later, depending on your use case.</p>
+<p>Named entities are available as the <code>ents</code> property of a <code>Doc</code>:</p>
+<blockquote><ul>
+<li><strong>Text:</strong> The original entity text.</li>
+<li><strong>Start:</strong> Index of start of entity in the <code>Doc</code>.</li>
+<li><strong>End:</strong> Index of end of entity in the <code>Doc</code>.</li>
+<li><strong>Label:</strong> Entity label, i.e. type.</li>
+</ul>
+</blockquote>
+<table>
+<thead><tr>
+<th>Text</th>
+<th style="text-align:center">Start</th>
+<th style="text-align:center">End</th>
+<th>Label</th>
+<th>Description</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>Apple</td>
+<td style="text-align:center">0</td>
+<td style="text-align:center">5</td>
+<td><code>ORG</code></td>
+<td>Companies, agencies, institutions.</td>
+</tr>
+<tr>
+<td>U.K.</td>
+<td style="text-align:center">27</td>
+<td style="text-align:center">31</td>
+<td><code>GPE</code></td>
+<td>Geopolitical entity, i.e. countries, cities, states.</td>
+</tr>
+<tr>
+<td>\$1 billion</td>
+<td style="text-align:center">44</td>
+<td style="text-align:center">54</td>
+<td><code>MONEY</code></td>
+<td>Monetary values, including unit.</td>
+</tr>
+</tbody>
+</table>
+<p>Using spaCy's built-in <a href="/usage/visualizers">displaCy visualizer</a>, here's what
+our example sentence and its named entities look like:</p>
+
+</div>
+</div>
+</div>
+<div class="cell border-box-sizing code_cell rendered">
+<div class="input">
+<div class="prompt input_prompt">In&nbsp;[6]:</div>
+<div class="inner_cell">
+    <div class="input_area">
+<div class=" highlight hl-ipython3"><pre><span></span><span class="k">for</span> <span class="n">ent</span> <span class="ow">in</span> <span class="n">doc</span><span class="o">.</span><span class="n">ents</span><span class="p">:</span>
+    <span class="nb">print</span><span class="p">(</span><span class="n">ent</span><span class="o">.</span><span class="n">text</span><span class="p">,</span> <span class="n">ent</span><span class="o">.</span><span class="n">start_char</span><span class="p">,</span> <span class="n">ent</span><span class="o">.</span><span class="n">end_char</span><span class="p">,</span> <span class="n">ent</span><span class="o">.</span><span class="n">label_</span><span class="p">)</span>
+</pre></div>
+
+    </div>
+</div>
+</div>
+
+<div class="output_wrapper">
+<div class="output">
+
+
+<div class="output_area">
+
+    <div class="prompt"></div>
+
+
+<div class="output_subarea output_stream output_stdout output_text">
+<pre>Apple 0 5 ORG
+U.K. 27 31 GPE
+$1 billion 44 54 MONEY
+</pre>
+</div>
+</div>
+
+</div>
+</div>
+
+</div>
+<div class="cell border-box-sizing text_cell rendered"><div class="prompt input_prompt">
+</div><div class="inner_cell">
+<div class="text_cell_render border-box-sizing rendered_html">
+<h3 id="Word-vectors-and-similarity">Word vectors and similarity<a class="anchor-link" href="#Word-vectors-and-similarity">&#182;</a></h3><p>To learn more about word vectors, how to <strong>customize them</strong> and how to load
+<strong>your own vectors</strong> into spaCy, see the usage guide on
+<a href="/usage/linguistic-features#vectors-similarity">using word vectors and semantic similarities</a>.</p>
+
+</div>
+</div>
 </div>
 <div class="cell border-box-sizing code_cell rendered">
 <div class="input">

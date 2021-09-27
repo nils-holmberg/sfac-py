@@ -5,10 +5,21 @@
 # 
 # # day 1: getting started with python
 # - overview of day 1
-# - **mindset: excel on steroids**
+# - section 1.3.1 tabular data
+#     - [dataset, csv file](#dataset)
+#     - [pandas data frame](#dataframe)
+# - section 1.3.2 subset
+#     - [indexing and slicing](#indexing)
+#     - [merging and reshaping](#merging)
+# - section 1.3.3 summarize
+#     - [group by](#groupby)
+#     - [summary statistics](#statistics)
+# 
 # <img src="../../fig/Microsoft_Office_Excel_2019_present.svg.png" width="100"/>
 # 
-# ## section 1.3.1: tables
+# - **mindset: excel on steroids**
+# 
+# # section 1.3.1: tables
 # - **mindset: excel on steroids**
 # - file system, folders, csv files
 # - checking, cleaning, summarizing 
