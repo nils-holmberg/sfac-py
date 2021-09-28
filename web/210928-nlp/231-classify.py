@@ -30,9 +30,7 @@ from spacy import displacy
 nlp = spacy.load("en_core_web_sm")
 
 
-# #  NLP Tutorial 8 - Amazon and IMDB Review Sentiment Classification using SpaCy
-
-# #### Watch Full Lesson here:  https://youtu.be/cd51nXNpiiU
+# # Amazon and IMDB Review Sentiment Classification using SpaCy
 
 # ## What is NLP 
 

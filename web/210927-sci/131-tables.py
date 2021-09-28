@@ -98,7 +98,7 @@ df.head()
 # 
 # We will be using this dataset, which can be downloaded here: [surveys.csv](tmp/surveys.csv) ... but **don't click** to download it in your browser - **we are going to use Python !**
 
-# In[ ]:
+# In[1]:
 
 
 import urllib.request
@@ -180,7 +180,7 @@ urllib.request.urlretrieve(url, 'tmp/surveys.csv')
 # library a nickname to shorten the command, we can add `as nickNameHere`.  An
 # example of importing the pandas library using the common nickname `pd` is below.
 
-# In[ ]:
+# In[2]:
 
 
 import pandas as pd
@@ -217,7 +217,7 @@ import pandas as pd
 # 
 # 
 
-# In[ ]:
+# In[3]:
 
 
 # note that pd.read_csv is available because we imported pandas as pd, and data is available where we saved it
@@ -237,7 +237,7 @@ df.head()
 # 
 # Let's call the imported survey data `surveys_df`:
 
-# In[ ]:
+# In[4]:
 
 
 surveys_df = pd.read_csv("../../csv/surveys.csv")
@@ -247,7 +247,7 @@ surveys_df = pd.read_csv("../../csv/surveys.csv")
 # produce any output on the screen. We can view the value of the `surveys_df`
 # object by typing its name into the cell.
 
-# In[ ]:
+# In[5]:
 
 
 surveys_df
@@ -263,7 +263,7 @@ surveys_df
 # The `head()` function displays the first several lines of a file. It is discussed below.
 # 
 
-# In[ ]:
+# In[6]:
 
 
 surveys_df.head()
@@ -275,7 +275,7 @@ surveys_df.head()
 # 
 # 
 
-# In[ ]:
+# In[7]:
 
 
 type(surveys_df)
@@ -290,7 +290,7 @@ type(surveys_df)
 # 
 # 
 
-# In[ ]:
+# In[8]:
 
 
 surveys_df.dtypes
@@ -349,7 +349,7 @@ surveys_df.dtypes
 # 
 # 
 
-# In[ ]:
+# In[9]:
 
 
 # Look at the column names
@@ -359,7 +359,7 @@ surveys_df.columns
 # Let's get a list of all the species. The `pd.unique` function tells us all of
 # the unique values in the `species_id` column.
 
-# In[ ]:
+# In[10]:
 
 
 pd.unique(surveys_df['species_id'])
@@ -375,7 +375,7 @@ pd.unique(surveys_df['species_id'])
 
 # ## Solution - Statistics
 
-# In[ ]:
+# In[11]:
 
 
 site_names = pd.unique(surveys_df['site_id'])
@@ -391,7 +391,7 @@ print(len(site_names), surveys_df['site_id'].nunique())
 # We can calculate basic statistics for all records in a single column using the
 # syntax below:
 
-# In[ ]:
+# In[12]:
 
 
 surveys_df['weight'].describe()
@@ -402,7 +402,7 @@ surveys_df['weight'].describe()
 # 
 # 
 
-# In[ ]:
+# In[13]:
 
 
 surveys_df['weight'].min()
@@ -420,7 +420,7 @@ surveys_df['weight'].count()
 # 
 # 
 
-# In[ ]:
+# In[14]:
 
 
 # Group data by sex
@@ -435,7 +435,7 @@ grouped_data = surveys_df.groupby('sex')
 # 
 # 
 
-# In[ ]:
+# In[15]:
 
 
 # Summary statistics for all numeric columns by sex
@@ -475,7 +475,7 @@ grouped_data.mean()
 
 # ## Solution- Summary Data
 
-# In[ ]:
+# In[16]:
 
 
 ## Solution Challenge 1
@@ -488,7 +488,7 @@ grouped_data.count()
 # mean does not make sense for each variable, so you can specify this column-wise: 
 # e.g. I want to know the last survey year, median foot-length and mean weight for each site/sex combination:
 
-# In[ ]:
+# In[17]:
 
 
 # Solution- Challenge 3
@@ -521,7 +521,7 @@ surveys_df.groupby(['site_id'])['weight'].describe()
 # 
 # 
 
-# In[ ]:
+# In[18]:
 
 
 # Count the number of samples by species
@@ -534,7 +534,7 @@ print(species_counts)
 # 
 # 
 
-# In[ ]:
+# In[19]:
 
 
 surveys_df.groupby('species_id')['record_id'].count()['DO']
@@ -549,7 +549,7 @@ surveys_df.groupby('species_id')['record_id'].count()['DO']
 # 
 # 
 
-# In[ ]:
+# In[20]:
 
 
 # Multiply all weight values by 2 but does not change the original weight data
@@ -596,28 +596,20 @@ surveys_df['weight']*2
 #   - Slicing, and
 #   - Subsetting
 
-# ## Ensure the Pandas package is installed
-
-# In[ ]:
-
-
-get_ipython().system('pip install pandas matplotlib')
-
-
 # ## Loading our data
 # 
 # We will continue to use the surveys dataset that we worked with in the last lesson. Let's reopen and read in the data again:
 # 
 # 
 
-# In[ ]:
+# In[21]:
 
 
 # Make sure pandas is loaded
 import pandas as pd
 
 # Read in the survey CSV
-surveys_df = pd.read_csv("surveys.csv")
+surveys_df = pd.read_csv("tmp/surveys.csv")
 
 
 # ## Indexing and Slicing in Python
