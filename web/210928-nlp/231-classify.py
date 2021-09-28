@@ -5,48 +5,20 @@
 # 
 # # day 2: getting started with nlp
 # - overview day 2
-# 
-# |time  |section |concepts               |outcomes                               |
-# |:-----|:-------|:----------------------|:--------------------------------------|
-# |09-10 |2.1.1   |[spacy](01-intro.html) |install spacy package to anaconda venv |
-# |      |2.1.2   |import text            |                                       |
-# |      |2.1.3   |create document        |                                       |
-# |      |break   |                       |                                       |
-# |10-11 |2.2.1   |clean                  |                                       |
-# |      |2.2.2   |tokenize               |                                       |
-# |      |2.2.3   |ner                    |                                       |
-# |      |break   |                       |                                       |
-# |11-12 |2.3.1   |classify               |                                       |
-# |      |2.3.2   |                       |                                       |
-# |      |2.3.3   |                       |                                       |
-# |12-13 |lunch   |                       |                                       |
-# 
-# - section 2.1.1 python syntax
+# - section 2.3.1 python syntax
 #     - [variables and data types](#variables)
-# - section 2.1.2 functions
+# - section 2.3.2 functions
 #     - [functions and modules](#functions)
-# - section 2.1.3 files
+# - section 2.3.3 files
 #     - [files and directories](#files)
 # 
-# # section 2.1.1
-# - check, update anaconda installation, create nlp venv
-# 
-# ```python
-# # update anaconda, env packages
-# conda update anaconda
-# conda update --all
-# # install spacy nlp package
-# conda install -c conda-forge -n base spacy
-# # get trained pipline, language model
-# python -m spacy download en_core_web_sm
-# # start jupyter notebook
-# jupyter notebook
-# ```
-# 
-# # section 2.1.2
+# # section 2.3.1
 # - some text
 # 
-# # section 2.1.3
+# # section 2.3.2
+# - some text
+# 
+# # section 2.3.3
 # - some text
 
 # In[8]:
@@ -58,178 +30,491 @@ from spacy import displacy
 nlp = spacy.load("en_core_web_sm")
 
 
-# ### spaCy Features 
+# #  NLP Tutorial 8 - Amazon and IMDB Review Sentiment Classification using SpaCy
+
+# #### Watch Full Lesson here:  https://youtu.be/cd51nXNpiiU
+
+# ## What is NLP 
+
+# Natural Language Processing (NLP) is the field of Artificial Intelligence concerned with the processing and understanding of human language. Since its inception during the 1950s, machine understanding of language has played a pivotal role in translation, topic modeling, document indexing, information retrieval, and extraction.
+
+# #### Application of NLP
+# - Text Classification
+# - Spam Filters
+# - Voice text messaging
+# - Sentiment analysis
+# - Spell or grammar check
+# - Chat bot
+# - Search Suggestion
+# - Search Autocorrect
+# - Automatic Review Analysis system
+# - Machine translation
+# - And so much more
+
+# In[ ]:
+
+
+# !pip install scikit-learn
+
+
+# In[ ]:
+
+
+# !pip install -U spacy
+
+
+# In[ ]:
+
+
+# !python -m spacy download en
+
+
+# In[ ]:
+
+
+#!python -m spacy download en_core_web_sm
+
+
+# ### Data Cleaning Options
+# - Case Normalization
+# - Removing Stop Words
+# - Removing Punctuations or Special Symbols
+# - Lemmatization or Stemming
+# - Parts of Speech Tagging
+# - Entity Detection
+# - Bag of Words
+# - TF-IDF 
+
+# ### Bag of Words - The Simplest Word Embedding Technique
+
+# This is one of the simplest methods of embedding words into numerical vectors. It is not often used in practice due to its oversimplification of language, but often the first embedding technique to be taught in the classroom setting.
+
+# ```
+# doc1 = "I am high"
+# doc2 = "Yes I am high"
+# doc3 = "I am kidding" 
 # 
-# In the documentation, you'll come across mentions of spaCy's features and
-# capabilities. Some of them refer to linguistic concepts, while others are
-# related to more general machine learning functionality.
+# ```
+
+# ![image.png](attachment:image.png)
+
+# ### Bag of Words and Tf-idf 
+# https://scikit-learn.org/stable/modules/generated/sklearn.feature_extraction.text.TfidfTransformer.html
 # 
-# | Name                                  | Description                                                                                                        |
-# | ------------------------------------- | ------------------------------------------------------------------------------------------------------------------ |
-# | **Tokenization**                      | Segmenting text into words, punctuations marks etc.                                                                |
-# | **Part-of-speech** (POS) **Tagging**  | Assigning word types to tokens, like verb or noun.                                                                 |
-# | **Dependency Parsing**                | Assigning syntactic dependency labels, describing the relations between individual tokens, like subject or object. |
-# | **Lemmatization**                     | Assigning the base forms of words. For example, the lemma of "was" is "be", and the lemma of "rats" is "rat".      |
-# | **Sentence Boundary Detection** (SBD) | Finding and segmenting individual sentences.                                                                       |
-# | **Named Entity Recognition** (NER)    | Labelling named "real-world" objects, like persons, companies or locations.                                        |
-# | **Entity Linking** (EL)               | Disambiguating textual entities to unique identifiers in a knowledge base.                                         |
-# | **Similarity**                        | Comparing words, text spans and documents and how similar they are to each other.                                  |
-# | **Text Classification**               | Assigning categories or labels to a whole document, or parts of a document.                                        |
-# | **Rule-based Matching**               | Finding sequences of tokens based on their texts and linguistic annotations, similar to regular expressions.       |
-# | **Training**                          | Updating and improving a statistical model's predictions.                                                          |
-# | **Serialization**                     | Saving objects to files or byte strings.                                                                           |
-# 
-# ### Tokenization
-# First, the raw text is split on whitespace characters, similar to
-# `text.split(' ')`. Then, the tokenizer processes the text from left to right. On
-# each substring, it performs two checks:
-# 
-# 1. **Does the substring match a tokenizer exception rule?** For example, "don't"
-#    does not contain whitespace, but should be split into two tokens, "do" and
-#    "n't", while "U.K." should always remain one token.
-# 
-# 2. **Can a prefix, suffix or infix be split off?** For example punctuation like
-#    commas, periods, hyphens or quotes.
-# 
-# If there's a match, the rule is applied and the tokenizer continues its loop,
-# starting with the newly split substrings. This way, spaCy can split **complex,
-# nested tokens** like combinations of abbreviations and multiple punctuation
-# marks.
-# 
-# |   0   |  1  |    2    |  3  |   4    |  5   |    6    |  7  |  8  |  9  |   10    |
-# | :---: | :-: | :-----: | :-: | :----: | :--: | :-----: | :-: | :-: | :-: | :-----: |
-# | Apple | is  | looking | at  | buying | U.K. | startup | for | \$  |  1  | billion |
-# 
+# tf–idf for “Term Frequency times Inverse Document Frequency
+
+# ![image.png](attachment:image.png)
+
+# ![image.png](attachment:image.png)
+
+# # Let's Get Started
+
+# In[1]:
+
+
+import spacy
+from spacy import displacy
+
+
+# In[16]:
+
+
+nlp = spacy.load('en_core_web_sm')
+
+
+# In[17]:
+
+
+text = "Apple, This is first sentence. and Google this is another one. here 3rd one is"
+
+
+# In[18]:
+
+
+doc = nlp(text)
+
+
+# In[19]:
+
+
+doc
+
+
+# In[20]:
+
+
+for token in doc:
+    print(token)
+
+
+# In[21]:
+
+
+sent = nlp.create_pipe('sentencizer')
+
+
+# In[22]:
+
+
+nlp.add_pipe(sent, before='parser')
+
+
+# In[23]:
+
+
+doc = nlp(text)
+
+
+# In[24]:
+
+
+for sent in doc.sents:
+    print(sent)
+
+
+# In[25]:
+
+
+from spacy.lang.en.stop_words import STOP_WORDS
+
+
+# In[26]:
+
+
+stopwords = list(STOP_WORDS)
+
+
+# In[27]:
+
+
+print(stopwords)
+
+
+# In[28]:
+
+
+len(stopwords)
+
+
+# In[30]:
+
+
+for token in doc:
+    if token.is_stop == False:
+        print(token)
+
+
+# ### Lemmatization 
+
+# In[31]:
+
+
+doc = nlp('run runs running runner')
+
+
+# In[32]:
+
+
+for lem in doc:
+    print(lem.text, lem.lemma_)
+
+
+# ### POS 
+
+# In[33]:
+
+
+doc = nlp('All is well at your end!')
+
+
+# In[34]:
+
+
+for token in doc:
+    print(token.text, token.pos_)
+
+
+# In[35]:
+
+
+displacy.render(doc, style = 'dep')
+
+
+# ### Entity Detection 
+
+# In[36]:
+
+
+doc = nlp("New York City on Tuesday declared a public health emergency and ordered mandatory measles vaccinations amid an outbreak, becoming the latest national flash point over refusals to inoculate against dangerous diseases. At least 285 people have contracted measles in the city since September, mostly in Brooklyn’s Williamsburg neighborhood. The order covers four Zip codes there, Mayor Bill de Blasio (D) said Tuesday. The mandate orders all unvaccinated people in the area, including a concentration of Orthodox Jews, to receive inoculations, including for children as young as 6 months old. Anyone who resists could be fined up to $1,000.")
+
+
+# In[37]:
+
+
+doc
+
+
+# In[38]:
+
+
+displacy.render(doc, style = 'ent')
+
+
+# ### Text Classification 
+
+# In[3]:
+
+
+import pandas as pd
+
 
 # In[4]:
 
 
-doc = nlp("Apple is looking at buying U.K. startup for $1 billion")
-for token in doc:
-    print(token.text)
+from sklearn.feature_extraction.text import TfidfVectorizer
+from sklearn.pipeline import Pipeline
+from sklearn.model_selection import train_test_split
+from sklearn.metrics import accuracy_score, classification_report, confusion_matrix
 
 
-# ### Linguistic annotations
-# 
-# spaCy provides a variety of linguistic annotations to give you **insights into a
-# text's grammatical structure**. This includes the word types, like the parts of
-# speech, and how the words are related to each other. For example, if you're
-# analyzing text, it makes a huge difference whether a noun is the subject of a
-# sentence, or the object – or whether "google" is used as a verb, or refers to
-# the website or company in a specific context.
-
-# In[2]:
+# In[41]:
 
 
-doc = nlp("Apple is looking at buying U.K. startup for $1 billion")
-for token in doc:
-    print(token.text, token.pos_, token.dep_)
+data_yelp = pd.read_csv('datasets/yelp_labelled.txt', sep='\t', header = None)
 
 
-# ### Part-of-speech tags and dependencies
-# 
-# After tokenization, spaCy can **parse** and **tag** a given `Doc`. This is where
-# the trained pipeline and its statistical models come in, which enable spaCy to
-# **make predictions** of which tag or label most likely applies in this context.
-# A trained component includes binary data that is produced by showing a system
-# enough examples for it to make predictions that generalize across the language –
-# for example, a word following "the" in English is most likely a noun.
-# 
-# Linguistic annotations are available as
-# [`Token` attributes](/api/token#attributes). Like many NLP libraries, spaCy
-# **encodes all strings to hash values** to reduce memory usage and improve
-# efficiency. So to get the readable string representation of an attribute, we
-# need to add an underscore `_` to its name:
-# 
-# To learn more about **part-of-speech tagging** and rule-based morphology, and
-# how to **navigate and use the parse tree** effectively, see the usage guides on
-# [part-of-speech tagging](/usage/linguistic-features#pos-tagging) and
-# [using the dependency parse](/usage/linguistic-features#dependency-parse).
-# 
-# > - **Text:** The original word text.
-# > - **Lemma:** The base form of the word.
-# > - **POS:** The simple [UPOS](https://universaldependencies.org/docs/u/pos/)
-# >   part-of-speech tag.
-# > - **Tag:** The detailed part-of-speech tag.
-# > - **Dep:** Syntactic dependency, i.e. the relation between tokens.
-# > - **Shape:** The word shape – capitalization, punctuation, digits.
-# > - **is alpha:** Is the token an alpha character?
-# > - **is stop:** Is the token part of a stop list, i.e. the most common words of
-# >   the language?
-# 
-# | Text    | Lemma   | POS     | Tag   | Dep        | Shape   | alpha   | stop    |
-# | ------- | ------- | ------- | ----- | ---------- | ------- | ------- | ------- |
-# | Apple   | apple   | `PROPN` | `NNP` | `nsubj`    | `Xxxxx` | `True`  | `False` |
-# | is      | be      | `AUX`   | `VBZ` | `aux`      | `xx`    | `True`  | `True`  |
-# | looking | look    | `VERB`  | `VBG` | `ROOT`     | `xxxx`  | `True`  | `False` |
-# | at      | at      | `ADP`   | `IN`  | `prep`     | `xx`    | `True`  | `True`  |
-# | buying  | buy     | `VERB`  | `VBG` | `pcomp`    | `xxxx`  | `True`  | `False` |
-# | U.K.    | u.k.    | `PROPN` | `NNP` | `compound` | `X.X.`  | `False` | `False` |
-# | startup | startup | `NOUN`  | `NN`  | `dobj`     | `xxxx`  | `True`  | `False` |
-# | for     | for     | `ADP`   | `IN`  | `prep`     | `xxx`   | `True`  | `True`  |
-# | \$      | \$      | `SYM`   | `$`   | `quantmod` | `$`     | `False` | `False` |
-# | 1       | 1       | `NUM`   | `CD`  | `compound` | `d`     | `False` | `False` |
-# | billion | billion | `NUM`   | `CD`  | `pobj`     | `xxxx`  | `True`  | `False` |
-# 
-
-# In[5]:
+# In[42]:
 
 
-for token in doc:
-    print(token.text, token.lemma_, token.pos_, token.tag_, token.dep_,
-            token.shape_, token.is_alpha, token.is_stop)
+data_yelp.head()
 
 
-# In[10]:
+# In[43]:
 
 
-displacy.render(doc, jupyter=True)
+columns_name = ['Review', 'Sentiment']
+data_yelp.columns = columns_name
 
 
-# ### Named Entities 
-# 
-# To learn more about entity recognition in spaCy, how to **add your own
-# entities** to a document and how to **train and update** the entity predictions
-# of a model, see the usage guides on
-# [named entity recognition](/usage/linguistic-features#named-entities) and
-# [training pipelines](/usage/training).
-# 
-# A named entity is a "real-world object" that's assigned a name – for example, a
-# person, a country, a product or a book title. spaCy can **recognize various
-# types of named entities in a document, by asking the model for a
-# prediction**. Because models are statistical and strongly depend on the
-# examples they were trained on, this doesn't always work _perfectly_ and might
-# need some tuning later, depending on your use case.
-# 
-# Named entities are available as the `ents` property of a `Doc`:
-# 
-# > - **Text:** The original entity text.
-# > - **Start:** Index of start of entity in the `Doc`.
-# > - **End:** Index of end of entity in the `Doc`.
-# > - **Label:** Entity label, i.e. type.
-# 
-# | Text        | Start | End | Label   | Description                                          |
-# | ----------- | :---: | :-: | ------- | ---------------------------------------------------- |
-# | Apple       |   0   |  5  | `ORG`   | Companies, agencies, institutions.                   |
-# | U.K.        |  27   | 31  | `GPE`   | Geopolitical entity, i.e. countries, cities, states. |
-# | \$1 billion |  44   | 54  | `MONEY` | Monetary values, including unit.                     |
-# 
-# Using spaCy's built-in [displaCy visualizer](/usage/visualizers), here's what
-# our example sentence and its named entities look like:
-
-# In[6]:
+# In[44]:
 
 
-for ent in doc.ents:
-    print(ent.text, ent.start_char, ent.end_char, ent.label_)
+data_yelp.head()
 
 
-# ### Word vectors and similarity 
-# 
-# To learn more about word vectors, how to **customize them** and how to load
-# **your own vectors** into spaCy, see the usage guide on
-# [using word vectors and semantic similarities](/usage/linguistic-features#vectors-similarity).
-# 
+# In[45]:
+
+
+data_yelp.shape
+
+
+# In[49]:
+
+
+data_amazon = pd.read_csv('datasets/amazon_cells_labelled.txt', sep = '\t', header = None)
+data_amazon.columns = columns_name
+
+
+# In[50]:
+
+
+data_amazon.head()
+
+
+# In[51]:
+
+
+data_amazon.shape
+
+
+# In[52]:
+
+
+data_imdb = pd.read_csv('datasets/imdb_labelled.txt', sep = '\t', header = None)
+
+
+# In[53]:
+
+
+data_imdb.columns = columns_name
+
+
+# In[54]:
+
+
+data_imdb.shape
+
+
+# In[55]:
+
+
+data_imdb.head()
+
+
+# In[56]:
+
+
+data = data_yelp.append([data_amazon, data_imdb], ignore_index=True)
+
+
+# In[57]:
+
+
+data.shape
+
+
+# In[58]:
+
+
+data.head()
+
+
+# In[59]:
+
+
+data['Sentiment'].value_counts()
+
+
+# In[60]:
+
+
+data.isnull().sum()
+
+
+# ### Tokenization 
+
+# In[61]:
+
+
+import string
+
+
+# In[64]:
+
+
+punct = string.punctuation
+
+
+# In[65]:
+
+
+punct
+
+
+# In[68]:
+
+
+def text_data_cleaning(sentence):
+    doc = nlp(sentence)
+    
+    tokens = []
+    for token in doc:
+        if token.lemma_ != "-PRON-":
+            temp = token.lemma_.lower().strip()
+        else:
+            temp = token.lower_
+        tokens.append(temp)
+    
+    cleaned_tokens = []
+    for token in tokens:
+        if token not in stopwords and token not in punct:
+            cleaned_tokens.append(token)
+    return cleaned_tokens
+
+
+# In[70]:
+
+
+text_data_cleaning("    Hello how are you. Like this video")
+
+
+# ### Vectorization Feature Engineering (TF-IDF) 
+
+# In[71]:
+
+
+from sklearn.svm import LinearSVC
+
+
+# In[72]:
+
+
+tfidf = TfidfVectorizer(tokenizer = text_data_cleaning)
+classifier = LinearSVC()
+
+
+# In[73]:
+
+
+X = data['Review']
+y = data['Sentiment']
+
+
+# In[74]:
+
+
+X_train, X_test, y_train, y_test = train_test_split(X, y, test_size = 0.2, random_state = 42)
+
+
+# In[75]:
+
+
+X_train.shape, X_test.shape
+
+
+# In[77]:
+
+
+clf = Pipeline([('tfidf', tfidf), ('clf', classifier)])
+
+
+# In[78]:
+
+
+clf.fit(X_train, y_train)
+
+
+# In[79]:
+
+
+y_pred = clf.predict(X_test)
+
+
+# In[80]:
+
+
+print(classification_report(y_test, y_pred))
+
+
+# In[81]:
+
+
+confusion_matrix(y_test, y_pred)
+
+
+# In[85]:
+
+
+clf.predict(['Wow, this is amzing lesson'])
+
+
+# In[86]:
+
+
+clf.predict(['Wow, this sucks'])
+
+
+# In[87]:
+
+
+clf.predict(['Worth of watching it. Please like it'])
+
+
+# In[88]:
+
+
+clf.predict(['Loved it. amazing'])
+
 
 # In[ ]:
 

@@ -5,51 +5,23 @@
 # 
 # # day 2: getting started with nlp
 # - overview day 2
-# 
-# |time  |section |concepts               |outcomes                               |
-# |:-----|:-------|:----------------------|:--------------------------------------|
-# |09-10 |2.1.1   |[spacy](01-intro.html) |install spacy package to anaconda venv |
-# |      |2.1.2   |import text            |                                       |
-# |      |2.1.3   |create document        |                                       |
-# |      |break   |                       |                                       |
-# |10-11 |2.2.1   |clean                  |                                       |
-# |      |2.2.2   |tokenize               |                                       |
-# |      |2.2.3   |ner                    |                                       |
-# |      |break   |                       |                                       |
-# |11-12 |2.3.1   |classify               |                                       |
-# |      |2.3.2   |                       |                                       |
-# |      |2.3.3   |                       |                                       |
-# |12-13 |lunch   |                       |                                       |
-# 
-# - section 2.1.1 python syntax
+# - section 2.2.1 python syntax
 #     - [variables and data types](#variables)
-# - section 2.1.2 functions
+# - section 2.2.2 functions
 #     - [functions and modules](#functions)
-# - section 2.1.3 files
+# - section 2.2.3 files
 #     - [files and directories](#files)
 # 
-# # section 2.1.1
-# - check, update anaconda installation, create nlp venv
-# 
-# ```python
-# # update anaconda, env packages
-# conda update anaconda
-# conda update --all
-# # install spacy nlp package
-# conda install -c conda-forge -n base spacy
-# # get trained pipline, language model
-# python -m spacy download en_core_web_sm
-# # start jupyter notebook
-# jupyter notebook
-# ```
-# 
-# # section 2.1.2
+# # section 2.2.1
 # - some text
 # 
-# # section 2.1.3
+# # section 2.2.2
+# - some text
+# 
+# # section 2.2.3
 # - some text
 
-# In[8]:
+# In[4]:
 
 
 import spacy
@@ -118,7 +90,7 @@ for token in doc:
 # sentence, or the object – or whether "google" is used as a verb, or refers to
 # the website or company in a specific context.
 
-# In[2]:
+# In[6]:
 
 
 doc = nlp("Apple is looking at buying U.K. startup for $1 billion")
@@ -172,7 +144,7 @@ for token in doc:
 # | billion | billion | `NUM`   | `CD`  | `pobj`     | `xxxx`  | `True`  | `False` |
 # 
 
-# In[5]:
+# In[7]:
 
 
 for token in doc:
@@ -180,10 +152,10 @@ for token in doc:
             token.shape_, token.is_alpha, token.is_stop)
 
 
-# In[10]:
+# In[9]:
 
 
-displacy.render(doc, jupyter=True)
+displacy.render(doc, style='dep', jupyter=True)
 
 
 # ### Named Entities 
@@ -217,11 +189,23 @@ displacy.render(doc, jupyter=True)
 # Using spaCy's built-in [displaCy visualizer](/usage/visualizers), here's what
 # our example sentence and its named entities look like:
 
-# In[6]:
+# In[10]:
 
 
 for ent in doc.ents:
     print(ent.text, ent.start_char, ent.end_char, ent.label_)
+
+
+# In[11]:
+
+
+text = """Apple decided to fire Tim Cook and hire somebody called John Doe as the new CEO.
+They also discussed a merger with Google. On the long run it seems more likely that Apple
+will merge with Amazon and Microsoft with Google. The companies will all relocate to
+Austin in Texas before the end of the century. John Doe bought a Prosche."""
+
+doc = nlp(text)
+displacy.render(doc, style='ent', jupyter=True)
 
 
 # ### Word vectors and similarity 
@@ -230,6 +214,153 @@ for ent in doc.ents:
 # **your own vectors** into spaCy, see the usage guide on
 # [using word vectors and semantic similarities](/usage/linguistic-features#vectors-similarity).
 # 
+
+# In[1]:
+
+
+#from textblob import TextBlob
+
+
+# ## Word vectors and similarity
+
+# To use vectors in spaCy, you might consider installing the larger models for the particular language. The common module and language packages only come with the small models. The larger models can be installed as described on the [spaCy vectors page](https://spacy.io/usage/vectors-similarity):
+# 
+#     python -m spacy download en_core_web_lg
+# 
+# The large model *en_core_web_lg* contains more than 1 million unique vectors.
+
+# Let us restart all necessary modules again, in particular spaCy:
+
+# In[2]:
+
+
+import spacy
+
+
+# We can now import the English NLP pipeline to process some word list. Since the small models in spacy only include context-sensitive tensors, we should use the dowloaded large model for better word vectors. We load the large model as follows:
+
+# In[3]:
+
+
+nlp = spacy.load('en_core_web_lg')
+#nlp = spacy.load("en_core_web_sm")
+
+
+# We can process a list of words by the pipeline using the *nlp* object:
+
+# In[4]:
+
+
+tokens = nlp(u'dog poodle beagle cat banana apple')
+
+
+# As described in the spaCy chapter *[Word Vectors and Semantic Similarity](https://spacy.io/usage/vectors-similarity)*, the resulting elements of *Doc*, *Span*, and *Token* provide a method *similarity()*, which returns the similarities between words: 
+
+# In[5]:
+
+
+for token1 in tokens:
+    for token2 in tokens:
+        print(token1, token2, token1.similarity(token2))
+
+
+# We can access the *vectors* of these objects using the *vector* attribute:
+
+# In[6]:
+
+
+tokens = nlp(u'dog cat banana grungle')
+
+for token in tokens:
+    print(token.text, token.has_vector, token.vector_norm, token.is_oov)
+
+
+# The attribute *has_vector* returns a boolean depending on whether the token has a vector in the model or not. The token *grungle* has no vector. It is also out-of-vocabulary (OOV), as the fourth column shows. Thus, it also has a norm of $0$, that is, it has a length of $0$.
+
+# Here the token vector has a length of $300$. We can print out the vector for a token:
+
+# In[7]:
+
+
+n = 0
+print(tokens[n].text, len(tokens[n].vector), tokens[n].vector)
+
+
+# Here just another example of similarities for some famous words:
+
+# In[8]:
+
+
+tokens = nlp(u'queen king chef')
+
+for token1 in tokens:
+    for token2 in tokens:
+        print(token1, token2, token1.similarity(token2))
+
+
+# ### Similarities in Context
+
+# In spaCy parsing, tagging and NER models make use of vector representations of contexts that represent the *meaning of words*. A text *meaning representation* is represented as an array of floats, i.e. a tensor, computed during the NLP pipeline processing. With this approach words that have not been seen before can be typed or classified. SpaCy uses a 4-layer convolutional network for the computation of these tensors. In this approach these tensors model a context of four words left and right of any given word.
+
+# Let us use the example from the spaCy documentation and check the word *labrador*:
+
+# In[9]:
+
+
+tokens = nlp(u'labrador')
+
+for token in tokens:
+    print(token.text, token.has_vector, token.vector_norm, token.is_oov)
+
+
+# We can now test for the context:
+
+# In[10]:
+
+
+doc1 = nlp(u"The labrador barked.")
+doc2 = nlp(u"The labrador swam.")
+doc3 = nlp(u"The people on Labrador are Canadians.")
+
+dog = nlp(u"dog")
+
+count = 0
+for doc in [doc1, doc2, doc3]:
+    lab = doc
+    count += 1
+    print(str(count) + ":", lab.similarity(dog))
+
+
+# Using this strategy we can compute document or text similarities as well:
+
+# In[11]:
+
+
+docs = ( nlp(u"Paris is the largest city in France."),
+        nlp(u"Vilnius is the capital of Lithuania."),
+        nlp(u"An emu is a large bird.") )
+
+for x in range(len(docs)):
+    zset = set(range(len(docs)))
+    zset.remove(x)
+    for y in zset:
+        print(x, y, docs[x].similarity(docs[y]))
+
+
+# We can vary the word order in sentences and compare them:
+
+# In[12]:
+
+
+docs = [nlp(u"dog bites man"), nlp(u"man bites dog"),
+        nlp(u"man dog bites"), nlp(u"cat eats mouse")]
+
+for doc in docs:
+    for other_doc in docs:
+        print('"' + doc.text + '"', '"' + other_doc.text + '"', doc.similarity(other_doc))
+
+
+# ### Custom Models
 
 # In[ ]:
 

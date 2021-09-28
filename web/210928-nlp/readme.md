@@ -6,8 +6,8 @@
 - 2.1.2: python syntax, practice data structures, conditional statements, flow control
 - 2.1.3: nlp doc, create our first nlp document
 - 2.2.1: [features](221-features.html), applying nlp analyses to extract linguistic features
-- 2.2.2: part of speech, 
-- 2.2.3: entity recognition, 
-- 2.3.1: [classify](231-classify.html), how to use the textblob feature for sentiment analysis
+- 2.2.2: part of speech, analyze syntactic structure, useful for finding e.g. negations
+- 2.2.3: entity recognition, extract named entities from text, analyze word similarity
+- 2.3.1: [classify](231-classify.html), how to use scikit-learn for sentiment analysis
 - 2.3.2: , 
 - 2.3.3: , 

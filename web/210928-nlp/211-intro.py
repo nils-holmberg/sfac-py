@@ -21,13 +21,6 @@
 # |      |2.3.3   |                       |                                       |
 # |12-13 |lunch   |                       |                                       |
 # 
-# - section 2.1.1 python syntax
-#     - [variables and data types](#variables)
-# - section 2.1.2 functions
-#     - [functions and modules](#functions)
-# - section 2.1.3 files
-#     - [files and directories](#files)
-# 
 # # section 2.1.1
 # - check, update anaconda installation, create nlp venv
 # 
@@ -37,8 +30,9 @@
 # conda update --all
 # # install spacy nlp package
 # conda install -c conda-forge -n base spacy
-# # get trained pipline, language model
+# # get trained pipline, language model, small and large
 # python -m spacy download en_core_web_sm
+# python -m spacy download en_core_web_lg
 # # start jupyter notebook
 # jupyter notebook
 # ```
@@ -51,12 +45,12 @@
 # - extend python fuctionality with spacy nlp package
 # - create our first basic nlp document
 
-# In[27]:
+# In[1]:
 
 
 import spacy
 from spacy import displacy
-# english language pre-trained model, small model
+# english language pre-trained model, small
 nlp = spacy.load("en_core_web_sm")
 
 
