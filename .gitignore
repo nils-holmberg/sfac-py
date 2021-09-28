@@ -8,6 +8,7 @@ log/*
 src/*
 tmp/*
 !tmp/syllabus.pdf
+!tmp/posner.zip
 
 # keep empty dir
 !log/.gitkeep
