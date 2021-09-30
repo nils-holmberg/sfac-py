@@ -8,7 +8,7 @@ source ~/lib/python/anaconda3/bin/activate
 source ~/lib/python/anaconda3/bin/activate
 # create new venv with ipython kernel
 conda create -n conda-vis
-conda install -c conda-forge -n conda-vis ipykernel plotly dash
+conda install -c conda-forge -n conda-vis ipykernel matplotlib seaborn plotly dash dash-renderer dash-html-components dash-core-components
 
 
 ### start exp (210926)

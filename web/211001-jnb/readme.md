@@ -9,5 +9,5 @@
 - 5.2.2: , 
 - 5.2.3: , 
 - 5.3.1: [publish](531-publish.html), github, gitlab, bitbucket
-- 5.3.2: , 
+- 5.3.2: nbviewer.jupyter.org, 
 - 5.3.3: , 

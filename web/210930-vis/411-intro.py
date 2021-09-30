@@ -3,8 +3,37 @@
 
 # [home](https://nils-holmberg.github.io/sfac-py/web/210930-vis/)
 # 
-# # data visualization using matplotlib, seaborn (210930)
-# some line
+# # day 4: getting started with data visualization
+# - overview day 4
+# 
+# |time  |section |concepts                      |outcomes                                                       |
+# |:-----|:-------|:-----------------------------|:--------------------------------------------------------------|
+# |09-10 |2.1.1   |[spacy](211-intro.html)       |install spacy packages to anaconda venv                        |
+# |      |2.1.2   |python syntax                 |practice data structures, conditional statements, flow control |
+# |      |2.1.3   |nlp doc                       |create our first nlp document                                  |
+# |      |break   |                              |                                                               |
+# |10-11 |2.2.1   |[features](221-features.html) |applying nlp analyses to extract linguistic features           |
+# |      |2.2.2   |part of speech                |analyze syntactic structure, useful for finding e.g. negations |
+# |      |2.2.3   |entity recognition            |extract named entities from text, analyze word similarity      |
+# |      |break   |                              |                                                               |
+# |11-12 |2.3.1   |[classify](231-classify.html) |how to use scikit-learn for sentiment analysis                 |
+# |      |2.3.2   |                              |                                                               |
+# |      |2.3.3   |                              |                                                               |
+# |12-13 |lunch   |                              |                                                               |
+# 
+# # section 4.1.1
+# - check, update anaconda, install new packages to venv
+# 
+# ```python
+# # update anaconda, env packages
+# conda update anaconda
+# conda update --all
+# # install python visualization packages
+# conda install -c conda-forge -n base matplotlib seaborn 
+# conda install -c conda-forge -n base plotly dash dash-renderer dash-html-components dash-core-components
+# # start jupyter notebook
+# jupyter notebook
+# ```
 # 
 # # section 4.1.1
 # some line
@@ -16,13 +45,12 @@
 # some line
 # 
 
-# In[4]:
+# In[1]:
 
 
 import numpy as np
 import pandas as pd
 import matplotlib.pyplot as plt
-#!pip install seaborn
 import seaborn as sns
 
 #%matplotlib inline
@@ -30,27 +58,43 @@ import seaborn as sns
 #%autoreload 2
 
 
-# In[5]:
+# In[2]:
 
 
 #dfc = pd.read_csv('some.csv')
 print(sns.get_dataset_names())
-dfc = sns.load_dataset('car_crashes')
-dfc.head()
+df = sns.load_dataset('car_crashes')
+df.head()
 
 
-# In[6]:
+# In[3]:
 
 
-sns.displot(dfc['not_distracted'])
+sns.displot(df['not_distracted'])
 
 
 # ## Quickly Creating Summary Counts in Pandas
 # 
+# We are studying the species and weight of animals caught in plots in our study
+# area. The dataset is stored as a `.csv` file: each row holds information for a
+# single animal, and the columns represent:
+# 
+# | Column           | Description                        |
+# |------------------|------------------------------------|
+# | record_id        | Unique id for the observation      |
+# | month            | month of observation               |
+# | day              | day of observation                 |
+# | year             | year of observation                |
+# | site_id          | ID of a particular plot            |
+# | species_id       | 2-letter code                      |
+# | sex              | sex of animal ("M", "F")           |
+# | hindfoot_length  | length of the hindfoot in mm       |
+# | weight           | weight of the animal in grams      |
+# 
 # Let's next count the number of samples for each species. We can do this in a few
 # ways, but we'll use `groupby` combined with **a `count()` method**.
 
-# In[7]:
+# In[4]:
 
 
 surveys_df = pd.read_csv("../../csv/surveys.csv")
@@ -65,7 +109,7 @@ print(species_counts)
 # 
 # 
 
-# In[8]:
+# In[5]:
 
 
 surveys_df.groupby('species_id')['record_id'].count()['DO']
@@ -80,7 +124,7 @@ surveys_df.groupby('species_id')['record_id'].count()['DO']
 # 
 # 
 
-# In[9]:
+# In[6]:
 
 
 # Multiply all weight values by 2 but does not change the original weight data
@@ -93,7 +137,7 @@ surveys_df['weight']*2
 # 
 # 
 
-# In[10]:
+# In[7]:
 
 
 ## To make sure figures appear inside Jupyter Notebook
@@ -107,7 +151,7 @@ species_counts.plot(kind='bar')
 # 
 # We can also look at how many animals were captured in each site.
 
-# In[11]:
+# In[8]:
 
 
 total_count = surveys_df.groupby('site_id')['record_id'].nunique()
@@ -130,7 +174,7 @@ total_count.plot(kind='bar')
 
 # ### _Solution to Extra Plotting Challenge 1_
 
-# In[12]:
+# In[9]:
 
 
 ## Solution Plotting Challenge 1
@@ -139,7 +183,7 @@ surveys_df.groupby('site_id').mean()["weight"].plot(kind='bar')
 
 # ### _Solution to Extra Plotting Challenge 2_
 
-# In[13]:
+# In[10]:
 
 
 # Solution Plotting Challenge 2
@@ -152,11 +196,14 @@ surveys_df.groupby('sex').count()["record_id"].plot(kind='bar')
 # 
 # First we group data by site and by sex, and then calculate a total for each site.
 
-# In[14]:
+# In[13]:
 
 
 by_site_sex = surveys_df.groupby(['site_id','sex'])
+#by_site_sex.head()
+
 site_sex_count = by_site_sex['weight'].sum()
+site_sex_count.head()
 
 
 # 
@@ -180,7 +227,7 @@ site_sex_count = by_site_sex['weight'].sum()
 # 
 # 
 
-# In[15]:
+# In[14]:
 
 
 by_site_sex = surveys_df.groupby(['site_id','sex'])
@@ -192,7 +239,7 @@ site_sex_count.unstack()
 # 
 # Rather than display it as a table, we can plot the above data by stacking the values of each sex as follows:
 
-# In[16]:
+# In[15]:
 
 
 by_site_sex = surveys_df.groupby(['site_id', 'sex'])
@@ -201,12 +248,6 @@ spc = site_sex_count.unstack()
 s_plot = spc.plot(kind='bar', stacked=True, title="Total weight by site and sex")
 s_plot.set_ylabel("Weight")
 s_plot.set_xlabel("Site")
-
-
-# In[ ]:
-
-
-
 
 
 # In[ ]:

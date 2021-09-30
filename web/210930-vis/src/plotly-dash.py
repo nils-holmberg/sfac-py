@@ -11,7 +11,7 @@ app = dash.Dash(__name__)
 
 # ---------- Import and clean data (importing csv into pandas)
 # df = pd.read_csv("intro_bees.csv")
-df = pd.read_csv("https://raw.githubusercontent.com/Coding-with-Adam/Dash-by-Plotly/master/Other/Dash_Introduction/intro_bees.csv")
+df = pd.read_csv("../csv/intro_bees.csv")
 
 df = df.groupby(['State', 'ANSI', 'Affected by', 'Year', 'state_code'])[['Pct of Colonies Impacted']].mean()
 df.reset_index(inplace=True)
@@ -92,10 +92,6 @@ def update_graph(option_slctd):
 
     return container, fig
 
-
 # ------------------------------------------------------------------------------
 if __name__ == '__main__':
     app.run_server(debug=True)
-
-    
-# https://youtu.be/hSPmj7mK6ng 

@@ -3,16 +3,22 @@
 
 # [home](https://nils-holmberg.github.io/sfac-py/web/210930-vis/)
 # 
-# # data visualization using matplotlib, seaborn (210930)
+# # day 4: getting started with data visualization
+# - overview day 4
+# - section 4.2.1 python syntax
+#     - [variables and data types](#variables)
+# - section 4.2.2 functions
+#     - [functions and modules](#functions)
+# - section 4.2.3 files
+#     - [files and directories](#files)
+# 
+# # section 4.2.1
 # some line
 # 
-# # section 4.1.1
+# # section 4.2.2
 # some line
 # 
-# # section 4.1.2
-# some line
-# 
-# # section 4.1.3
+# # section 4.2.3
 # some line
 # 
 
