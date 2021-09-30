@@ -6,20 +6,20 @@
 # # day 4: getting started with data visualization
 # - overview day 4
 # 
-# |time  |section |concepts                      |outcomes                                                       |
-# |:-----|:-------|:-----------------------------|:--------------------------------------------------------------|
-# |09-10 |2.1.1   |[spacy](211-intro.html)       |install spacy packages to anaconda venv                        |
-# |      |2.1.2   |python syntax                 |practice data structures, conditional statements, flow control |
-# |      |2.1.3   |nlp doc                       |create our first nlp document                                  |
-# |      |break   |                              |                                                               |
-# |10-11 |2.2.1   |[features](221-features.html) |applying nlp analyses to extract linguistic features           |
-# |      |2.2.2   |part of speech                |analyze syntactic structure, useful for finding e.g. negations |
-# |      |2.2.3   |entity recognition            |extract named entities from text, analyze word similarity      |
-# |      |break   |                              |                                                               |
-# |11-12 |2.3.1   |[classify](231-classify.html) |how to use scikit-learn for sentiment analysis                 |
-# |      |2.3.2   |                              |                                                               |
-# |      |2.3.3   |                              |                                                               |
-# |12-13 |lunch   |                              |                                                               |
+# |time  |section |concepts                            |outcomes                                                       |
+# |:-----|:-------|:-----------------------------------|:--------------------------------------------------------------|
+# |09-10 |4.1.1   |[graphics](411-intro.html)          |basic python graphics                                          |
+# |      |4.1.2   |python syntax                       |practice data structures, conditional statements, flow control |
+# |      |4.1.3   |render images                       |understand python for computer vision, pil, opencv, matplotlib |
+# |      |break   |                                    |                                                               |
+# |10-11 |4.2.1   |[plotting](421-plotting.html)       |basic static plots with matplotlib and seaborn                 |
+# |      |4.2.2   |bar charts                          |                                                               |
+# |      |4.2.3   |scatter plots                       |time series                                                    |
+# |      |break   |                                    |                                                               |
+# |11-12 |4.3.1   |[interactive](431-interactive.html) |creating interactive dashboards with plotly and dash           |
+# |      |4.3.2   |                                    |                                                               |
+# |      |4.3.3   |                                    |                                                               |
+# |12-13 |lunch   |                                    |                                                               |
 # 
 # # section 4.1.1
 # - check, update anaconda, install new packages to venv
