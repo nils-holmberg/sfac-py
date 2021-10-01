@@ -1,6 +1,18 @@
 ### start jnb (210926)
 # start base env
 source ~/lib/python/anaconda3/bin/activate
+# create new venv with ipython kernel
+conda create -n conda-jnb
+conda install -c conda-forge -n conda-jnb ipykernel matplotlib seaborn scikit-learn tensorflow
+
+
+#keras
+conda install -c conda-forge -n conda-jnb protobuf
+
+
+conda env remove --name conda-jnb
+
+print(tensorflow.__version__)
 
 
 ### start vis (210926)
