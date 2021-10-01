@@ -35,6 +35,8 @@
 # # section 5.1.2
 # - some line
 # 
+# ![resume code](../../fig/612497595dc00-2-612344de79979__700.jpg)
+# 
 # # section 5.1.3
 # - some line
 # 
