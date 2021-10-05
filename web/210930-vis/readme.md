@@ -11,6 +11,3 @@
 - 4.3.1: [interactive](431-interactive.html), creating interactive dashboards with plotly and dash
 - 4.3.2: networks, intro to social network analysis
 - 4.3.3: , 
-- 
-- 
-- 
