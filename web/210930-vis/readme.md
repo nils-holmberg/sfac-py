@@ -9,7 +9,7 @@
 - 4.2.2: bar charts, 
 - 4.2.3: scatter plots, time series
 - 4.3.1: [interactive](431-interactive.html), creating interactive dashboards with plotly and dash
-- 4.3.2: , 
+- 4.3.2: networks, intro to social network analysis
 - 4.3.3: , 
 - 
 - 
