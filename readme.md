@@ -2,7 +2,7 @@
 
 # introduction to python programming
 
-**computational content analyses, cognitive communication effects**
+**computational content analyses, cognitive communication effects** ([syllabus](tmp/syllabus.pdf))
 
 ## social sciences methods workshops
 
