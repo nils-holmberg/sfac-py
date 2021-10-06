@@ -1,3 +1,8 @@
+### compile materials (211006)
+# generate only syllabus without conda activated
+bash src/compile.sh -a
+
+
 ### start jnb (210926)
 # start base env
 source ~/lib/python/anaconda3/bin/activate
