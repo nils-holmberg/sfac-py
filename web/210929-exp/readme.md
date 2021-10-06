@@ -11,3 +11,4 @@
 - 3.3.1: [web based](331-online.html), use pavlovia web service to put experiment online and invite participants
 - 3.3.2: manage, log in to pavlovia, sync psychopy experiment, select local dir, remote repo
 - 3.3.3: publish, view code on gitlab, change experiment status to piloting, change to public
+- 3.4.1: flask, shiny, intro to python flask survey experiment, compare to r shiny web app
