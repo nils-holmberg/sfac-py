@@ -13,7 +13,22 @@
 #     - [files and directories](#files)
 # 
 # # section 4.2.1
-# some line
+# - [seaborn-additional-regression-plots.ipynb](src/seaborn-additional-regression-plots.ipynb)
+# - [seaborn-bar-plot-count-plot.ipynb](src/seaborn-bar-plot-count-plot.ipynb)
+# - [seaborn-box-plot.ipynb](src/seaborn-box-plot.ipynb)
+# - [seaborn-categorical-data-plot.ipynb](src/seaborn-categorical-data-plot.ipynb)
+# - [seaborn-color-palettes.ipynb](src/seaborn-color-palettes.ipynb)
+# - [seaborn-controlling-aesthetics.ipynb](src/seaborn-controlling-aesthetics.ipynb)
+# - [seaborn-facetgrid.ipynb](src/seaborn-facetgrid.ipynb)
+# - [seaborn-factor-plot.ipynb](src/seaborn-factor-plot.ipynb)
+# - [seaborn-lm-plot-reg-plot.ipynb](src/seaborn-lm-plot-reg-plot.ipynb)
+# - [seaborn-loading-dataset.ipynb](src/seaborn-loading-dataset.ipynb)
+# - [seaborn-matplotlib-vs-seaborn.ipynb](src/seaborn-matplotlib-vs-seaborn.ipynb)
+# - [seaborn-pairgrid.ipynb](src/seaborn-pairgrid.ipynb)
+# - [seaborn-scatter-plot-joint-plot.ipynb](src/seaborn-scatter-plot-joint-plot.ipynb)
+# - [seaborn-strip-plot.ipynb](src/seaborn-strip-plot.ipynb)
+# - [seaborn-time-series-and-letter-value-plot.ipynb](src/seaborn-time-series-and-letter-value-plot.ipynb)
+# - [seaborn-violin-plot.ipynb](src/seaborn-violin-plot.ipynb)
 # 
 # # section 4.2.2
 # some line
